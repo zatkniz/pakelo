@@ -4,7 +4,7 @@
     <app-header @toggleSidebar="drawer = !drawer" />
 
     <v-content>
-      <router-view />
+      <router-view :key="$route.path" />
     </v-content>
 
     <v-btn bottom color="primary" dark fab fixed right> 

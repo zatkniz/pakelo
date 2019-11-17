@@ -14,8 +14,23 @@ const router = new VueRouter({
         },
         {
             path: '/users',
-            name: 'Dashboard',
+            name: 'Users',
             component: () => import('./views/Users')
+        },
+        {
+            path: '/customers',
+            name: 'Customers',
+            component: () => import('./views/Customers')
+        },
+        {
+            path: '/customer/:id',
+            name: 'Customers Single',
+            component: () => import('./views/CustomerSingle')
+        },
+        {
+            path: '/customer',
+            name: 'Customers Single',
+            component: () => import('./views/CustomerSingle')
         },
     ]
 });

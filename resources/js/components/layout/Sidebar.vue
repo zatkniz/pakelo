@@ -90,14 +90,31 @@ export default {
             { icon: 'mdi-history', text: 'Παραγγελίες' },
             { icon: 'mdi-car-side', text: 'Επισκέψεις' },
             {
-              icon: 'mdi-chevron-up',
+              icon: 'mdi-account',
               text: 'Πελάτες',
+              href: '/customers'
             },
             { icon: 'mdi-archive', text: 'Προϊόντα' },
             { icon: 'mdi-message', text: 'Προσφορές' },
             { icon: 'mdi-cash-register', text: 'Ταμείο' },
             { icon: 'mdi-contacts', text: 'Χρήστες', href: '/users' },
+            {
+              icon: 'mdi-chevron-up',
+              'icon-alt': 'mdi-chevron-down',
+              text: 'Λίστες',
+              model: false,
+              children: [
+                { text: 'Import' },
+                { text: 'Export' },
+              ],
+            },
         ],
-    })
+    }),
+
+    watch: {
+      drawer(val) {
+         this.$emit('updateDrawer')
+      }
+    }
 }
 </script>

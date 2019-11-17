@@ -1,7 +1,11 @@
 .v-card {
-    border-radius: 20px;
+    border-radius: 20px !important;
 }
 
 a.v-list-item--active.v-list-item {
     background: #e41513 !important;
+}
+
+.v-data-table.elevation-1.theme--light {
+    border-radius: 20px;
 }

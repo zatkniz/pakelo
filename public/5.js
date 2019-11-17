@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/customers/Details.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
@@ -82,6 +82,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -93,21 +95,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       valid: false
     };
   },
-  methods: {
-    getCustomer: function getCustomer() {
-      if (this.customer_id || this.$route.params.id) this.$store.dispatch("getSinglecustomer", this.customer_id || this.$route.params.id);else this.$store.dispatch("getSinglecustomer", null);
-    }
-  },
-  mounted: function mounted() {
-    this.getCustomer();
+  methods: {},
+  mounted: function mounted() {// this.$store.dispatch("getSingleCharacter", this.$route.params.id);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    customer: 'getcustomer'
-  })),
-  watch: {
-    customer_id: function customer_id(val) {
-      this.$store.dispatch("getSinglecustomer", val);
-    }
+    character: 'getCharacter'
+  }))
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_customers_Details__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/customers/Details */ "./resources/js/components/customers/Details.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    customerDetails: _components_customers_Details__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      tab: null
+    };
   }
 });
 
@@ -160,21 +206,29 @@ var render = function() {
                   _c(
                     "v-row",
                     [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.customer_id) +
+                          "\n                    "
+                      ),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Επωνυμία" },
-                            model: {
-                              value: _vm.customer.name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "name", $$v)
-                              },
-                              expression: "customer.name"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Επωνυμία" } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "3", md: "3" } },
+                        [_c("v-text-field", { attrs: { label: "Α.Φ.Μ." } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "3", md: "3" } },
+                        [_c("v-text-field", { attrs: { label: "Δ.Ο.Υ." } })],
                         1
                       ),
                       _vm._v(" "),
@@ -183,14 +237,7 @@ var render = function() {
                         { attrs: { cols: "12", sm: "3", md: "3" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "Α.Φ.Μ." },
-                            model: {
-                              value: _vm.customer.afm,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "afm", $$v)
-                              },
-                              expression: "customer.afm"
-                            }
+                            attrs: { label: "Διακριτικό Όνομα" }
                           })
                         ],
                         1
@@ -199,144 +246,70 @@ var render = function() {
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "3", md: "3" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Δ.Ο.Υ." },
-                            model: {
-                              value: _vm.customer.doy,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "doy", $$v)
-                              },
-                              expression: "customer.doy"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Υπεύθυνος" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "3", md: "3" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Διακριτικό Όνομα" },
-                            model: {
-                              value: _vm.customer.display_name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "display_name", $$v)
-                              },
-                              expression: "customer.display_name"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Τηλέφ. 1" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "3", md: "3" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Υπεύθυνος" },
-                            model: {
-                              value: _vm.customer.responsible,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "responsible", $$v)
-                              },
-                              expression: "customer.responsible"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Τηλέφ. 2" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "3", md: "3" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Τηλέφ. 1" },
-                            model: {
-                              value: _vm.customer.phone,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "phone", $$v)
-                              },
-                              expression: "customer.phone"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Email" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "3", md: "3" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Τηλέφ. 2" },
-                            model: {
-                              value: _vm.customer.phone_2,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "phone_2", $$v)
-                              },
-                              expression: "customer.phone_2"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Κινητό" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Email" },
-                            model: {
-                              value: _vm.customer.email,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "email", $$v)
-                              },
-                              expression: "customer.email"
-                            }
-                          })
-                        ],
+                        { attrs: { cols: "12", sm: "6", md: "6" } },
+                        [_c("v-text-field", { attrs: { label: "Διεύθυνση" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Κινητό" },
-                            model: {
-                              value: _vm.customer.mobile,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "mobile", $$v)
-                              },
-                              expression: "customer.mobile"
-                            }
-                          })
-                        ],
+                        { attrs: { cols: "12", sm: "6", md: "6" } },
+                        [_c("v-text-field", { attrs: { label: "Πόλη" } })],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "FAX" },
-                            model: {
-                              value: _vm.customer.fax,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "fax", $$v)
-                              },
-                              expression: "customer.fax"
-                            }
-                          })
-                        ],
+                        { attrs: { cols: "12", sm: "6", md: "6" } },
+                        [_c("v-text-field", { attrs: { label: "FAX" } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "6", md: "6" } },
+                        [_c("v-text-field", { attrs: { label: "Επάγγελμα" } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "6", md: "6" } },
+                        [_c("v-text-field", { attrs: { label: "Ενεργός" } })],
                         1
                       ),
                       _vm._v(" "),
@@ -345,14 +318,7 @@ var render = function() {
                         { attrs: { cols: "12", sm: "6", md: "6" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "Πόλη" },
-                            model: {
-                              value: _vm.customer.city_id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "city_id", $$v)
-                              },
-                              expression: "customer.city_id"
-                            }
+                            attrs: { label: "Πιστωτικό Όριο" }
                           })
                         ],
                         1
@@ -361,90 +327,7 @@ var render = function() {
                       _c(
                         "v-col",
                         { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Διεύθυνση" },
-                            model: {
-                              value: _vm.customer.address,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "address", $$v)
-                              },
-                              expression: "customer.address"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Επάγγελμα" },
-                            model: {
-                              value: _vm.customer.job,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "job", $$v)
-                              },
-                              expression: "customer.job"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Ενεργός" },
-                            model: {
-                              value: _vm.customer.active,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "active", $$v)
-                              },
-                              expression: "customer.active"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Πιστωτικό Όριο" },
-                            model: {
-                              value: _vm.customer.limit,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "limit", $$v)
-                              },
-                              expression: "customer.limit"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "6", md: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Πωλητής" },
-                            model: {
-                              value: _vm.customer.user_id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "user_id", $$v)
-                              },
-                              expression: "customer.user_id"
-                            }
-                          })
-                        ],
+                        [_c("v-text-field", { attrs: { label: "Πωλητής" } })],
                         1
                       )
                     ],
@@ -457,19 +340,130 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          !_vm.customer_id
-            ? _c(
-                "v-card-actions",
+          _c(
+            "v-card-actions",
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("v-btn", [_vm._v("Ακυρωση")]),
+              _vm._v(" "),
+              _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
+                _vm._v("Αποθηκευση")
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-row",
+        [
+          _c(
+            "v-col",
+            [
+              _c(
+                "v-card",
+                { staticClass: "ma-5" },
                 [
-                  _c("v-spacer"),
+                  _c(
+                    "v-tabs",
+                    {
+                      attrs: {
+                        "background-color": "secondary",
+                        color: "#fff",
+                        grow: "",
+                        dark: "",
+                        height: "64"
+                      },
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c("v-tab", [
+                        _vm._v(
+                          "\n                       Στοιχεια\n                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("v-tab", [
+                        _vm._v(
+                          "\n                       Test\n                    "
+                        )
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
-                    _vm._v("Αποθηκευση")
-                  ])
+                  _c(
+                    "v-tabs-items",
+                    {
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c("v-tab-item", [_c("customer-details")], 1),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "", color: "basil" } },
+                            [_c("v-card-text", [_vm._v("Test")])],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
-            : _vm._e()
+            ],
+            1
+          )
         ],
         1
       )
@@ -548,6 +542,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_2e3a27ad___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_2e3a27ad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/CustomerSingle.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/views/CustomerSingle.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomerSingle.vue?vue&type=template&id=94ad7cb6& */ "./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6&");
+/* harmony import */ var _CustomerSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomerSingle.vue?vue&type=script&lang=js& */ "./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CustomerSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/CustomerSingle.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerSingle.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/CustomerSingle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerSingle.vue?vue&type=template&id=94ad7cb6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/CustomerSingle.vue?vue&type=template&id=94ad7cb6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerSingle_vue_vue_type_template_id_94ad7cb6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

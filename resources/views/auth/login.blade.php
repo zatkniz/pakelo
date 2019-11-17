@@ -19,7 +19,7 @@
     <body>
         <div id="app">
             <v-app id="inspire">
-                <layout />
+                <login />
             </v-app>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>

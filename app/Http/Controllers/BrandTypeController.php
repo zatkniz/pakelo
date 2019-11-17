@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\UserRole;
+use App\BrandType;
 use Illuminate\Http\Request;
-use Auth;
 
-class UserController extends Controller
+class BrandTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
-    }
-
-    public function getUserRoles()
-    {
-        return UserRole::all();
-    }
-
-    public function getAuth() {
-        return Auth::user();
+        //
     }
 
     /**
@@ -46,21 +35,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return User::updateOrCreate(
-            [
-                'id' => $request->all()
-            ],
-                $request->all()
-            );
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\BrandType  $brandType
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(BrandType $brandType)
     {
         //
     }
@@ -68,10 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\BrandType  $brandType
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(BrandType $brandType)
     {
         //
     }
@@ -80,10 +64,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\BrandType  $brandType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, BrandType $brandType)
     {
         //
     }
@@ -91,11 +75,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\BrandType  $brandType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(BrandType $brandType)
     {
-        $user->delete();
+        //
     }
 }

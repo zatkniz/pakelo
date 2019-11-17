@@ -6,8 +6,10 @@ import Vuetify from 'vuetify';
 Vue.use(Vuetify);
 
 import layout from './components/layout/Layout';
+import login from './views/Login';
 
 import router from './router';
+import store from './store';
 
 require('../css/main.css')
 /**
@@ -34,7 +36,16 @@ const app = new Vue({
         }
       }),
     router,
+    store,
     components: {
-        layout
+        layout,
+        login
+    },
+    created() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+      }
+      this.$store.dispatch("getAuth");
+      return this.$store.dispatch("getAllcustomers");
     }
 });

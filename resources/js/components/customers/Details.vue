@@ -1,0 +1,103 @@
+<template>
+    <v-card :loading="loading">
+        <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="">
+            <v-card-text>
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Επωνυμία" v-model="customer.name" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Α.Φ.Μ." v-model="customer.afm" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Δ.Ο.Υ." v-model="customer.doy" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Διακριτικό Όνομα" v-model="customer.display_name" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Υπεύθυνος" v-model="customer.responsible" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Τηλέφ. 1" v-model="customer.phone" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field label="Τηλέφ. 2" v-model="customer.phone_2" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="4" md="4">
+                            <v-text-field label="Email" v-model="customer.email" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="4" md="4">
+                            <v-text-field label="Κινητό" v-model="customer.mobile" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="4" md="4">
+                            <v-text-field label="FAX" v-model="customer.fax" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Πόλη" v-model="customer.city_id" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Διεύθυνση" v-model="customer.address" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Επάγγελμα" v-model="customer.job" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Ενεργός" v-model="customer.active" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Πιστωτικό Όριο" v-model="customer.limit" ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                            <v-text-field label="Πωλητής" v-model="customer.user_id" ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-card-text>
+
+            <v-card-actions v-if="!customer_id">
+                <v-spacer></v-spacer>
+                <v-btn color="primary" type="submit">Αποθηκευση</v-btn>
+            </v-card-actions>
+        </v-form>
+    </v-card>
+</template>
+
+<script>
+    import { mapGetters, mapMutations } from "vuex";
+    export default {
+        props: {
+            customer_id: Number
+        },
+        data: () => ({
+            loading: false,
+            valid: false,
+        }),
+
+        methods: {
+            getCustomer() {
+                if(this.customer_id || this.$route.params.id)
+                    this.$store.dispatch("getSinglecustomer", this.customer_id || this.$route.params.id);
+                else
+                    this.$store.dispatch("getSinglecustomer", null);
+            }
+        },
+
+        mounted() {
+            this.getCustomer();
+        },
+
+        computed: {
+            ...mapGetters({
+                customer :'getcustomer'
+            })
+        },
+
+        watch: {
+            customer_id(val) {
+                this.$store.dispatch("getSinglecustomer", val);
+            }
+        }
+    }
+</script>
