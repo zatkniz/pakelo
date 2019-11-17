@@ -1,0 +1,7 @@
+.v-card {
+    border-radius: 20px;
+}
+
+a.v-list-item--active.v-list-item {
+    background: #e41513 !important;
+}
