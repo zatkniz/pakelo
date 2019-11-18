@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Customer;
+use App\City;
 use Faker\Generator as Faker;
 
 $factory->define(Customer::class, function (Faker $faker) {
@@ -15,15 +16,15 @@ $factory->define(Customer::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'phone_2' => $faker->phoneNumber,
         'mobile' => $faker->phoneNumber,
-        'address' => $faker->streetAddress,                       
-        'city_id' => 1,
+        'address' => $faker->streetAddress,
+        'city_id' => City::all()->random(1)[0]->id,
         'fax' => $faker->phoneNumber,
-        'doy' => $faker->word,                                             
-        'job' => $faker->company,             
+        'doy' => $faker->word,
+        'job' => $faker->company,
         'limit' => $faker->numberBetween($min = 1000, $max = 9000),
         'user_id' => 1,
         'seller_type_id' => 1,
-        'brand_type_id' => 1 ,
+        'brand_type_id' => 1,
         'percentage' => $faker->numberBetween($min = 1, $max = 40),
         'active' => true
     ];

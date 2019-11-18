@@ -1993,17 +1993,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2013,7 +2002,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     toggleSidebar: function toggleSidebar() {
-      this.$emit('toggleSidebar');
+      this.$emit("toggleSidebar");
     },
     logout: function logout() {
       axios.post("logout").then(function (res) {
@@ -2027,8 +2016,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    auth: 'getAuth',
-    customers: 'getcustomers'
+    auth: "getAuth",
+    customers: "getcustomers"
   }))
 });
 
@@ -2074,6 +2063,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       drawer: true
     };
+  },
+  methods: {
+    updateDrawer: function updateDrawer(val) {
+      this.drawer = val;
+    }
   }
 });
 
@@ -2143,32 +2137,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     drawer: Boolean
@@ -2176,48 +2144,48 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [{
-        icon: 'mdi-home',
-        text: 'Dashboard',
-        href: '/'
+        icon: "mdi-home",
+        text: "Dashboard",
+        href: "/"
       }, {
-        icon: 'mdi-history',
-        text: 'Παραγγελίες'
+        icon: "mdi-history",
+        text: "Παραγγελίες"
       }, {
-        icon: 'mdi-car-side',
-        text: 'Επισκέψεις'
+        icon: "mdi-car-side",
+        text: "Επισκέψεις"
       }, {
-        icon: 'mdi-account',
-        text: 'Πελάτες',
-        href: '/customers'
+        icon: "mdi-account",
+        text: "Πελάτες",
+        href: "/customers"
       }, {
-        icon: 'mdi-archive',
-        text: 'Προϊόντα'
+        icon: "mdi-archive",
+        text: "Προϊόντα"
       }, {
-        icon: 'mdi-message',
-        text: 'Προσφορές'
+        icon: "mdi-message",
+        text: "Προσφορές"
       }, {
-        icon: 'mdi-cash-register',
-        text: 'Ταμείο'
+        icon: "mdi-cash-register",
+        text: "Ταμείο"
       }, {
-        icon: 'mdi-contacts',
-        text: 'Χρήστες',
-        href: '/users'
+        icon: "mdi-contacts",
+        text: "Χρήστες",
+        href: "/users"
       }, {
-        icon: 'mdi-chevron-up',
-        'icon-alt': 'mdi-chevron-down',
-        text: 'Λίστες',
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Λίστες",
         model: false,
         children: [{
-          text: 'Import'
+          text: "Import"
         }, {
-          text: 'Export'
+          text: "Export"
         }]
       }]
     };
   },
-  watch: {
-    drawer: function drawer(val) {
-      this.$emit('updateDrawer');
+  methods: {
+    broadcastEvent: function broadcastEvent() {
+      this.$emit("updateDrawer", this.drawer);
     }
   }
 });
@@ -2349,7 +2317,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".v-card {\r\n    border-radius: 20px !important;\r\n}\r\n\r\na.v-list-item--active.v-list-item {\r\n    background: #e41513 !important;\r\n}\r\n\r\n.v-data-table.elevation-1.theme--light {\r\n    border-radius: 20px;\r\n}", ""]);
+exports.push([module.i, ".v-card {\n    border-radius: 20px !important;\n}\n\na.v-list-item--active.v-list-item {\n    background: #e41513 !important;\n}\n\n.v-data-table.elevation-1.theme--light {\n    border-radius: 20px;\n}", ""]);
 
 // exports
 
@@ -20639,13 +20607,7 @@ var render = function() {
                       { staticClass: "text-capitalize", attrs: { text: "" } },
                       on
                     ),
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.auth.name) +
-                          "\n            "
-                      )
-                    ]
+                    [_vm._v(_vm._s(_vm.auth.name))]
                   )
                 ]
               }
@@ -20699,7 +20661,10 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire" } },
     [
-      _c("appSidebar", { attrs: { drawer: _vm.drawer } }),
+      _c("appSidebar", {
+        attrs: { drawer: _vm.drawer },
+        on: { updateDrawer: _vm.updateDrawer }
+      }),
       _vm._v(" "),
       _c("app-header", {
         on: {
@@ -20757,10 +20722,11 @@ var render = function() {
     {
       attrs: {
         color: "secondary",
-        dark: "",
         clipped: _vm.$vuetify.breakpoint.lgAndUp,
+        dark: "",
         app: ""
       },
+      on: { input: _vm.broadcastEvent },
       model: {
         value: _vm.drawer,
         callback: function($$v) {
@@ -20786,13 +20752,7 @@ var render = function() {
                         { attrs: { cols: "6" } },
                         [
                           item.heading
-                            ? _c("v-subheader", [
-                                _vm._v(
-                                  "\n            " +
-                                    _vm._s(item.heading) +
-                                    "\n          "
-                                )
-                              ])
+                            ? _c("v-subheader", [_vm._v(_vm._s(item.heading))])
                             : _vm._e()
                         ],
                         1
@@ -20839,11 +20799,7 @@ var render = function() {
                                       "v-list-item-content",
                                       [
                                         _c("v-list-item-title", [
-                                          _vm._v(
-                                            "\n                " +
-                                              _vm._s(item.text) +
-                                              "\n              "
-                                          )
+                                          _vm._v(_vm._s(item.text))
                                         ])
                                       ],
                                       1
@@ -20886,11 +20842,7 @@ var render = function() {
                               "v-list-item-content",
                               [
                                 _c("v-list-item-title", [
-                                  _vm._v(
-                                    "\n              " +
-                                      _vm._s(child.text) +
-                                      "\n            "
-                                  )
+                                  _vm._v(_vm._s(child.text))
                                 ])
                               ],
                               1
@@ -20914,15 +20866,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-list-item-content",
-                        [
-                          _c("v-list-item-title", [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(item.text) +
-                                "\n          "
-                            )
-                          ])
-                        ],
+                        [_c("v-list-item-title", [_vm._v(_vm._s(item.text))])],
                         1
                       )
                     ],
@@ -75059,13 +75003,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/',
     name: 'Dashboard',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
     }
   }, {
     path: '/users',
     name: 'Users',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
     path: '/customers',
@@ -75077,13 +75021,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/customer/:id',
     name: 'Customers Single',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: '/customer',
     name: 'Customers Single',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }]
 });
@@ -75258,8 +75202,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

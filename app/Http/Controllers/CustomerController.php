@@ -35,7 +35,10 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Customer::updateOrCreate(
+            ['id' => $request->id],
+            $request->all()
+        );
     }
 
     /**

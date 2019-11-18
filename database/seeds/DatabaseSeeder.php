@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(UserRolesSeeder::class);
+        factory(App\City::class, 50)->create();
         factory(App\Customer::class, 300)->create();
+        factory(App\User::class, 50)->create();
     }
 }

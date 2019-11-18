@@ -27,23 +27,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     deleteDialog: Boolean,
@@ -56,16 +39,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     closeDialog: function closeDialog() {
-      this.$emit('closeDialog');
+      this.$emit("closeDialog");
     },
     deleteItem: function deleteItem() {
       var _this = this;
 
       this.loading = true;
       axios["delete"]("customers/".concat(this.user.id)).then(function (res) {
-        _this.$emit('closeDialog');
+        _this.$emit("closeDialog");
 
-        _this.$emit('userDeleted');
+        _this.$emit("userDeleted");
 
         _this.loading = false;
       });
@@ -102,6 +85,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  methods: {
+    closeDialog: function closeDialog() {
+      this.$emit("closeDialog");
+    }
   }
 });
 
@@ -183,13 +171,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -204,27 +185,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       snackbar: false,
       deleteDialog: false,
       loading: false,
-      search: '',
+      search: "",
       headers: [{
-        text: 'Όνομα',
-        align: 'left',
-        value: 'name'
+        text: "Όνομα",
+        align: "left",
+        value: "name"
       }, {
-        text: 'Εmail',
-        value: 'email'
+        text: "Εmail",
+        value: "email"
       }, {
-        text: 'Διεύθυνση',
-        value: 'address'
+        text: "Διεύθυνση",
+        value: "address"
       }, {
-        text: 'Τηλέφωνο',
-        value: 'mobile'
+        text: "Τηλέφωνο",
+        value: "mobile"
       }, {
-        text: 'Υπεύθυνος',
-        value: 'responsible'
+        text: "Υπεύθυνος",
+        value: "responsible"
       }, {
-        text: 'Ενέργειες',
-        value: 'action',
-        align: 'right'
+        text: "Ενέργειες",
+        value: "action",
+        align: "right"
       }],
       editedItem: {}
     };
@@ -243,7 +224,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
-    customers: 'getcustomers'
+    customers: "getcustomers"
   }))
 });
 
@@ -268,6 +249,7 @@ var render = function() {
     "v-dialog",
     {
       attrs: { "max-width": "290" },
+      on: { "click:outside": _vm.closeDialog },
       model: {
         value: _vm.deleteDialog,
         callback: function($$v) {
@@ -287,9 +269,9 @@ var render = function() {
           _vm._v(" "),
           _c("v-card-text", [
             _vm._v(
-              "\n        Είστε σίγουροι ότι θέλετε να διαγράψετε τον χρήστη " +
+              "Είστε σίγουροι ότι θέλετε να διαγράψετε τον χρήστη " +
                 _vm._s(_vm.user.name) +
-                "?\n        "
+                "?"
             )
           ]),
           _vm._v(" "),
@@ -308,7 +290,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n            Ακυρωση\n        ")]
+                [_vm._v("Ακυρωση")]
               ),
               _vm._v(" "),
               _c(
@@ -321,7 +303,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n            διαγραφη\n        ")]
+                [_vm._v("διαγραφη")]
               )
             ],
             1
@@ -359,6 +341,7 @@ var render = function() {
     "v-dialog",
     {
       attrs: { "max-width": "800px" },
+      on: { "click:outside": _vm.closeDialog },
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -490,9 +473,7 @@ var render = function() {
                               },
                               [
                                 _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(
-                                    "\n                                mdi-eye\n                            "
-                                  )
+                                  _vm._v("mdi-eye")
                                 ])
                               ],
                               1
@@ -512,9 +493,7 @@ var render = function() {
                               },
                               [
                                 _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(
-                                    "\n                                mdi-pencil\n                            "
-                                  )
+                                  _vm._v("mdi-pencil")
                                 ])
                               ],
                               1
@@ -538,9 +517,7 @@ var render = function() {
                               },
                               [
                                 _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(
-                                    "\n                                mdi-delete\n                            "
-                                  )
+                                  _vm._v("mdi-delete")
                                 ])
                               ],
                               1
@@ -568,7 +545,12 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("edit-customer-dialog", {
-                    attrs: { user: _vm.editedItem, dialog: _vm.dialog }
+                    attrs: { user: _vm.editedItem, dialog: _vm.dialog },
+                    on: {
+                      closeDialog: function($event) {
+                        _vm.dialog = false
+                      }
+                    }
                   }),
                   _vm._v(" "),
                   _c(
@@ -584,7 +566,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                  Η επιλογή σας αποθηκεύτηκε επιτυχώς\n                  "
+                        "\n          Η επιλογή σας αποθηκεύτηκε επιτυχώς\n          "
                       ),
                       _c(
                         "v-btn",
@@ -596,11 +578,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    κλεισιμο\n                  "
-                          )
-                        ]
+                        [_vm._v("κλεισιμο")]
                       )
                     ],
                     1
