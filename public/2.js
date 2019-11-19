@@ -171,6 +171,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -185,6 +233,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       snackbar: false,
       deleteDialog: false,
       loading: false,
+      searchQuery: {},
+      fitleredCustomers: [],
+      cities: [],
+      brandTypes: [],
+      sellerTypes: [],
+      users: [],
       search: "",
       headers: [{
         text: "Όνομα",
@@ -203,9 +257,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         text: "Υπεύθυνος",
         value: "responsible"
       }, {
+        text: "Πόλη",
+        value: "city.name"
+      }, {
         text: "Ενέργειες",
         value: "action",
-        align: "right"
+        align: "right",
+        sortable: false,
+        width: 135
       }],
       editedItem: {}
     };
@@ -221,11 +280,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getcustomers: function getcustomers() {
       this.$store.dispatch("getAllcustomers");
+    },
+    getBrandTypes: function getBrandTypes() {
+      var _this = this;
+
+      axios.get("brand-types").then(function (res) {
+        _this.brandTypes = res.data;
+      });
+    },
+    getSellerTypes: function getSellerTypes() {
+      var _this2 = this;
+
+      axios.get("seller-types").then(function (res) {
+        _this2.sellerTypes = res.data;
+      });
+    },
+    getCities: function getCities() {
+      var _this3 = this;
+
+      axios.get("cities").then(function (res) {
+        _this3.cities = res.data;
+      });
+    },
+    getUsers: function getUsers() {
+      var _this4 = this;
+
+      axios.get("users").then(function (res) {
+        _this4.users = res.data;
+      });
+    },
+    runFilters: function runFilters() {
+      var _this5 = this;
+
+      this.fitleredCustomers = this.customers;
+      Object.keys(this.searchQuery).map(function (q) {
+        if (_this5.searchQuery[q]) _this5.fitleredCustomers = _this5.fitleredCustomers.filter(function (customer) {
+          return customer[q] == _this5.searchQuery[q];
+        });
+      });
     }
+  },
+  created: function created() {
+    this.getUsers();
+    this.getCities();
+    this.getBrandTypes();
+    this.getSellerTypes();
+    this.runFilters();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
     customers: "getcustomers"
-  }))
+  })),
+  watch: {
+    customers: function customers(val) {
+      this.fitleredCustomers = val;
+    }
+  }
 });
 
 /***/ }),
@@ -445,11 +554,141 @@ var render = function() {
                     staticClass: "elevation-1",
                     attrs: {
                       headers: _vm.headers,
-                      items: _vm.customers,
-                      "sort-by": "calories",
+                      items: _vm.fitleredCustomers,
+                      "sort-by": "name",
                       search: _vm.search
                     },
                     scopedSlots: _vm._u([
+                      {
+                        key: "top",
+                        fn: function() {
+                          return [
+                            _c(
+                              "v-row",
+                              { staticClass: "px-5" },
+                              [
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "3" } },
+                                  [
+                                    _c("v-autocomplete", {
+                                      attrs: {
+                                        items: _vm.users,
+                                        label: "Πωλητής",
+                                        clearable: "",
+                                        "item-text": "name",
+                                        "item-value": "id"
+                                      },
+                                      on: { input: _vm.runFilters },
+                                      model: {
+                                        value: _vm.searchQuery.user_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.searchQuery,
+                                            "user_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "searchQuery.user_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "3" } },
+                                  [
+                                    _c("v-autocomplete", {
+                                      attrs: {
+                                        items: _vm.brandTypes,
+                                        clearable: "",
+                                        label: "Μάρκα",
+                                        "item-text": "name",
+                                        "item-value": "id"
+                                      },
+                                      on: { input: _vm.runFilters },
+                                      model: {
+                                        value: _vm.searchQuery.brand_type_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.searchQuery,
+                                            "brand_type_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "searchQuery.brand_type_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "3" } },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.sellerTypes,
+                                        clearable: "",
+                                        label: "Τύπος",
+                                        "item-text": "name",
+                                        "item-value": "id"
+                                      },
+                                      on: { input: _vm.runFilters },
+                                      model: {
+                                        value: _vm.searchQuery.seller_type_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.searchQuery,
+                                            "seller_type_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "searchQuery.seller_type_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "3" } },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.cities,
+                                        clearable: "",
+                                        label: "Πόλη",
+                                        "item-text": "name",
+                                        "item-value": "id"
+                                      },
+                                      on: { input: _vm.runFilters },
+                                      model: {
+                                        value: _vm.searchQuery.city_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.searchQuery,
+                                            "city_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "searchQuery.city_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      },
                       {
                         key: "item.action",
                         fn: function(ref) {

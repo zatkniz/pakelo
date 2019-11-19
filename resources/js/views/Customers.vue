@@ -21,11 +21,59 @@
           </v-card-title>
           <v-data-table
             :headers="headers"
-            :items="customers"
-            sort-by="calories"
+            :items="fitleredCustomers"
+            sort-by="name"
             :search="search"
             class="elevation-1"
           >
+            <template v-slot:top>
+              <v-row class="px-5">
+                <v-col cols="12" sm="6" md="3">
+                  <v-autocomplete
+                    @input="runFilters"
+                    :items="users"
+                    label="Πωλητής"
+                    clearable
+                    v-model="searchQuery.user_id"
+                    item-text="name"
+                    item-value="id"
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <v-autocomplete
+                    @input="runFilters"
+                    :items="brandTypes"
+                    clearable
+                    label="Μάρκα"
+                    v-model="searchQuery.brand_type_id"
+                    item-text="name"
+                    item-value="id"
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <v-select
+                    @input="runFilters"
+                    :items="sellerTypes"
+                    clearable
+                    label="Τύπος"
+                    v-model="searchQuery.seller_type_id"
+                    item-text="name"
+                    item-value="id"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <v-select
+                    @input="runFilters"
+                    :items="cities"
+                    clearable
+                    label="Πόλη"
+                    v-model="searchQuery.city_id"
+                    item-text="name"
+                    item-value="id"
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </template>
             <template v-slot:item.action="{ item }">
               <v-btn class="mx-0" fab dark x-small color="secondary" @click="editItem(item)">
                 <v-icon small>mdi-eye</v-icon>
@@ -71,6 +119,12 @@ export default {
     snackbar: false,
     deleteDialog: false,
     loading: false,
+    searchQuery: {},
+    fitleredCustomers: [],
+    cities: [],
+    brandTypes: [],
+    sellerTypes: [],
+    users: [],
     search: "",
     headers: [
       {
@@ -82,7 +136,14 @@ export default {
       { text: "Διεύθυνση", value: "address" },
       { text: "Τηλέφωνο", value: "mobile" },
       { text: "Υπεύθυνος", value: "responsible" },
-      { text: "Ενέργειες", value: "action", align: "right" }
+      { text: "Πόλη", value: "city.name" },
+      {
+        text: "Ενέργειες",
+        value: "action",
+        align: "right",
+        sortable: false,
+        width: 135
+      }
     ],
     editedItem: {}
   }),
@@ -100,13 +161,59 @@ export default {
 
     getcustomers() {
       this.$store.dispatch("getAllcustomers");
+    },
+
+    getBrandTypes() {
+      axios.get("brand-types").then(res => {
+        this.brandTypes = res.data;
+      });
+    },
+    getSellerTypes() {
+      axios.get("seller-types").then(res => {
+        this.sellerTypes = res.data;
+      });
+    },
+    getCities() {
+      axios.get("cities").then(res => {
+        this.cities = res.data;
+      });
+    },
+
+    getUsers() {
+      axios.get("users").then(res => {
+        this.users = res.data;
+      });
+    },
+
+    runFilters() {
+      this.fitleredCustomers = this.customers;
+      Object.keys(this.searchQuery).map(q => {
+        if (this.searchQuery[q])
+          this.fitleredCustomers = this.fitleredCustomers.filter(
+            customer => customer[q] == this.searchQuery[q]
+          );
+      });
     }
+  },
+
+  created() {
+    this.getUsers();
+    this.getCities();
+    this.getBrandTypes();
+    this.getSellerTypes();
+    this.runFilters();
   },
 
   computed: {
     ...mapGetters({
       customers: "getcustomers"
     })
+  },
+
+  watch: {
+    customers(val) {
+      this.fitleredCustomers = val;
+    }
   }
 };
 </script>
