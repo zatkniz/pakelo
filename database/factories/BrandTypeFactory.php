@@ -6,7 +6,8 @@ use App\BrandType;
 use Faker\Generator as Faker;
 
 $factory->define(BrandType::class, function (Faker $faker) {
+    $faker->addProvider(new \Faker\Provider\Fakecar($faker));
     return [
-        //
+        'name' => $faker->vehicleBrand,
     ];
 });

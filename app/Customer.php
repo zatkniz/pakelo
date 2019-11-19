@@ -30,7 +30,9 @@ class Customer extends Model
 
     protected $with = [
         'user',
-        'city'
+        'city',
+        'sellerType',
+        'BrandType',
     ];
 
     public function user()
@@ -41,5 +43,15 @@ class Customer extends Model
     public function city()
     {
         return $this->belongsTo('App\City');
+    }
+
+    public function sellerType()
+    {
+        return $this->belongsTo('App\SellerType');
+    }
+
+    public function BrandType()
+    {
+        return $this->belongsTo('App\BrandType');
     }
 }

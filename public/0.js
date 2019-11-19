@@ -109,6 +109,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -121,6 +139,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       valid: false,
       users: [],
       cities: [],
+      brandTypes: [],
+      sellerTypes: [],
       status: [{
         value: false,
         text: "Ανενεργός"
@@ -152,11 +172,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.users = res.data;
       });
     },
-    getCities: function getCities() {
+    getBrandTypes: function getBrandTypes() {
       var _this3 = this;
 
+      axios.get("brand-types").then(function (res) {
+        _this3.brandTypes = res.data;
+      });
+    },
+    getSellerTypes: function getSellerTypes() {
+      var _this4 = this;
+
+      axios.get("seller-types").then(function (res) {
+        _this4.sellerTypes = res.data;
+      });
+    },
+    getCities: function getCities() {
+      var _this5 = this;
+
       axios.get("cities").then(function (res) {
-        _this3.cities = res.data;
+        _this5.cities = res.data;
       });
     }
   },
@@ -164,6 +198,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getCustomer();
     this.getUsers();
     this.getCities();
+    this.getBrandTypes();
+    this.getSellerTypes();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     customer: "getcustomer"
@@ -465,7 +501,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
+                        { attrs: { cols: "12", sm: "4", md: "2" } },
                         [
                           _c("v-text-field", {
                             attrs: {
@@ -486,9 +522,9 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
+                        { attrs: { cols: "12", sm: "4", md: "3" } },
                         [
-                          _c("v-select", {
+                          _c("v-autocomplete", {
                             attrs: {
                               items: _vm.users,
                               label: "Πωλητής",
@@ -509,7 +545,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "4" } },
+                        { attrs: { cols: "12", sm: "4", md: "2" } },
                         [
                           _c("v-select", {
                             attrs: {
@@ -524,6 +560,52 @@ var render = function() {
                                 _vm.$set(_vm.customer, "active", $$v)
                               },
                               expression: "customer.active"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "6", md: "3" } },
+                        [
+                          _c("v-autocomplete", {
+                            attrs: {
+                              items: _vm.brandTypes,
+                              label: "Μάρκα",
+                              "item-text": "name",
+                              "item-value": "id"
+                            },
+                            model: {
+                              value: _vm.customer.brand_type_id,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "brand_type_id", $$v)
+                              },
+                              expression: "customer.brand_type_id"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "6", md: "2" } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              items: _vm.sellerTypes,
+                              label: "Τύπος",
+                              "item-text": "name",
+                              "item-value": "id"
+                            },
+                            model: {
+                              value: _vm.customer.seller_type_id,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "seller_type_id", $$v)
+                              },
+                              expression: "customer.seller_type_id"
                             }
                           })
                         ],

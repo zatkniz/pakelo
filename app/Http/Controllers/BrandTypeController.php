@@ -14,7 +14,7 @@ class BrandTypeController extends Controller
      */
     public function index()
     {
-        //
+        return BrandType::all();
     }
 
     /**

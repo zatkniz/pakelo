@@ -49,29 +49,47 @@
             <v-col cols="12" sm="5" md="5">
               <v-text-field label="Διεύθυνση" v-model="customer.address"></v-text-field>
             </v-col>
-            <v-col cols="12" sm="4" md="4">
+            <v-col cols="12" sm="4" md="2">
               <v-text-field
                 label="Πιστωτικό Όριο"
                 v-model="customer.limit"
                 append-icon="mdi-currency-eur"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <v-select
+            <v-col cols="12" sm="4" md="3">
+              <v-autocomplete
                 :items="users"
                 label="Πωλητής"
                 v-model="customer.user_id"
                 item-text="name"
                 item-value="id"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="4" md="4">
+            <v-col cols="12" sm="4" md="2">
               <v-select
                 :items="status"
                 label="Κατάσταση"
                 v-model="customer.active"
                 item-text="text"
                 item-value="value"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" sm="6" md="3">
+              <v-autocomplete
+                :items="brandTypes"
+                label="Μάρκα"
+                v-model="customer.brand_type_id"
+                item-text="name"
+                item-value="id"
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" sm="6" md="2">
+              <v-select
+                :items="sellerTypes"
+                label="Τύπος"
+                v-model="customer.seller_type_id"
+                item-text="name"
+                item-value="id"
               ></v-select>
             </v-col>
           </v-row>
@@ -103,6 +121,8 @@ export default {
     valid: false,
     users: [],
     cities: [],
+    brandTypes: [],
+    sellerTypes: [],
     status: [
       {
         value: false,
@@ -137,6 +157,16 @@ export default {
         this.users = res.data;
       });
     },
+    getBrandTypes() {
+      axios.get("brand-types").then(res => {
+        this.brandTypes = res.data;
+      });
+    },
+    getSellerTypes() {
+      axios.get("seller-types").then(res => {
+        this.sellerTypes = res.data;
+      });
+    },
     getCities() {
       axios.get("cities").then(res => {
         this.cities = res.data;
@@ -148,6 +178,8 @@ export default {
     this.getCustomer();
     this.getUsers();
     this.getCities();
+    this.getBrandTypes();
+    this.getSellerTypes();
   },
 
   computed: {
