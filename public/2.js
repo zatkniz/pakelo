@@ -219,6 +219,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -536,7 +537,8 @@ var render = function() {
                           "append-icon": "mdi-magnify",
                           label: "Αναζήτηση",
                           "single-line": "",
-                          "hide-details": ""
+                          "hide-details": "",
+                          clearable: ""
                         },
                         model: {
                           value: _vm.search,

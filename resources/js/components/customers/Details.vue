@@ -1,11 +1,11 @@
 <template>
   <v-card :loading="loading">
-    <v-form ref="form" v-model="valid" lazy-validation @submit.prevent>
+    <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="validate">
       <v-card-text>
         <v-container>
           <v-row>
             <v-col cols="12" sm="6" md="6">
-              <v-text-field label="Επωνυμία" v-model="customer.name"></v-text-field>
+              <v-text-field :rules="nameRules" label="Επωνυμία" v-model="customer.name"></v-text-field>
             </v-col>
             <v-col cols="12" sm="3" md="3">
               <v-text-field label="Α.Φ.Μ." v-model="customer.afm"></v-text-field>
@@ -98,7 +98,7 @@
 
       <v-card-actions v-if="!customer_id">
         <v-spacer></v-spacer>
-        <v-btn color="primary" type="submit" @click="saveCustomer">Αποθηκευση</v-btn>
+        <v-btn color="primary" type="submit">Αποθηκευση</v-btn>
       </v-card-actions>
     </v-form>
 
@@ -119,6 +119,7 @@ export default {
     loading: false,
     snackbar: false,
     valid: false,
+    nameRules: [v => !!v || "Συμπληρώστε την επωνυμία του πελάτη."],
     users: [],
     cities: [],
     brandTypes: [],
@@ -151,6 +152,11 @@ export default {
         this.snackbar = true;
         this.$store.dispatch("getAllcustomers");
       });
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.saveCustomer();
+      }
     },
     getUsers() {
       axios.get("users").then(res => {

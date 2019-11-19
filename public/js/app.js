@@ -2053,6 +2053,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2065,7 +2077,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      drawer: true
+      drawer: true,
+      fab: false
     };
   },
   methods: {
@@ -20681,21 +20694,72 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("v-content", [_c("router-view", { key: _vm.$route.path })], 1),
-      _vm._v(" "),
       _c(
-        "v-btn",
-        {
-          attrs: {
-            bottom: "",
-            color: "primary",
-            dark: "",
-            fab: "",
-            fixed: "",
-            right: ""
-          }
-        },
-        [_c("v-icon", [_vm._v("mdi-plus")])],
+        "v-content",
+        [
+          _c("router-view", { key: _vm.$route.path }),
+          _vm._v(" "),
+          _c(
+            "v-speed-dial",
+            {
+              attrs: { bottom: "", right: "", fixed: "" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function() {
+                    return [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary", dark: "", fab: "" },
+                          model: {
+                            value: _vm.fab,
+                            callback: function($$v) {
+                              _vm.fab = $$v
+                            },
+                            expression: "fab"
+                          }
+                        },
+                        [
+                          _vm.fab
+                            ? _c("v-icon", [_vm._v("mdi-close")])
+                            : _c("v-icon", [_vm._v("mdi-plus")])
+                        ],
+                        1
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ]),
+              model: {
+                value: _vm.fab,
+                callback: function($$v) {
+                  _vm.fab = $$v
+                },
+                expression: "fab"
+              }
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    to: "/customer",
+                    fab: "",
+                    dark: "",
+                    small: "",
+                    color: "red"
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-account")])],
+                1
+              )
+            ],
+            1
+          )
+        ],
         1
       )
     ],

@@ -137,6 +137,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: false,
       snackbar: false,
       valid: false,
+      nameRules: [function (v) {
+        return !!v || "Συμπληρώστε την επωνυμία του πελάτη.";
+      }],
       users: [],
       cities: [],
       brandTypes: [],
@@ -164,6 +167,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.$store.dispatch("getAllcustomers");
       });
+    },
+    validate: function validate() {
+      if (this.$refs.form.validate()) {
+        this.saveCustomer();
+      }
     },
     getUsers: function getUsers() {
       var _this2 = this;
@@ -240,6 +248,7 @@ var render = function() {
           on: {
             submit: function($event) {
               $event.preventDefault()
+              return _vm.validate($event)
             }
           },
           model: {
@@ -265,7 +274,7 @@ var render = function() {
                         { attrs: { cols: "12", sm: "6", md: "6" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "Επωνυμία" },
+                            attrs: { rules: _vm.nameRules, label: "Επωνυμία" },
                             model: {
                               value: _vm.customer.name,
                               callback: function($$v) {
@@ -627,14 +636,9 @@ var render = function() {
                 [
                   _c("v-spacer"),
                   _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "primary", type: "submit" },
-                      on: { click: _vm.saveCustomer }
-                    },
-                    [_vm._v("Αποθηκευση")]
-                  )
+                  _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
+                    _vm._v("Αποθηκευση")
+                  ])
                 ],
                 1
               )

@@ -5,11 +5,23 @@
 
     <v-content>
       <router-view :key="$route.path" />
+
+      <v-speed-dial v-model="fab" bottom right fixed>
+        <template v-slot:activator>
+          <v-btn v-model="fab" color="primary" dark fab>
+            <v-icon v-if="fab">mdi-close</v-icon>
+            <v-icon v-else>mdi-plus</v-icon>
+          </v-btn>
+        </template>
+        <v-btn to="/customer" fab dark small color="red">
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </v-speed-dial>
     </v-content>
 
-    <v-btn bottom color="primary" dark fab fixed right>
+    <!-- <v-btn bottom color="primary" dark fab fixed right>
       <v-icon>mdi-plus</v-icon>
-    </v-btn>
+    </v-btn>-->
   </v-app>
 </template>
 
@@ -27,7 +39,8 @@ export default {
   },
 
   data: () => ({
-    drawer: true
+    drawer: true,
+    fab: false
   }),
 
   methods: {
