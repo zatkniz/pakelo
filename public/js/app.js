@@ -2018,7 +2018,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     auth: "getAuth",
     customers: "getcustomers"
-  }))
+  }), {
+    getNamesFirstLetters: function getNamesFirstLetters() {
+      if (this.auth.name) return this.auth.name.split(" ")[0][0] + this.auth.name.split(" ")[1][0];
+    }
+  })
 });
 
 /***/ }),
@@ -20604,10 +20608,13 @@ var render = function() {
                   _c(
                     "v-btn",
                     _vm._g(
-                      { staticClass: "text-capitalize", attrs: { text: "" } },
+                      {
+                        staticClass: "elevation-3",
+                        attrs: { fab: "", text: "" }
+                      },
                       on
                     ),
-                    [_vm._v(_vm._s(_vm.auth.name))]
+                    [_vm._v(_vm._s(_vm.getNamesFirstLetters))]
                   )
                 ]
               }

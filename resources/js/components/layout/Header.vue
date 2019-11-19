@@ -20,7 +20,7 @@
     <v-spacer />
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn text v-on="on" class="text-capitalize">{{auth.name}}</v-btn>
+        <v-btn class="elevation-3" fab text v-on="on">{{getNamesFirstLetters}}</v-btn>
       </template>
       <v-list>
         <v-list-item @click="logout">
@@ -56,7 +56,13 @@ export default {
     ...mapGetters({
       auth: "getAuth",
       customers: "getcustomers"
-    })
+    }),
+    getNamesFirstLetters() {
+      if (this.auth.name)
+        return (
+          this.auth.name.split(" ")[0][0] + this.auth.name.split(" ")[1][0]
+        );
+    }
   }
 };
 </script>
