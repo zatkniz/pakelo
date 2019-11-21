@@ -28,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('brand-types', 'BrandTypeController');
     Route::resource('seller-types', 'SellerTypeController');
     Route::resource('products', 'ProductController');
+    Route::resource('products-uses', 'ProductUseController');
+    Route::resource('products-descriptions', 'ProductDescriptionController');
+    Route::resource('products-categories', 'ProductCategoryController');
 
     Route::get('user-roles', 'UserController@getUserRoles');
 });

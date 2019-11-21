@@ -14,7 +14,7 @@ class ProductDescriptionController extends Controller
      */
     public function index()
     {
-        //
+        return ProductDescription::all();
     }
 
     /**

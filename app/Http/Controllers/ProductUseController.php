@@ -14,7 +14,7 @@ class ProductUseController extends Controller
      */
     public function index()
     {
-        //
+        return ProductUse::all();
     }
 
     /**

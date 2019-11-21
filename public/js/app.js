@@ -2176,7 +2176,8 @@ __webpack_require__.r(__webpack_exports__);
         href: "/customers"
       }, {
         icon: "mdi-archive",
-        text: "Προϊόντα"
+        text: "Προϊόντα",
+        href: "/products"
       }, {
         icon: "mdi-message",
         text: "Προσφορές"
@@ -2251,48 +2252,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       valid: true,
       snackbar: false,
       loading: false,
-      name: '',
-      text: '',
+      name: "",
+      text: "",
       nameRules: [function (v) {
-        return !!v || 'Συμπληρώστε το όνομα χρήστη';
+        return !!v || "Συμπληρώστε το όνομα χρήστη";
       }],
-      password: '',
+      password: "",
       passRules: [function (v) {
-        return !!v || 'Συμπληρώστε τον κωδικό σας';
+        return !!v || "Συμπληρώστε τον κωδικό σας";
       }]
     };
   },
@@ -21006,9 +20979,7 @@ var render = function() {
                 },
                 [
                   _c("v-card-title", [
-                    _vm._v(
-                      "\n                Συμπληρώστε τα στοιχεία εισόδου\n            "
-                    )
+                    _vm._v("Συμπληρώστε τα στοιχεία εισόδου")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -21076,11 +21047,7 @@ var render = function() {
                             type: "submit"
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Εισοδος\n                "
-                          )
-                        ]
+                        [_vm._v("Εισοδος")]
                       )
                     ],
                     1
@@ -21104,18 +21071,18 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n            " + _vm._s(_vm.text) + "\n            "),
+              _vm._v("\n      " + _vm._s(_vm.text) + "\n      "),
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "pink", text: "" },
+                  attrs: { loading: _vm.loading, color: "pink", text: "" },
                   on: {
                     click: function($event) {
                       _vm.snackbar = false
                     }
                   }
                 },
-                [_vm._v("\n                κλεισιμο\n            ")]
+                [_vm._v("κλεισιμο")]
               )
             ],
             1
@@ -74785,18 +74752,18 @@ __webpack_require__(/*! ../css/main.css */ "./resources/css/main.css");
 
 
 var app = new Vue({
-  el: '#app',
+  el: "#app",
   vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_0___default.a({
     theme: {
       themes: {
         light: {
-          primary: '#e41513',
-          secondary: '#242424',
-          accent: '#8bc34a',
-          error: '#3f51b5',
-          warning: '#2196f3',
-          info: '#03a9f4',
-          success: '#ffc107'
+          primary: "#e41513",
+          secondary: "#242424",
+          accent: "#8bc34a",
+          error: "#3f51b5",
+          warning: "#2196f3",
+          info: "#03a9f4",
+          success: "#ffc107"
         }
       }
     }
@@ -74808,11 +74775,12 @@ var app = new Vue({
     login: _views_Login__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js");
     }
 
     this.$store.dispatch("getAuth");
+    this.$store.dispatch("getAllproducts");
     return this.$store.dispatch("getAllcustomers");
   }
 });
@@ -75075,34 +75043,40 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
-    path: '/',
-    name: 'Dashboard',
+    path: "/",
+    name: "Dashboard",
     component: function component() {
       return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
     }
   }, {
-    path: '/users',
-    name: 'Users',
+    path: "/users",
+    name: "Users",
     component: function component() {
       return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
-    path: '/customers',
-    name: 'Customers',
+    path: "/customers",
+    name: "Customers",
     component: function component() {
       return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
     }
   }, {
-    path: '/customer/:id',
-    name: 'Customers Single',
+    path: "/customer/:id",
+    name: "Customers Single",
     component: function component() {
       return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
-    path: '/customer',
-    name: 'Customers Single',
+    path: "/customer",
+    name: "Customers New",
     component: function component() {
       return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+    }
+  }, {
+    path: "/products",
+    name: "Products",
+    component: function component() {
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
     }
   }]
 });
@@ -75129,6 +75103,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     customers: [],
     customer: {},
+    products: [],
+    product: {},
     auth: {}
   },
   mutations: {
@@ -75140,19 +75116,25 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     SET_CUSTOMER: function SET_CUSTOMER(state, payload) {
       return state.customer = payload;
+    },
+    SET_PRODUCTS: function SET_PRODUCTS(state, payload) {
+      return state.products = payload;
+    },
+    SET_PRODUCT: function SET_PRODUCT(state, payload) {
+      return state.product = payload;
     }
   },
   actions: {
     getAuth: function getAuth(_ref) {
       var commit = _ref.commit;
-      return axios.get('auth').then(function (res) {
-        return commit('SET_AUTH', res.data);
+      return axios.get("auth").then(function (res) {
+        return commit("SET_AUTH", res.data);
       });
     },
     getAllcustomers: function getAllcustomers(_ref2) {
       var commit = _ref2.commit;
-      return axios.get('customers').then(function (res) {
-        return commit('SET_CUSTOMERS', res.data);
+      return axios.get("customers").then(function (res) {
+        return commit("SET_CUSTOMERS", res.data);
       });
     },
     getSinglecustomer: function getSinglecustomer(_ref3, id) {
@@ -75160,17 +75142,41 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           commit = _ref3.commit;
 
       if (!id) {
-        return commit('SET_CUSTOMER', {});
+        return commit("SET_CUSTOMER", {});
       }
 
       if (state.customers.length) {
-        return commit('SET_CUSTOMER', state.customers.find(function (customer) {
+        return commit("SET_CUSTOMER", state.customers.find(function (customer) {
           return customer.id == id;
         }));
       }
 
       axios.get("customers/".concat(id)).then(function (res) {
-        return commit('SET_CUSTOMER', res.data);
+        return commit("SET_CUSTOMER", res.data);
+      });
+    },
+    getAllproducts: function getAllproducts(_ref4) {
+      var commit = _ref4.commit;
+      return axios.get("products").then(function (res) {
+        return commit("SET_PRODUCTS", res.data);
+      });
+    },
+    getSingleproduct: function getSingleproduct(_ref5, id) {
+      var state = _ref5.state,
+          commit = _ref5.commit;
+
+      if (!id) {
+        return commit("SET_PRODUCT", {});
+      }
+
+      if (state.products.length) {
+        return commit("SET_PRODUCT", state.products.find(function (product) {
+          return product.id == id;
+        }));
+      }
+
+      axios.get("products/".concat(id)).then(function (res) {
+        return commit("SET_PRODUCT", res.data);
       });
     }
   },
@@ -75183,6 +75189,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     getcustomer: function getcustomer(state) {
       return state.customer;
+    },
+    getproducts: function getproducts(state) {
+      return state.products;
+    },
+    getproduct: function getproduct(state) {
+      return state.product;
     }
   },
   modules: {}

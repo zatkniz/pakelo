@@ -68,7 +68,7 @@ export default {
         text: "Πελάτες",
         href: "/customers"
       },
-      { icon: "mdi-archive", text: "Προϊόντα" },
+      { icon: "mdi-archive", text: "Προϊόντα", href: "/products" },
       { icon: "mdi-message", text: "Προσφορές" },
       { icon: "mdi-cash-register", text: "Ταμείο" },
       { icon: "mdi-contacts", text: "Χρήστες", href: "/users" },

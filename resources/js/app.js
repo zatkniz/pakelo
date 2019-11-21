@@ -1,17 +1,17 @@
-require('./bootstrap');
+require("./bootstrap");
 
-const Vue = require('vue');
-import Vuetify from 'vuetify';
+const Vue = require("vue");
+import Vuetify from "vuetify";
 
 Vue.use(Vuetify);
 
-import layout from './components/layout/Layout';
-import login from './views/Login';
+import layout from "./components/layout/Layout";
+import login from "./views/Login";
 
-import router from './router';
-import store from './store';
+import router from "./router";
+import store from "./store";
 
-require('../css/main.css')
+require("../css/main.css");
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,22 +19,22 @@ require('../css/main.css')
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     vuetify: new Vuetify({
         theme: {
-          themes: {
-            light: {
-                primary: '#e41513',
-                secondary: '#242424',
-                accent: '#8bc34a',
-                error: '#3f51b5',
-                warning: '#2196f3',
-                info: '#03a9f4',
-                success: '#ffc107'
+            themes: {
+                light: {
+                    primary: "#e41513",
+                    secondary: "#242424",
+                    accent: "#8bc34a",
+                    error: "#3f51b5",
+                    warning: "#2196f3",
+                    info: "#03a9f4",
+                    success: "#ffc107"
+                }
             }
-          }
         }
-      }),
+    }),
     router,
     store,
     components: {
@@ -42,10 +42,11 @@ const app = new Vue({
         login
     },
     created() {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-      }
-      this.$store.dispatch("getAuth");
-      return this.$store.dispatch("getAllcustomers");
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service-worker.js");
+        }
+        this.$store.dispatch("getAuth");
+        this.$store.dispatch("getAllproducts");
+        return this.$store.dispatch("getAllcustomers");
     }
 });
