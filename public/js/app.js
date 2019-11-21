@@ -2284,6 +2284,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       valid: true,
       snackbar: false,
+      loading: false,
       name: '',
       text: '',
       nameRules: [function (v) {
@@ -2304,13 +2305,16 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
+      this.loading = true;
       axios.post("login", {
         username: this.name,
         password: this.password
       }).then(function (res) {
         window.location.reload();
+        _this.loading = false;
       })["catch"](function (error) {
         _this.snackbar = true;
+        _this.loading = false;
 
         for (var err in error.response.data.errors) {
           _this.text = error.response.data.errors[err][0];
@@ -20998,7 +21002,7 @@ var render = function() {
                 "v-card",
                 {
                   staticClass: "pa-5 elevation-5",
-                  attrs: { color: "#fff", width: "400" }
+                  attrs: { color: "#fff", width: "400", loading: _vm.loading }
                 },
                 [
                   _c("v-card-title", [

@@ -11,7 +11,7 @@
 |
 */
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
@@ -21,13 +21,14 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::get('/auth', 'UserController@getAuth');
-    
-    Route::resource( 'users' , 'UserController' );
-    Route::resource( 'customers' , 'CustomerController' );
-    Route::resource( 'cities' , 'CityController' );
-    Route::resource( 'brand-types' , 'BrandTypeController' );
-    Route::resource( 'seller-types' , 'SellerTypeController' );
-    
+
+    Route::resource('users', 'UserController');
+    Route::resource('customers', 'CustomerController');
+    Route::resource('cities', 'CityController');
+    Route::resource('brand-types', 'BrandTypeController');
+    Route::resource('seller-types', 'SellerTypeController');
+    Route::resource('products', 'ProductController');
+
     Route::get('user-roles', 'UserController@getUserRoles');
 });
 

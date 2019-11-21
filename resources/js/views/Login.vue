@@ -3,7 +3,7 @@
       <v-container class="fill-height" fluid>
         <v-row class="flex-column" align="center" justify="center">
             <img class="mb-5" src="/assets/logo.png" />
-            <v-card color="#fff" class="pa-5 elevation-5" width="400">
+            <v-card color="#fff" class="pa-5 elevation-5" width="400" :loading="loading">
                 <v-card-title>
                     Συμπληρώστε τα στοιχεία εισόδου
                 </v-card-title>
@@ -64,6 +64,7 @@
     data: () => ({
       valid: true,
       snackbar: false,
+      loading: false,
       name: '',
       text: '',
       nameRules: [
@@ -83,13 +84,16 @@
       },
 
         login() {
+          this.loading = true;
             axios
                 .post("login", { username: this.name, password: this.password })
                 .then(res => {
                     window.location.reload();
+                    this.loading = false;
                 })
                 .catch(error => {
                     this.snackbar = true;
+                    this.loading = false;
                     for (let err in error.response.data.errors) {
                         this.text = error.response.data.errors[err][0];
                     }
