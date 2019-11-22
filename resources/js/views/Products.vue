@@ -7,7 +7,7 @@
             <v-toolbar-title>Προϊοντα</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <v-btn color="primary" dark class="mb-2" to="customer">Προσθηκη Προϊοντος</v-btn>
+            <v-btn color="primary" dark class="mb-2" to="product">Προσθηκη Προϊοντος</v-btn>
           </v-toolbar>
           <v-card-title>
             <v-spacer></v-spacer>
@@ -71,7 +71,7 @@
               <v-btn class="mx-0" fab dark x-small color="secondary" @click="editItem(item)">
                 <v-icon small>mdi-eye</v-icon>
               </v-btn>
-              <v-btn class="mx-0" fab dark x-small color="teal" :to="'customer/' + item.id">
+              <v-btn class="mx-0" fab dark x-small color="teal" :to="'product/' + item.id">
                 <v-icon small>mdi-pencil</v-icon>
               </v-btn>
               <v-btn class="mx-0" fab dark x-small color="primary" @click="openDeleteDialog(item)">
@@ -85,21 +85,31 @@
                   hide-default-footer
                   :headers="[ { text: 'Κωδικός', align: 'center', sortable: false, value: 'code', }, { text: 'Lt/Kg', align: 'center', value: 'lt_kg' }, { text: 'Tιμή',align: 'center', value: 'price' }, { text: 'Tιμή Lt/Kg', align: 'center', value: 'price_per_kg' }]"
                   :items="item.attributes"
-                ></v-data-table>
+                >
+                  <template v-slot:item.price="{ item }">
+                    {{ item.price }}€
+                  </template>
+                  <template v-slot:item.lt_kg="{ item }">
+                    {{ item.lt_kg }}Lt
+                  </template>
+                  <template v-slot:item.price_per_kg="{ item }">
+                    {{ (item.price / item.lt_kg).toFixed(2) }}€
+                  </template>
+                </v-data-table>
               </td>
             </template>
           </v-data-table>
-          <delete-customer-dialog
-            :user="editedItem"
+          <delete-product-dialog
+            :product="editedItem"
             :deleteDialog="deleteDialog"
-            @userDeleted="getproducts(); snackbar = true;"
+            @productDeleted="getproducts(); snackbar = true;"
             @closeDialog="deleteDialog = false"
           />
-          <edit-customer-dialog :user="editedItem" :dialog="dialog" @closeDialog="dialog = false" />
+          <edit-product-dialog :product="editedItem" :dialog="dialog" @closeDialog="dialog = false" />
 
           <v-snackbar v-model="snackbar">
             Η επιλογή σας αποθηκεύτηκε επιτυχώς
-            <v-btn color="pink" text @click="snackbar = false">κλεισιμο</v-btn>
+            <v-btn color="primary" text @click="snackbar = false">κλεισιμο</v-btn>
           </v-snackbar>
         </v-card>
       </v-col>
@@ -108,14 +118,14 @@
 </template>
 
 <script>
-import deleteCustomerDialog from "../components/customers/DeleteCustomerDialog";
-import editCustomerDialog from "../components/customers/EditCustomer";
+import deleteProductDialog from "../components/products/DeleteProductDialog";
+import editProductDialog from "../components/products/EditProduct";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
-    deleteCustomerDialog,
-    editCustomerDialog
+    deleteProductDialog,
+    editProductDialog
   },
   data: () => ({
     dialog: false,
@@ -129,7 +139,6 @@ export default {
     productUses: [],
     productDescriptions: [],
     productCategories: [],
-    users: [],
     search: "",
     headers: [
       {
@@ -159,8 +168,8 @@ export default {
       this.dialog = true;
     },
 
-    openDeleteDialog(user) {
-      this.editedItem = Object.assign({}, user);
+    openDeleteDialog(product) {
+      this.editedItem = Object.assign({}, product);
       this.deleteDialog = true;
     },
 

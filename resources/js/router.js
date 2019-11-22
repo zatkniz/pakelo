@@ -51,6 +51,16 @@ const router = new VueRouter({
             component: () => import("./views/Products")
         },
         {
+            path: "/product/:id",
+            name: "Product Single",
+            component: () => import("./views/ProductSingle")
+        },
+        {
+            path: "/product",
+            name: "Product New",
+            component: () => import("./views/ProductSingle")
+        },
+        {
             path: "/lists-descriptions",
             name: "Lists Description",
             component: () => import("./views/Lists")
@@ -77,7 +87,7 @@ const router = new VueRouter({
         },
         {
             path: "/lists-seller-types",
-            name: "Lists Uses",
+            name: "Lists Seller Types",
             component: () => import("./views/Lists")
         },
     ]

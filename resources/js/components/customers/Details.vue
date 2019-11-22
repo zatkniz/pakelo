@@ -98,7 +98,7 @@
 
       <v-card-actions v-if="!customer_id">
         <v-spacer></v-spacer>
-        <v-btn color="primary" type="submit">Αποθηκευση</v-btn>
+        <v-btn class="mx-5 mb-5" color="primary" type="submit">Αποθηκευση</v-btn>
       </v-card-actions>
     </v-form>
 

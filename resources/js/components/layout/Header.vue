@@ -4,20 +4,21 @@
     <v-toolbar-title style="width: 300px" class="ml-0 pl-0">
       <img src="/assets/logo.png" />
     </v-toolbar-title>
+    <v-spacer />
     <v-autocomplete
+      style="max-width: 20%;"
       flat
       solo-inverted
       hide-details
       prepend-inner-icon="mdi-magnify"
-      label="Search"
-      class="hidden-sm-and-down"
+      label="Αναζήτηση"
+      class="hidden-sm-and-down mr-10"
       :items="customers"
       item-text="name"
       item-value="id"
       v-model="customer"
       @change="navigateToCustomerSingle"
     />
-    <v-spacer />
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn class="elevation-3" fab text v-on="on">{{getNamesFirstLetters}}</v-btn>

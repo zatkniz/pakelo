@@ -27,3 +27,14 @@ a.v-list-item--active.v-list-item {
     background-color: #e41513;
     color: #fff !important;
 }
+
+.v-data-table.products-table tbody tr:not(:last-child) td:last-child, .v-data-table.products-table tbody tr:not(:last-child) td:not(.v-data-table__mobile-row) {
+    border-bottom: 1px solid #fff !important;
+}
+
+.products-table .v-data-table__mobile-row {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
