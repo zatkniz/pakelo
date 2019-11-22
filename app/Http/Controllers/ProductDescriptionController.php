@@ -35,7 +35,9 @@ class ProductDescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ProductDescription::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class ProductDescriptionController extends Controller
      * @param  \App\ProductDescription  $productDescription
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductDescription $productDescription)
+    public function destroy($productDescription)
     {
-        //
+        ProductDescription::find($productDescription)->delete();
     }
 }

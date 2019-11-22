@@ -11,6 +11,21 @@ const router = new VueRouter({
             component: () => import("./views/Dashboard")
         },
         {
+            path: "/visits",
+            name: "Visits",
+            component: () => import("./views/Users")
+        },
+        {
+            path: "/offers",
+            name: "Offers",
+            component: () => import("./views/Users")
+        },
+        {
+            path: "/orders",
+            name: "Orders",
+            component: () => import("./views/Users")
+        },
+        {
             path: "/users",
             name: "Users",
             component: () => import("./views/Users")
@@ -34,7 +49,37 @@ const router = new VueRouter({
             path: "/products",
             name: "Products",
             component: () => import("./views/Products")
-        }
+        },
+        {
+            path: "/lists-descriptions",
+            name: "Lists Description",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-categories",
+            name: "Lists Categories",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-uses",
+            name: "Lists Uses",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-brand-types",
+            name: "Lists Brands",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-cities",
+            name: "Lists Cities",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-seller-types",
+            name: "Lists Uses",
+            component: () => import("./views/Lists")
+        },
     ]
 });
 

@@ -13,6 +13,15 @@
             <v-icon v-else>mdi-plus</v-icon>
           </v-btn>
         </template>
+        <v-btn to="/visits" fab dark small color="red">
+          <v-icon>mdi-car-side</v-icon>
+        </v-btn>
+        <v-btn to="/offers" fab dark small color="red">
+          <v-icon>mdi-message</v-icon>
+        </v-btn>
+        <v-btn to="/orders" fab dark small color="red">
+          <v-icon>mdi-history</v-icon>
+        </v-btn>
         <v-btn to="/customer" fab dark small color="red">
           <v-icon>mdi-account</v-icon>
         </v-btn>

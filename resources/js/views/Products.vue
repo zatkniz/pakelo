@@ -81,6 +81,7 @@
             <template v-slot:expanded-item="{item , headers}">
               <td :colspan="headers.length" class="pa-0">
                 <v-data-table
+                  class="products-table"
                   hide-default-footer
                   :headers="[ { text: 'Κωδικός', align: 'center', sortable: false, value: 'code', }, { text: 'Lt/Kg', align: 'center', value: 'lt_kg' }, { text: 'Tιμή',align: 'center', value: 'price' }, { text: 'Tιμή Lt/Kg', align: 'center', value: 'price_per_kg' }]"
                   :items="item.attributes"

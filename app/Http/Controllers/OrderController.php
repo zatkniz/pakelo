@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductCategory;
+use App\Order;
 use Illuminate\Http\Request;
 
-class ProductCategoryController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        return ProductCategory::all();
+        //
     }
 
     /**
@@ -35,18 +35,16 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return ProductCategory::updateOrCreate([
-            'id' => $request->input('id')
-        ], $request->all());
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductCategory  $productCategory
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductCategory $productCategory)
+    public function show(Order $order)
     {
         //
     }
@@ -54,10 +52,10 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductCategory  $productCategory
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit(Order $order)
     {
         //
     }
@@ -66,10 +64,10 @@ class ProductCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductCategory  $productCategory
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductCategory $productCategory)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -77,11 +75,11 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductCategory  $productCategory
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $productCategory)
+    public function destroy(Order $order)
     {
-        ProductCategory::find($productCategory)->delete();
+        //
     }
 }

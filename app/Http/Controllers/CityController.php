@@ -35,7 +35,9 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return City::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy($city)
     {
-        //
+        City::find($city)->delete();
     }
 }

@@ -11,4 +11,12 @@ class ProductUse extends Model
     protected $fillable = [
         'name'
     ];
+
+    protected $withCount = [
+        'items'
+    ];
+
+    public function items() {
+        return $this->hasMany('\App\Product');
+    }
 }

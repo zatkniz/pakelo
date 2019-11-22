@@ -35,7 +35,9 @@ class SellerTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return SellerType::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class SellerTypeController extends Controller
      * @param  \App\SellerType  $sellerType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SellerType $sellerType)
+    public function destroy($sellerType)
     {
-        //
+        SellerType::find($sellerType)->delete();
     }
 }

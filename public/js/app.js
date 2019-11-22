@@ -2065,6 +2065,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2160,44 +2169,62 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      items: [{
-        icon: "mdi-home",
-        text: "Dashboard",
-        href: "/"
+      items: [// { icon: "mdi-home", text: "Dashboard", href: "/" },
+      {
+        icon: "mdi-car-side",
+        text: "Επισκέψεις",
+        href: "/visits"
+      }, {
+        icon: "mdi-message",
+        text: "Προσφορές",
+        href: "/offers"
       }, {
         icon: "mdi-history",
-        text: "Παραγγελίες"
-      }, {
-        icon: "mdi-car-side",
-        text: "Επισκέψεις"
+        text: "Παραγγελίες",
+        href: "/orders"
       }, {
         icon: "mdi-account",
         text: "Πελάτες",
         href: "/customers"
       }, {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Λίστες Πελατών",
+        model: false,
+        children: [{
+          text: "Μάρκες",
+          href: '/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη'
+        }, {
+          text: "Πόλη",
+          href: '/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη'
+        }, {
+          text: "Τύπος",
+          href: '/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη'
+        }]
+      }, // { icon: "mdi-cash-register", text: "Ταμείο" },
+      {
         icon: "mdi-archive",
         text: "Προϊόντα",
         href: "/products"
       }, {
-        icon: "mdi-message",
-        text: "Προσφορές"
-      }, {
-        icon: "mdi-cash-register",
-        text: "Ταμείο"
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Λίστες Προϊόντος",
+        model: false,
+        children: [{
+          text: "Περιγραφές",
+          href: '/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος'
+        }, {
+          text: "Κατηγορίες",
+          href: '/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος'
+        }, {
+          text: "Εφαρμογές",
+          href: '/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος'
+        }]
       }, {
         icon: "mdi-contacts",
         text: "Χρήστες",
         href: "/users"
-      }, {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
-        text: "Λίστες",
-        model: false,
-        children: [{
-          text: "Import"
-        }, {
-          text: "Export"
-        }]
       }]
     };
   },
@@ -2311,7 +2338,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".v-card {\n    border-radius: 20px !important;\n}\n\na.v-list-item--active.v-list-item {\n    background: #e41513 !important;\n}\n\n.v-data-table.elevation-1.theme--light {\n    border-radius: 20px;\n}", ""]);
+exports.push([module.i, ".v-card {\r\n    border-radius: 20px !important;\r\n}\r\n\r\na.v-list-item--active.v-list-item {\r\n    background: #e41513 !important;\r\n}\r\n\r\n.v-data-table.elevation-1.theme--light {\r\n    border-radius: 20px;\r\n}\r\n\r\n.v-list .v-list-item--active{\r\n    color: #fff;\r\n}\r\n\r\n.v-data-table.products-table {\r\n    background-color: #242424;\r\n    color: #fff !important;\r\n}\r\n\r\n.v-data-table.products-table tr:hover {\r\n    color: #000 !important;\r\n}\r\n\r\n.v-data-table.products-table th {\r\n    background-color: #e41513;\r\n    color: #fff !important;\r\n}", ""]);
 
 // exports
 
@@ -20723,6 +20750,51 @@ var render = function() {
                 "v-btn",
                 {
                   attrs: {
+                    to: "/visits",
+                    fab: "",
+                    dark: "",
+                    small: "",
+                    color: "red"
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-car-side")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    to: "/offers",
+                    fab: "",
+                    dark: "",
+                    small: "",
+                    color: "red"
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-message")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    to: "/orders",
+                    fab: "",
+                    dark: "",
+                    small: "",
+                    color: "red"
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-history")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
                     to: "/customer",
                     fab: "",
                     dark: "",
@@ -20876,7 +20948,7 @@ var render = function() {
                       _vm._l(item.children, function(child, i) {
                         return _c(
                           "v-list-item",
-                          { key: i, attrs: { link: "", to: item.href } },
+                          { key: i, attrs: { link: "", to: child.href } },
                           [
                             child.icon
                               ? _c(
@@ -75046,19 +75118,37 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: "/",
     name: "Dashboard",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
+    }
+  }, {
+    path: "/visits",
+    name: "Visits",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+    }
+  }, {
+    path: "/offers",
+    name: "Offers",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+    }
+  }, {
+    path: "/orders",
+    name: "Orders",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
     path: "/users",
     name: "Users",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
     path: "/customers",
     name: "Customers",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
     }
   }, {
     path: "/customer/:id",
@@ -75076,7 +75166,43 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: "/products",
     name: "Products",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
+    }
+  }, {
+    path: "/lists-descriptions",
+    name: "Lists Description",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-categories",
+    name: "Lists Categories",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-uses",
+    name: "Lists Uses",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-brand-types",
+    name: "Lists Brands",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-cities",
+    name: "Lists Cities",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-seller-types",
+    name: "Lists Uses",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
     }
   }]
 });
@@ -75289,8 +75415,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

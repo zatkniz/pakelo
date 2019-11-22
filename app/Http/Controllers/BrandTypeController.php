@@ -35,7 +35,9 @@ class BrandTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return BrandType::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class BrandTypeController extends Controller
      * @param  \App\BrandType  $brandType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BrandType $brandType)
+    public function destroy($brandType)
     {
-        //
+        BrandType::find($brandType)->delete();
     }
 }

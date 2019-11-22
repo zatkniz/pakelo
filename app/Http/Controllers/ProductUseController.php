@@ -35,7 +35,9 @@ class ProductUseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ProductUse::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class ProductUseController extends Controller
      * @param  \App\ProductUse  $productUse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductUse $productUse)
+    public function destroy($productUse)
     {
-        //
+        ProductUse::find($productUse)->delete();
     }
 }

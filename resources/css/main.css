@@ -9,3 +9,21 @@ a.v-list-item--active.v-list-item {
 .v-data-table.elevation-1.theme--light {
     border-radius: 20px;
 }
+
+.v-list .v-list-item--active{
+    color: #fff;
+}
+
+.v-data-table.products-table {
+    background-color: #242424;
+    color: #fff !important;
+}
+
+.v-data-table.products-table tr:hover {
+    color: #000 !important;
+}
+
+.v-data-table.products-table th {
+    background-color: #e41513;
+    color: #fff !important;
+}

@@ -31,7 +31,7 @@
               </v-list-item-content>
             </v-list-item>
           </template>
-          <v-list-item v-for="(child, i) in item.children" :key="i" link :to="item.href">
+          <v-list-item v-for="(child, i) in item.children" :key="i" link :to="child.href">
             <v-list-item-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
             </v-list-item-action>
@@ -60,25 +60,40 @@ export default {
   },
   data: () => ({
     items: [
-      { icon: "mdi-home", text: "Dashboard", href: "/" },
-      { icon: "mdi-history", text: "Παραγγελίες" },
-      { icon: "mdi-car-side", text: "Επισκέψεις" },
+      // { icon: "mdi-home", text: "Dashboard", href: "/" },
+      { icon: "mdi-car-side", text: "Επισκέψεις",  href: "/visits" },
+        { icon: "mdi-message", text: "Προσφορές", href: "/offers" },
+      { icon: "mdi-history", text: "Παραγγελίες", href: "/orders" },
       {
         icon: "mdi-account",
         text: "Πελάτες",
         href: "/customers"
       },
-      { icon: "mdi-archive", text: "Προϊόντα", href: "/products" },
-      { icon: "mdi-message", text: "Προσφορές" },
-      { icon: "mdi-cash-register", text: "Ταμείο" },
-      { icon: "mdi-contacts", text: "Χρήστες", href: "/users" },
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
-        text: "Λίστες",
+        text: "Λίστες Πελατών",
         model: false,
-        children: [{ text: "Import" }, { text: "Export" }]
-      }
+        children: [
+          { text: "Μάρκες", href: '/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη' },
+          { text: "Πόλη", href: '/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη' },
+          { text: "Τύπος", href: '/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη' },
+        ]
+      },
+      // { icon: "mdi-cash-register", text: "Ταμείο" },
+      { icon: "mdi-archive", text: "Προϊόντα", href: "/products" },
+      {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Λίστες Προϊόντος",
+        model: false,
+        children: [
+          { text: "Περιγραφές", href: '/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος' },
+          { text: "Κατηγορίες", href: '/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος' },
+          { text: "Εφαρμογές", href: '/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος' },
+        ]
+      },
+      { icon: "mdi-contacts", text: "Χρήστες", href: "/users" },
     ]
   }),
 
