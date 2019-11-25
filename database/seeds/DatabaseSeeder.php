@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         factory(App\BrandType::class, 50)->create();
         factory(App\City::class, 50)->create();
         factory(App\Customer::class, 300)->create();
+        factory(App\Visit::class, 300)->create();
         $this->call(ProductSeeder::class);
     }
 }

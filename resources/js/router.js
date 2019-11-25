@@ -13,7 +13,7 @@ const router = new VueRouter({
         {
             path: "/visits",
             name: "Visits",
-            component: () => import("./views/Users")
+            component: () => import("./views/Visits")
         },
         {
             path: "/offers",
@@ -89,7 +89,7 @@ const router = new VueRouter({
             path: "/lists-seller-types",
             name: "Lists Seller Types",
             component: () => import("./views/Lists")
-        },
+        }
     ]
 });
 

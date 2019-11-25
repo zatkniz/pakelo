@@ -1,1 +1,225 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{20:function(t,e,r){"use strict";var a=r(5);r.n(a).a},21:function(t,e,r){(t.exports=r(9)(!1)).push([t.i,"\n.v-data-table__expanded td.v-data-table__mobile-row {\r\n  text-align: center;\r\n  display: -webkit-box;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n          justify-content: center;\n}\r\n",""])},5:function(t,e,r){var a=r(21);"string"==typeof a&&(a=[[t.i,a,""]]);var o={hmr:!0,transform:void 0,insertInto:void 0};r(10)(a,o);a.locals&&(t.exports=a.locals)},52:function(t,e,r){"use strict";r.r(e);var a={props:{deleteDialog:Boolean,product:Object},data:function(){return{loading:!1}},methods:{closeDialog:function(){this.$emit("closeDialog")},deleteItem:function(){var t=this;this.loading=!0,axios.delete("products/".concat(this.product.id)).then((function(e){t.$emit("closeDialog"),t.$emit("productDeleted"),t.loading=!1}))}}},o=r(0),i=Object(o.a)(a,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("v-dialog",{attrs:{"max-width":"290"},on:{"click:outside":t.closeDialog},model:{value:t.deleteDialog,callback:function(e){t.deleteDialog=e},expression:"deleteDialog"}},[r("v-card",{attrs:{loading:t.loading}},[r("v-card-title",{staticClass:"headline"},[t._v("Διαγραφή Χρήστη")]),t._v(" "),r("v-card-text",[t._v("Είστε σίγουροι ότι θέλετε να διαγράψετε το "+t._s(t.product.name)+"?")]),t._v(" "),r("v-card-actions",[r("v-spacer"),t._v(" "),r("v-btn",{attrs:{color:"green darken-1",text:""},on:{click:function(e){return t.closeDialog()}}},[t._v("Ακυρωση")]),t._v(" "),r("v-btn",{attrs:{color:"primary",text:""},on:{click:function(e){return t.deleteItem()}}},[t._v("διαγραφη")])],1)],1)],1)}),[],!1,null,null,null).exports,n=r(7),c={props:{dialog:Boolean,product:Object},components:{productDetails:n.a},data:function(){return{}},methods:{closeDialog:function(){this.$emit("closeDialog")}}},s=Object(o.a)(c,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("v-dialog",{attrs:{"max-width":"800px"},on:{"click:outside":t.closeDialog},model:{value:t.dialog,callback:function(e){t.dialog=e},expression:"dialog"}},[r("product-details",{attrs:{product_id:t.product.id}})],1)}),[],!1,null,null,null).exports,l=r(2);function d(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(t);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,a)}return r}function u(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}var p={components:{deleteProductDialog:i,editProductDialog:s},data:function(){return{dialog:!1,expanded:[],singleExpand:!1,snackbar:!1,deleteDialog:!1,loading:!1,searchQuery:{},fitleredproducts:[],productUses:[],productDescriptions:[],productCategories:[],search:"",headers:[{text:"Όνομα",align:"left",value:"name"},{text:"Περιγραφή",value:"description.name"},{text:"Ιξώδες",value:"ixodes"},{text:"Κατηγορία",value:"category.name"},{text:"Εφαρμογή",value:"use.name"},{text:"Ενέργειες",value:"action",align:"right",sortable:!1,width:135},{text:"",value:"data-table-expand"}],editedItem:{}}},methods:{editItem:function(t){this.editedItem=Object.assign({},t),this.dialog=!0},openDeleteDialog:function(t){this.editedItem=Object.assign({},t),this.deleteDialog=!0},getproducts:function(){this.$store.dispatch("getAllproducts")},getProductDescriptions:function(){var t=this;axios.get("products-descriptions").then((function(e){t.productDescriptions=e.data}))},getProductCategories:function(){var t=this;axios.get("products-categories").then((function(e){t.productCategories=e.data}))},getProductUses:function(){var t=this;axios.get("products-uses").then((function(e){t.productUses=e.data}))},runFilters:function(){var t=this;this.fitleredproducts=this.products,Object.keys(this.searchQuery).map((function(e){t.searchQuery[e]&&(t.fitleredproducts=t.fitleredproducts.filter((function(r){return r[e]==t.searchQuery[e]})))}))}},created:function(){this.getProductUses(),this.getProductDescriptions(),this.getProductCategories(),this.runFilters()},computed:function(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?d(r,!0).forEach((function(e){u(t,e,r[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):d(r).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))}))}return t}({},Object(l.b)({products:"getproducts"})),watch:{products:function(t){this.fitleredproducts=t}}},v=(r(20),Object(o.a)(p,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("v-container",[r("v-row",[r("v-col",[r("v-card",{staticClass:"ma-5",attrs:{shaped:"",outlined:"",loading:t.loading}},[r("v-toolbar",{attrs:{flat:"",color:"secondary",dark:""}},[r("v-toolbar-title",[t._v("Προϊοντα")]),t._v(" "),r("v-divider",{staticClass:"mx-4",attrs:{inset:"",vertical:""}}),t._v(" "),r("v-spacer"),t._v(" "),r("v-btn",{staticClass:"mb-2",attrs:{color:"primary",dark:"",to:"product"}},[t._v("Προσθηκη Προϊοντος")])],1),t._v(" "),r("v-card-title",[r("v-spacer"),t._v(" "),r("v-text-field",{attrs:{"append-icon":"mdi-magnify",label:"Αναζήτηση","single-line":"","hide-details":"",clearable:""},model:{value:t.search,callback:function(e){t.search=e},expression:"search"}})],1),t._v(" "),r("v-data-table",{staticClass:"elevation-1",attrs:{headers:t.headers,items:t.fitleredproducts,"sort-by":"name",search:t.search,"single-expand":t.singleExpand,expanded:t.expanded,"show-expand":""},on:{"update:expanded":function(e){t.expanded=e}},scopedSlots:t._u([{key:"top",fn:function(){return[r("v-row",{staticClass:"px-5"},[r("v-col",{attrs:{cols:"12",sm:"6",md:"4"}},[r("v-autocomplete",{attrs:{items:t.productDescriptions,label:"Περιγραφή",clearable:"","item-text":"name","item-value":"id"},on:{input:t.runFilters},model:{value:t.searchQuery.product_description_id,callback:function(e){t.$set(t.searchQuery,"product_description_id",e)},expression:"searchQuery.product_description_id"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"6",md:"4"}},[r("v-autocomplete",{attrs:{items:t.productCategories,clearable:"",label:"Κατηγορία","item-text":"name","item-value":"id"},on:{input:t.runFilters},model:{value:t.searchQuery.product_category_id,callback:function(e){t.$set(t.searchQuery,"product_category_id",e)},expression:"searchQuery.product_category_id"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"6",md:"4"}},[r("v-select",{attrs:{items:t.productUses,clearable:"",label:"Εφαρμογή","item-text":"name","item-value":"id"},on:{input:t.runFilters},model:{value:t.searchQuery.product_use_id,callback:function(e){t.$set(t.searchQuery,"product_use_id",e)},expression:"searchQuery.product_use_id"}})],1)],1)]},proxy:!0},{key:"item.action",fn:function(e){var a=e.item;return[r("v-btn",{staticClass:"mx-0",attrs:{fab:"",dark:"","x-small":"",color:"secondary"},on:{click:function(e){return t.editItem(a)}}},[r("v-icon",{attrs:{small:""}},[t._v("mdi-eye")])],1),t._v(" "),r("v-btn",{staticClass:"mx-0",attrs:{fab:"",dark:"","x-small":"",color:"teal",to:"product/"+a.id}},[r("v-icon",{attrs:{small:""}},[t._v("mdi-pencil")])],1),t._v(" "),r("v-btn",{staticClass:"mx-0",attrs:{fab:"",dark:"","x-small":"",color:"primary"},on:{click:function(e){return t.openDeleteDialog(a)}}},[r("v-icon",{attrs:{small:""}},[t._v("mdi-delete")])],1)]}},{key:"expanded-item",fn:function(e){var a=e.item,o=e.headers;return[r("td",{staticClass:"pa-0",attrs:{colspan:o.length}},[r("v-data-table",{staticClass:"products-table",attrs:{"hide-default-footer":"",headers:[{text:"Κωδικός",align:"center",sortable:!1,value:"code"},{text:"Lt/Kg",align:"center",value:"lt_kg"},{text:"Tιμή",align:"center",value:"price"},{text:"Tιμή Lt/Kg",align:"center",value:"price_per_kg"}],items:a.attributes},scopedSlots:t._u([{key:"item.price",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s(r.price)+"€\n                ")]}},{key:"item.lt_kg",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s(r.lt_kg)+"Lt\n                ")]}},{key:"item.price_per_kg",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s((r.price/r.lt_kg).toFixed(2))+"€\n                ")]}}],null,!0)})],1)]}}])}),t._v(" "),r("delete-product-dialog",{attrs:{product:t.editedItem,deleteDialog:t.deleteDialog},on:{productDeleted:function(e){t.getproducts(),t.snackbar=!0},closeDialog:function(e){t.deleteDialog=!1}}}),t._v(" "),r("edit-product-dialog",{attrs:{product:t.editedItem,dialog:t.dialog},on:{closeDialog:function(e){t.dialog=!1}}}),t._v(" "),r("v-snackbar",{model:{value:t.snackbar,callback:function(e){t.snackbar=e},expression:"snackbar"}},[t._v("\n          Η επιλογή σας αποθηκεύτηκε επιτυχώς\n          "),r("v-btn",{attrs:{color:"primary",text:""},on:{click:function(e){t.snackbar=!1}}},[t._v("κλεισιμο")])],1)],1)],1)],1)],1)}),[],!1,null,null,null));e.default=v.exports},7:function(t,e,r){"use strict";var a=r(2);function o(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(t);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,a)}return r}function i(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}var n={props:{product_id:Number},data:function(){return{loading:!1,snackbar:!1,valid:!1,nameRules:[function(t){return!!t||"Το πεδίο είναι υποχρεωτικό."}],products:[],categories:[],descriptions:[],uses:[],status:[{value:!1,text:"Ανενεργός"},{value:!0,text:"Ενεργός"}]}},methods:{getproduct:function(){this.product_id||this.$route.params.id?this.$store.dispatch("getSingleproduct",this.product_id||this.$route.params.id):this.$store.dispatch("getSingleproduct",null)},saveproduct:function(){var t=this;this.loading=!0,axios.post("products",this.product).then((function(e){t.loading=!1,t.snackbar=!0,t.$store.dispatch("getAllproducts")}))},validate:function(){this.$refs.form.validate()&&this.saveproduct()},getproducts:function(){var t=this;axios.get("products").then((function(e){t.products=e.data}))},getdescriptions:function(){var t=this;axios.get("products-descriptions").then((function(e){t.descriptions=e.data}))},getuses:function(){var t=this;axios.get("products-uses").then((function(e){t.uses=e.data}))},getcategories:function(){var t=this;axios.get("products-categories").then((function(e){t.categories=e.data}))}},mounted:function(){this.getproduct(),this.getproducts(),this.getcategories(),this.getdescriptions(),this.getuses()},computed:function(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?o(r,!0).forEach((function(e){i(t,e,r[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):o(r).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))}))}return t}({},Object(a.b)({product:"getproduct"})),watch:{product_id:function(t){this.$store.dispatch("getSingleproduct",t)}}},c=r(0),s=Object(c.a)(n,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("v-card",{attrs:{loading:t.loading}},[r("v-form",{ref:"form",attrs:{"lazy-validation":""},on:{submit:function(e){return e.preventDefault(),t.validate(e)}},model:{value:t.valid,callback:function(e){t.valid=e},expression:"valid"}},[r("v-card-text",[r("v-container",[r("v-row",[r("v-col",{attrs:{cols:"12",sm:"9",md:"9"}},[r("v-text-field",{attrs:{rules:t.nameRules,label:"Ονομασία"},model:{value:t.product.name,callback:function(e){t.$set(t.product,"name",e)},expression:"product.name"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"3",md:"3"}},[r("v-text-field",{attrs:{label:"Ιξώδες"},model:{value:t.product.ixodes,callback:function(e){t.$set(t.product,"ixodes",e)},expression:"product.ixodes"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"4",md:"4"}},[r("v-autocomplete",{attrs:{items:t.categories,label:"Κατηγορία","item-text":"name","item-value":"id"},model:{value:t.product.product_category_id,callback:function(e){t.$set(t.product,"product_category_id",e)},expression:"product.product_category_id"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"4",md:"4"}},[r("v-autocomplete",{attrs:{items:t.descriptions,label:"Περιγραφή","item-text":"name","item-value":"id"},model:{value:t.product.product_description_id,callback:function(e){t.$set(t.product,"product_description_id",e)},expression:"product.product_description_id"}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",sm:"4",md:"4"}},[r("v-autocomplete",{attrs:{items:t.uses,label:"Εφαρμογή","item-text":"name","item-value":"id"},model:{value:t.product.product_use_id,callback:function(e){t.$set(t.product,"product_use_id",e)},expression:"product.product_use_id"}})],1),t._v(" "),t.product.attributes?r("v-col",{attrs:{cols:"12",sm:"12",md:"12"}},[r("v-data-table",{staticClass:"products-table",attrs:{"hide-default-footer":"",headers:[{text:"Κωδικός",align:"center",sortable:!1,value:"code"},{text:"Lt/Kg",align:"center",value:"lt_kg"},{text:"Tιμή",align:"center",value:"price"},{text:"Tιμή Lt/Kg",align:"center",value:"price_per_kg"}],items:t.product.attributes},scopedSlots:t._u([{key:"item.price",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s(r.price)+"€\n                ")]}},{key:"item.lt_kg",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s(r.lt_kg)+"Lt\n                ")]}},{key:"item.price_per_kg",fn:function(e){var r=e.item;return[t._v("\n                  "+t._s((r.price/r.lt_kg).toFixed(2))+"€\n                ")]}}],null,!1,4228467026)})],1):t._e()],1)],1)],1),t._v(" "),t.product_id?t._e():r("v-card-actions",[r("v-spacer"),t._v(" "),r("v-btn",{staticClass:"mx-5 mb-5",attrs:{color:"primary",type:"submit"}},[t._v("Αποθηκευση")])],1)],1),t._v(" "),r("v-snackbar",{model:{value:t.snackbar,callback:function(e){t.snackbar=e},expression:"snackbar"}},[t._v("\n    Η επιλογή σας αποθηκεύτηκε επιτυχώς\n    "),r("v-btn",{attrs:{color:"pink",text:""},on:{click:function(e){t.snackbar=!1}}},[t._v("κλεισιμο")])],1)],1)}),[],!1,null,null,null);e.a=s.exports}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ProductSingle.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/ProductSingle.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_products_Details__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/products/Details */ "./resources/js/components/products/Details.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    productDetails: _components_products_Details__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      tab: null
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-row",
+        [
+          _c(
+            "v-col",
+            [
+              _c(
+                "v-card",
+                { staticClass: "ma-5" },
+                [
+                  _c(
+                    "v-tabs",
+                    {
+                      attrs: {
+                        "background-color": "secondary",
+                        color: "#fff",
+                        grow: "",
+                        dark: "",
+                        height: "64"
+                      },
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c("v-tab", [_vm._v("Στοιχεια")]),
+                      _vm._v(" "),
+                      _c("v-tab", [_vm._v("Παραγγελιες")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tabs-items",
+                    {
+                      model: {
+                        value: _vm.tab,
+                        callback: function($$v) {
+                          _vm.tab = $$v
+                        },
+                        expression: "tab"
+                      }
+                    },
+                    [
+                      _c("v-tab-item", [_c("product-details")], 1),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "", color: "basil" } },
+                            [_c("v-card-text", [_vm._v("Παραγγελίες")])],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/ProductSingle.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/views/ProductSingle.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductSingle.vue?vue&type=template&id=73d6e808& */ "./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808&");
+/* harmony import */ var _ProductSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductSingle.vue?vue&type=script&lang=js& */ "./resources/js/views/ProductSingle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProductSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/ProductSingle.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/ProductSingle.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/views/ProductSingle.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ProductSingle.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ProductSingle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductSingle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ProductSingle.vue?vue&type=template&id=73d6e808& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/ProductSingle.vue?vue&type=template&id=73d6e808&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductSingle_vue_vue_type_template_id_73d6e808___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);

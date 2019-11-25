@@ -24,7 +24,8 @@ class UserController extends Controller
         return UserRole::all();
     }
 
-    public function getAuth() {
+    public function getAuth()
+    {
         return Auth::user();
     }
 
@@ -48,10 +49,10 @@ class UserController extends Controller
     {
         return User::updateOrCreate(
             [
-                'id' => $request->all()
+                'id' => $request->input('id')
             ],
-                $request->all()
-            );
+            $request->all()
+        );
     }
 
     /**

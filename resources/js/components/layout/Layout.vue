@@ -13,7 +13,7 @@
             <v-icon v-else>mdi-plus</v-icon>
           </v-btn>
         </template>
-        <v-btn to="/visits" fab dark small color="red">
+        <v-btn to="/visits?newVisit=true" fab dark small color="red">
           <v-icon>mdi-car-side</v-icon>
         </v-btn>
         <v-btn to="/offers" fab dark small color="red">

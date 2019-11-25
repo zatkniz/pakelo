@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitController extends Controller
 {
@@ -14,7 +15,7 @@ class VisitController extends Controller
      */
     public function index()
     {
-        //
+        return Visit::all();
     }
 
     /**
@@ -35,7 +36,16 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!$request->input('id')) {
+            $request['user_id'] = Auth::user()->id;
+        }
+
+        return Visit::updateOrCreate(
+            [
+                'id' => $request->input('id')
+            ],
+            $request->all()
+        );
     }
 
     /**
@@ -80,6 +90,6 @@ class VisitController extends Controller
      */
     public function destroy(Visit $visit)
     {
-        //
+        $visit->delete();
     }
 }

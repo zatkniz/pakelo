@@ -14,11 +14,6 @@ class Product extends Model
         'description', 'category', 'use', 'attributes'
     ];
 
-    public function getProductDescriptionIdAttribute($value)
-    {
-        return (int) $value;
-    }
-
     public function description()
     {
         return $this->belongsTo('App\ProductDescription', 'product_description_id');
@@ -38,6 +33,4 @@ class Product extends Model
     {
         return $this->hasMany('App\ProductAttribute', 'product_id');
     }
-
-
 }
