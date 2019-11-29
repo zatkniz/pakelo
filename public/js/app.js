@@ -75121,67 +75121,67 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "Dashboard",
     redirect: "/visits",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
     }
   }, {
     path: "/visits",
     name: "Visits",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./views/Visits */ "./resources/js/views/Visits.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Visits */ "./resources/js/views/Visits.vue"));
     }
   }, {
     path: "/offers",
     name: "Offers",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
     }
   }, {
     path: "/orders",
     name: "Orders",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
     }
   }, {
     path: "/users",
     name: "Users",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
     path: "/customers",
     name: "Customers",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
     }
   }, {
     path: "/customer/:id",
     name: "Customers Single",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/customer",
     name: "Customers New",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/products",
     name: "Products",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
     }
   }, {
     path: "/product/:id",
     name: "Product Single",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
     }
   }, {
     path: "/product",
     name: "Product New",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
     }
   }, {
     path: "/lists-descriptions",

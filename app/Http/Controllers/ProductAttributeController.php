@@ -35,7 +35,9 @@ class ProductAttributeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ProductAttribute::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -78,8 +80,8 @@ class ProductAttributeController extends Controller
      * @param  \App\ProductAttribute  $productAttribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductAttribute $productAttribute)
+    public function destroy($productAttribute)
     {
-        //
+        ProductAttribute::find($productAttribute)->delete();
     }
 }

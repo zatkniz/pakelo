@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products-uses', 'ProductUseController');
     Route::resource('products-descriptions', 'ProductDescriptionController');
     Route::resource('products-categories', 'ProductCategoryController');
+    Route::resource('products-attributes', 'ProductAttributeController');
 
     Route::get('user-roles', 'UserController@getUserRoles');
 });

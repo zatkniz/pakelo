@@ -37,23 +37,42 @@
                 item-value="id"
               ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="12" md="12" v-if="product.attributes">
-               <v-data-table
-                  class="products-table"
-                  hide-default-footer
-                  :headers="[ { text: 'Κωδικός', align: 'center', sortable: false, value: 'code', }, { text: 'Lt/Kg', align: 'center', value: 'lt_kg' }, { text: 'Tιμή',align: 'center', value: 'price' }, { text: 'Tιμή Lt/Kg', align: 'center', value: 'price_per_kg' }]"
-                  :items="product.attributes"
-                >
-                  <template v-slot:item.price="{ item }">
-                    {{ item.price }}€
-                  </template>
-                  <template v-slot:item.lt_kg="{ item }">
-                    {{ item.lt_kg }}Lt
-                  </template>
-                  <template v-slot:item.price_per_kg="{ item }">
-                    {{ (item.price / item.lt_kg).toFixed(2) }}€
-                  </template>
-                </v-data-table>
+            <v-col class="text-right" cols="12" sm="12" md="12" v-if="product.attributes">
+              <v-btn class="mb-5" color="primary" @click="openEditAttributeDialog">Προσθηκη</v-btn>
+              <v-data-table
+                class="products-table"
+                hide-default-footer
+                :headers="tableHeaders"
+                :items="product.attributes"
+              >
+                <template v-slot:item.price="{ item }">{{ item.price }}€</template>
+                <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
+                <template
+                  v-slot:item.price_per_kg="{ item }"
+                >{{ (item.price / item.lt_kg).toFixed(2) }}€</template>
+                <template v-slot:item.action="{ item }">
+                  <v-btn
+                    class="mx-0"
+                    fab
+                    dark
+                    x-small
+                    color="teal"
+                    @click="openEditAttributeDialog(item)"
+                  >
+                    <v-icon small>mdi-pencil</v-icon>
+                  </v-btn>
+                  <v-btn
+                    class="mx-0"
+                    fab
+                    dark
+                    x-small
+                    color="primary"
+                    @click="openDeleteDialog(item)"
+                  >
+                    <v-icon small>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
             </v-col>
           </v-row>
         </v-container>
@@ -65,6 +84,20 @@
       </v-card-actions>
     </v-form>
 
+    <edit-attribute
+      :editedItem="editedItem"
+      :dialog="dialog"
+      @closeDialog="dialog = false;"
+      @attributeSaved="retriveProducts(); snackbar = true;"
+    />
+
+    <delete-dialog
+      :item="editedItem"
+      :deleteDialog="deleteDialog"
+      @attributeSaved="retriveProducts(); snackbar = true;"
+      @closeDialog="deleteDialog = false"
+    />
+
     <v-snackbar v-model="snackbar">
       Η επιλογή σας αποθηκεύτηκε επιτυχώς
       <v-btn color="pink" text @click="snackbar = false">κλεισιμο</v-btn>
@@ -74,18 +107,35 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import editAttribute from "./EditProductAttribute";
+import deleteDialog from "./DeleteDialog";
 export default {
   props: {
     product_id: Number
   },
+  components: {
+    editAttribute,
+    deleteDialog
+  },
   data: () => ({
+    dialog: false,
+    deleteDialog: false,
+    selectedAttribute: null,
     loading: false,
     snackbar: false,
     valid: false,
+    editedItem: {},
     nameRules: [v => !!v || "Το πεδίο είναι υποχρεωτικό."],
     products: [],
     categories: [],
     descriptions: [],
+    tableHeaders: [
+      { text: "Κωδικός", align: "center", sortable: false, value: "code" },
+      { text: "Lt/Kg", align: "center", value: "lt_kg" },
+      { text: "Tιμή", align: "center", value: "price" },
+      { text: "Tιμή Lt/Kg", align: "center", value: "price_per_kg" },
+      { text: "Ενέργειες", value: "action", align: "right" }
+    ],
     uses: [],
     status: [
       {
@@ -100,6 +150,22 @@ export default {
   }),
 
   methods: {
+    openEditAttributeDialog(item) {
+      this.selectedAttribute = item.id;
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    openDeleteDialog(item) {
+      this.editedItem = Object.assign({}, item);
+      this.deleteDialog = true;
+    },
+    retriveProducts() {
+      this.dialog = false;
+      this.$store.dispatch(
+        "getSingleproduct",
+        this.product_id || this.$route.params.id
+      );
+    },
     getproduct() {
       if (this.product_id || this.$route.params.id)
         this.$store.dispatch(
