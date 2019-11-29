@@ -12,9 +12,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Order::all();
+        return Order::whereIsOffer($request->input('orders'))->get();
     }
 
     /**

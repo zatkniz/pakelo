@@ -41,14 +41,24 @@
                   ]"
                   :items="item.products"
                 >
+                  <template v-slot:item.product.code="{ item }">
+                    <v-tooltip right>
+                      <template v-slot:activator="{ on }">
+                        <div v-on="on">{{item.product.code}}</div>
+                      </template>
+                      <span>Ονομασία: {{item.product.product.name}}lt</span>
+                      <br />
+                      <span>Ποσότητα: {{item.product.lt_kg}}lt</span>
+                    </v-tooltip>
+                  </template>
                   <template v-slot:item.price="{ item }">{{ item.price }}€</template>
                   <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
                   <template
                     v-slot:item.price_per_kg="{ item }"
                   >{{ (item.price / item.quantity).toFixed(2) }}€</template>
                 </v-data-table>
-                <div class="sum-table-div pa-5">Σύνολο: {{item.summary}}€</div>
-                <div class="sum-table-div pa-5">Σύνολο: {{item.products_count}}</div>
+                <div class="sum-table-div pa-5">Σύνολο Παραγγελίας: {{item.summary}}€</div>
+                <div class="sum-table-div pb-5">Αριθμός Προϊόντων: {{item.products_count}}</div>
               </td>
             </template>
           </v-data-table>
@@ -114,7 +124,7 @@ export default {
   methods: {
     getorders() {
       this.loading = true;
-      axios.get("orders").then(res => {
+      axios.get(`orders?orders=${this.$route.name == "Orders"}`).then(res => {
         this.orders = res.data;
         this.loading = false;
         this.$route.query.new;

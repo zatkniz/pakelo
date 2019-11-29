@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="400px" @click:outside="closeDialog">
+  <v-dialog v-model="dialog" max-width="800px" @click:outside="closeDialog">
     <v-card :loading="loading">
       <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="save">
         <v-card-title>
@@ -27,6 +27,37 @@
             <v-row>
               <v-col cols="12" sm="12" md="12">
                 <v-textarea rows="1" auto-grow v-model="order.comments" label="Σχόλια"></v-textarea>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" sm="12" md="12">
+                <v-data-table
+                  class="products-table"
+                  hide-default-footer
+                  :headers="[
+                    { text: 'Κωδικός', align: 'center', sortable: false, value: 'product.code', },
+                    { text: 'Ποσότητα', align: 'center', value: 'quantity' }, 
+                    { text: 'Tιμή',align: 'center', value: 'price' }, 
+                    { text: 'Tιμή Ποσότητας', align: 'center', value: 'price_per_kg' }
+                  ]"
+                  :items="order.products"
+                >
+                  <template v-slot:item.product.code="{ item }">
+                    <v-tooltip right>
+                      <template v-slot:activator="{ on }">
+                        <div v-on="on">{{item.product.code}}</div>
+                      </template>
+                      <span>Ονομασία: {{item.product.product.name}}lt</span>
+                      <br />
+                      <span>Ποσότητα: {{item.product.lt_kg}}lt</span>
+                    </v-tooltip>
+                  </template>
+                  <template v-slot:item.price="{ item }">{{ item.price }}€</template>
+                  <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
+                  <template
+                    v-slot:item.price_per_kg="{ item }"
+                  >{{ (item.price / item.quantity).toFixed(2) }}€</template>
+                </v-data-table>
               </v-col>
             </v-row>
           </v-container>

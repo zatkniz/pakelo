@@ -111,6 +111,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     dialog: Boolean,
@@ -280,6 +311,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -331,7 +372,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.get("orders").then(function (res) {
+      axios.get("orders?orders=".concat(this.$route.name == "Orders")).then(function (res) {
         _this.orders = res.data;
         _this.loading = false;
         _this.$route.query["new"];
@@ -470,7 +511,7 @@ var render = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { "max-width": "400px" },
+      attrs: { "max-width": "800px" },
       on: { "click:outside": _vm.closeDialog },
       model: {
         value: _vm.dialog,
@@ -586,6 +627,142 @@ var render = function() {
                                   },
                                   expression: "order.comments"
                                 }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", sm: "12", md: "12" } },
+                            [
+                              _c("v-data-table", {
+                                staticClass: "products-table",
+                                attrs: {
+                                  "hide-default-footer": "",
+                                  headers: [
+                                    {
+                                      text: "Κωδικός",
+                                      align: "center",
+                                      sortable: false,
+                                      value: "product.code"
+                                    },
+                                    {
+                                      text: "Ποσότητα",
+                                      align: "center",
+                                      value: "quantity"
+                                    },
+                                    {
+                                      text: "Tιμή",
+                                      align: "center",
+                                      value: "price"
+                                    },
+                                    {
+                                      text: "Tιμή Ποσότητας",
+                                      align: "center",
+                                      value: "price_per_kg"
+                                    }
+                                  ],
+                                  items: _vm.order.products
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "item.product.code",
+                                    fn: function(ref) {
+                                      var item = ref.item
+                                      return [
+                                        _c(
+                                          "v-tooltip",
+                                          {
+                                            attrs: { right: "" },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "activator",
+                                                  fn: function(ref) {
+                                                    var on = ref.on
+                                                    return [
+                                                      _c(
+                                                        "div",
+                                                        _vm._g({}, on),
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item.product.code
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  }
+                                                }
+                                              ],
+                                              null,
+                                              true
+                                            )
+                                          },
+                                          [
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(
+                                                "Ονομασία: " +
+                                                  _vm._s(
+                                                    item.product.product.name
+                                                  ) +
+                                                  "lt"
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("br"),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(
+                                                "Ποσότητα: " +
+                                                  _vm._s(item.product.lt_kg) +
+                                                  "lt"
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    key: "item.price",
+                                    fn: function(ref) {
+                                      var item = ref.item
+                                      return [_vm._v(_vm._s(item.price) + "€")]
+                                    }
+                                  },
+                                  {
+                                    key: "item.lt_kg",
+                                    fn: function(ref) {
+                                      var item = ref.item
+                                      return [_vm._v(_vm._s(item.lt_kg) + "Lt")]
+                                    }
+                                  },
+                                  {
+                                    key: "item.price_per_kg",
+                                    fn: function(ref) {
+                                      var item = ref.item
+                                      return [
+                                        _vm._v(
+                                          _vm._s(
+                                            (
+                                              item.price / item.quantity
+                                            ).toFixed(2)
+                                          ) + "€"
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ])
                               })
                             ],
                             1
@@ -837,6 +1014,71 @@ var render = function() {
                                   scopedSlots: _vm._u(
                                     [
                                       {
+                                        key: "item.product.code",
+                                        fn: function(ref) {
+                                          var item = ref.item
+                                          return [
+                                            _c(
+                                              "v-tooltip",
+                                              {
+                                                attrs: { right: "" },
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "activator",
+                                                      fn: function(ref) {
+                                                        var on = ref.on
+                                                        return [
+                                                          _c(
+                                                            "div",
+                                                            _vm._g({}, on),
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.product
+                                                                    .code
+                                                                )
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      }
+                                                    }
+                                                  ],
+                                                  null,
+                                                  true
+                                                )
+                                              },
+                                              [
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(
+                                                    "Ονομασία: " +
+                                                      _vm._s(
+                                                        item.product.product
+                                                          .name
+                                                      ) +
+                                                      "lt"
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("br"),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(
+                                                    "Ποσότητα: " +
+                                                      _vm._s(
+                                                        item.product.lt_kg
+                                                      ) +
+                                                      "lt"
+                                                  )
+                                                ])
+                                              ]
+                                            )
+                                          ]
+                                        }
+                                      },
+                                      {
                                         key: "item.price",
                                         fn: function(ref) {
                                           var item = ref.item
@@ -880,17 +1122,20 @@ var render = function() {
                                   { staticClass: "sum-table-div pa-5" },
                                   [
                                     _vm._v(
-                                      "Σύνολο: " + _vm._s(item.summary) + "€"
+                                      "Σύνολο Παραγγελίας: " +
+                                        _vm._s(item.summary) +
+                                        "€"
                                     )
                                   ]
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "div",
-                                  { staticClass: "sum-table-div pa-5" },
+                                  { staticClass: "sum-table-div pb-5" },
                                   [
                                     _vm._v(
-                                      "Σύνολο: " + _vm._s(item.products_count)
+                                      "Αριθμός Προϊόντων: " +
+                                        _vm._s(item.products_count)
                                     )
                                   ]
                                 )

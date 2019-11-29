@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Order extends Model
 {
-    protected $with = ['customer', 'user',  'products'];
+    protected $with = ['customer', 'user',  'products', 'products.product.product'];
     protected $withCount = ['products'];
 
     protected $fillable = [
