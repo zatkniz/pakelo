@@ -9,7 +9,7 @@
                 <v-toolbar-title>Επισκέψεις</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη Επίσκεψης</v-btn>
+                <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη Επισκεψης</v-btn>
               </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">
@@ -31,7 +31,7 @@
             :visit="editedItem"
             :dialog="dialog"
             @visitEdited="getvisits(); snackbar = true;"
-            @closeDialog="dialog = false; $route.query.newVisit = false;"
+            @closeDialog="dialog = false; $route.query.new = false;"
           />
 
           <v-snackbar v-model="snackbar">
@@ -73,7 +73,7 @@ export default {
 
   created() {
     this.getvisits();
-    if (this.$route.query.newVisit) this.dialog = true;
+    if (this.$route.query.new) this.dialog = true;
   },
 
   methods: {
@@ -82,7 +82,7 @@ export default {
       axios.get("visits").then(res => {
         this.visits = res.data;
         this.loading = false;
-        this.$route.query.newVisit;
+        this.$route.query.new;
       });
     },
 
@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     "$route.query"() {
-      if (this.$route.query.newVisit) this.dialog = true;
+      if (this.$route.query.new) this.dialog = true;
     }
   }
 };

@@ -8,6 +8,7 @@ const router = new VueRouter({
         {
             path: "/",
             name: "Dashboard",
+            redirect: "/visits",
             component: () => import("./views/Dashboard")
         },
         {
@@ -18,12 +19,12 @@ const router = new VueRouter({
         {
             path: "/offers",
             name: "Offers",
-            component: () => import("./views/Users")
+            component: () => import("./views/Orders")
         },
         {
             path: "/orders",
             name: "Orders",
-            component: () => import("./views/Users")
+            component: () => import("./views/Orders")
         },
         {
             path: "/users",

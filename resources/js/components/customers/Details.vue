@@ -49,13 +49,6 @@
             <v-col cols="12" sm="5" md="5">
               <v-text-field label="Διεύθυνση" v-model="customer.address"></v-text-field>
             </v-col>
-            <v-col cols="12" sm="4" md="2">
-              <v-text-field
-                label="Πιστωτικό Όριο"
-                v-model="customer.limit"
-                append-icon="mdi-currency-eur"
-              ></v-text-field>
-            </v-col>
             <v-col cols="12" sm="4" md="3">
               <v-autocomplete
                 :items="users"
@@ -91,6 +84,20 @@
                 item-text="name"
                 item-value="id"
               ></v-select>
+            </v-col>
+            <v-col cols="12" sm="2" md="2">
+              <v-text-field
+                label="Πιστωτικό Όριο"
+                v-model="customer.limit"
+                append-icon="mdi-currency-eur"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="2" md="2">
+              <v-text-field
+                label="Ποσοστό"
+                v-model="customer.percentage"
+                append-icon="mdi-currency-eur"
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>

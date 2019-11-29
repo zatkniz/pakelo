@@ -127,6 +127,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -510,27 +517,6 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-col",
-                        { attrs: { cols: "12", sm: "4", md: "2" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Πιστωτικό Όριο",
-                              "append-icon": "mdi-currency-eur"
-                            },
-                            model: {
-                              value: _vm.customer.limit,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "limit", $$v)
-                              },
-                              expression: "customer.limit"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
                         { attrs: { cols: "12", sm: "4", md: "3" } },
                         [
                           _c("v-autocomplete", {
@@ -615,6 +601,48 @@ var render = function() {
                                 _vm.$set(_vm.customer, "seller_type_id", $$v)
                               },
                               expression: "customer.seller_type_id"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "2", md: "2" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              label: "Πιστωτικό Όριο",
+                              "append-icon": "mdi-currency-eur"
+                            },
+                            model: {
+                              value: _vm.customer.limit,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "limit", $$v)
+                              },
+                              expression: "customer.limit"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "2", md: "2" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              label: "Ποσοστό",
+                              "append-icon": "mdi-currency-eur"
+                            },
+                            model: {
+                              value: _vm.customer.percentage,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "percentage", $$v)
+                              },
+                              expression: "customer.percentage"
                             }
                           })
                         ],
