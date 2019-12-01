@@ -17,7 +17,7 @@
                 <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη</v-btn>
+                <v-btn color="primary" dark class="mb-2" @click="editItem({products:[]})">Προσθηκη</v-btn>
               </v-toolbar>
             </template>
             <template v-slot:item.action="{ item }">

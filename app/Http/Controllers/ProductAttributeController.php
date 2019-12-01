@@ -14,7 +14,7 @@ class ProductAttributeController extends Controller
      */
     public function index()
     {
-        //
+        return ProductAttribute::with('product')->get();
     }
 
     /**

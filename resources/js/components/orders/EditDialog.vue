@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="800px" @click:outside="closeDialog">
+  <v-dialog v-model="dialog" max-width="1200px" @click:outside="closeDialog">
     <v-card :loading="loading">
       <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="save">
         <v-card-title>
@@ -21,7 +21,29 @@
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="12" md="12">
-                <v-text-field v-model="order.created_at" label="Ημερομηνία"></v-text-field>
+                
+
+                <!-- <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="order.created_at"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }"> -->
+                    <v-text-field v-model="order.created_at"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      label="Ημερομηνία"></v-text-field>
+                  <!-- </template> -->
+                  <!-- <v-date-picker v-model="order.created_at" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                    <v-btn text color="primary" @click="$refs.menu.save(order.created_at)">OK</v-btn>
+                  </v-date-picker>
+                </v-menu> -->
               </v-col>
             </v-row>
             <v-row>
@@ -30,33 +52,59 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" sm="12" md="12">
+              <v-col class="text-right" cols="12" sm="12" md="12">
+                <v-btn color="primary" dark class="mb-2" @click="addItem()">Προσθηκη</v-btn>
                 <v-data-table
+                  dark
                   class="products-table"
                   hide-default-footer
                   :headers="[
                     { text: 'Κωδικός', align: 'center', sortable: false, value: 'product.code', },
-                    { text: 'Ποσότητα', align: 'center', value: 'quantity' }, 
-                    { text: 'Tιμή',align: 'center', value: 'price' }, 
-                    { text: 'Tιμή Ποσότητας', align: 'center', value: 'price_per_kg' }
+                    { text: 'Ποσότητα', align: 'left', value: 'quantity', width: 106 }, 
+                    { text: 'Tιμή',align: 'left', value: 'price', width: 150 }, 
+                    { text: 'Tιμή Μονάδας', align: 'center', value: 'product.price' },
+                    { text: 'Ενέργειες', align: 'center', value: 'action', sortable: false },
                   ]"
                   :items="order.products"
                 >
                   <template v-slot:item.product.code="{ item }">
-                    <v-tooltip right>
-                      <template v-slot:activator="{ on }">
-                        <div v-on="on">{{item.product.code}}</div>
-                      </template>
-                      <span>Ονομασία: {{item.product.product.name}}lt</span>
-                      <br />
-                      <span>Ποσότητα: {{item.product.lt_kg}}lt</span>
-                    </v-tooltip>
+                    <v-autocomplete
+                      label="Προιόν"
+                      :items="products"
+                      required
+                      class="edit-product-dialog"
+                      :rules="requiredRules"
+                      v-model="item.product_id"
+                      item-text="code"
+                      item-value="id"
+                      clearable
+                      dark
+                      @input="updateItem(item)"
+                    >
+                    <template v-slot:item="{item}">
+                      {{item.code}} - {{item.product.name}} ({{item.lt_kg}}lt)
+                    </template>
+                    <template v-slot:selection="{item}">
+                      {{item.code}} - {{item.product.name}} ({{item.lt_kg}}lt)
+                    </template>
+                    </v-autocomplete>
                   </template>
-                  <template v-slot:item.price="{ item }">{{ item.price }}€</template>
-                  <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
+                  <template v-slot:item.price="{ item }">
+                    <v-text-field  dark v-model="item.price" append-icon="mdi-currency-eur"></v-text-field>
+                    </template>
+                  <template v-slot:item.quantity="{ item }">
+                    <v-text-field @input="updateItem(item)" dark type="number"  v-model="item.quantity"></v-text-field>
+                  </template>
                   <template
-                    v-slot:item.price_per_kg="{ item }"
-                  >{{ (item.price / item.quantity).toFixed(2) }}€</template>
+                    v-slot:item.product.price="{ item }"
+                  >
+                    <span style="color:#fff;">{{ item.product ? item.product.price : 0}}€</span>
+                  </template>
+                  <template v-slot:item.action="{ item }">
+                    <v-btn class="mx-0" fab dark x-small color="primary" @click="removeItem(item)">
+                      <v-icon small>mdi-close</v-icon>
+                    </v-btn>
+                  </template>
                 </v-data-table>
               </v-col>
             </v-row>
@@ -67,6 +115,7 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="closeDialog">Ακυρωση</v-btn>
           <v-btn color="blue darken-1" text type="submit">Αποθηκευση</v-btn>
+          <v-btn v-if="$route.name == 'Offers'" color="blue darken-1" text @click.prevent="saveAsOrder()" type="buttom">Μετατροπη σε παραγγελια</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -74,6 +123,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   props: {
     dialog: Boolean,
@@ -81,7 +132,9 @@ export default {
   },
   data: () => ({
     loading: false,
+    menu: false,
     customers: [],
+    products: [],
     valid: false,
     activeItems: [
       { text: "Ενεργός", value: 1 },
@@ -116,13 +169,46 @@ export default {
       this.$emit("closeDialog");
     },
 
+    updateItem(item, d) {
+      const selectedProduct = this.products.find( product => product.id == item.product_id );  
+      item.product = selectedProduct;   
+
+      if(selectedProduct)
+        return item.price = (item.quantity * selectedProduct.price).toFixed(2);
+
+      item.price = 0;
+    },
+
+    addItem(){
+      this.order.products.push({
+        price: 0,
+        quantity: 1,
+        id: Math.random() * 2525
+      })
+    },
+
+    saveAsOrder(){
+      this.order.is_offer = 1;
+      this.save();
+    },
+
+    removeItem(item) {
+      const index = this.order.products.findIndex( p => p.id == item.id );
+      this.order.products.splice(index, 1)
+      
+    },
+
     getCustomers() {
       axios.get("customers").then(res => (this.customers = res.data));
     },
 
+    getAttributes() {
+      axios.get("products-attributes").then(res => (this.products = res.data));
+    },
+
     save() {
       if (this.$refs.form.validate()) {
-        this.loading = true;
+        // this.loading = true;
         axios.post(`orders`, this.order).then(res => {
           this.$emit("closeDialog");
           this.$emit("orderEdited");
@@ -134,12 +220,13 @@ export default {
 
   created() {
     this.getCustomers();
+    this.getAttributes();    
   },
 
   watch: {
     order(val) {
       window.order = val;
     }
-  }
+  },
 };
 </script>

@@ -14,7 +14,8 @@ class Order extends Model
         'customer_id',
         'user_id',
         'comments',
-        'is_offer'
+        'is_offer',
+        'created_at'
     ];
 
     protected $appends = [
@@ -31,10 +32,10 @@ class Order extends Model
         return $this->belongsTo('\App\User');
     }
 
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    // }
 
     public function products()
     {
@@ -43,7 +44,6 @@ class Order extends Model
 
     public function getSummaryAttribute()
     {
-
         return number_format((float) $this->products->sum('price'), 2, '.', '');
     }
 }

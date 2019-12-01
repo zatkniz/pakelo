@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderProduct;
 use Illuminate\Http\Request;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -14,7 +16,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        return Order::whereIsOffer($request->input('orders'))->get();
+        return Order::whereIsOffer($request->input('orders') == 'true' ? true :false)->get();
     }
 
     /**
@@ -35,16 +37,34 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         if (!$request->input('id')) {
             $request['user_id'] = Auth::user()->id;
         }
 
-        return Order::updateOrCreate(
+        $order = Order::updateOrCreate(
             [
                 'id' => $request->input('id')
             ],
             $request->all()
         );
+
+        $order->products()->delete();
+
+        foreach ($request->input('products') as $key => $prod) {
+            $product = new OrderProduct(
+                [
+                    'order_id' => $order->id,
+                    'price' => $prod['price'],
+                    'product_id' => $prod['product']['id'],
+                    'quantity' => $prod['quantity'],
+                ]
+            );
+
+            $order->products()->save($product);
+        }
+
+        return $order;
     }
 
     /**
