@@ -3,6 +3,23 @@
     <v-row>
       <v-col>
         <v-card class="ma-5" shaped outlined :loading="loading">
+          <v-toolbar flat color="secondary" dark>
+            <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" dark class="mb-2" @click="editItem({products:[]})">Προσθηκη</v-btn>
+          </v-toolbar>
+          <v-card-title>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Αναζήτηση"
+              single-line
+              hide-details
+              clearable
+            ></v-text-field>
+          </v-card-title>
           <v-data-table
             :headers="headers"
             :items="orders"
@@ -10,16 +27,9 @@
             class="elevation-1"
             :single-expand="singleExpand"
             :expanded.sync="expanded"
+            :search="search"
             show-expand
           >
-            <template v-slot:top>
-              <v-toolbar flat color="secondary" dark>
-                <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" dark class="mb-2" @click="editItem({products:[]})">Προσθηκη</v-btn>
-              </v-toolbar>
-            </template>
             <template v-slot:item.action="{ item }">
               <v-btn class="mx-0" fab dark x-small color="teal" @click="editItem(item)">
                 <v-icon small>mdi-pencil</v-icon>
@@ -100,6 +110,7 @@ export default {
     singleExpand: false,
     deleteDialog: false,
     loading: false,
+    search: "",
     headers: [
       {
         text: "Πελάτης",

@@ -51,7 +51,7 @@
                     item-value="id"
                   ></v-autocomplete>
                 </v-col>
-                <v-col cols="12" sm="6" md="3">
+                <v-col cols="12" sm="6" md="2">
                   <v-select
                     @input="runFilters"
                     :items="sellerTypes"
@@ -62,7 +62,18 @@
                     item-value="id"
                   ></v-select>
                 </v-col>
-                <v-col cols="12" sm="6" md="3">
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    @input="runFilters"
+                    :items="sellerTypes"
+                    clearable
+                    label="Μάρκα Λαδιού"
+                    v-model="searchQuery.seller_type_id"
+                    item-text="name"
+                    item-value="id"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
                   <v-select
                     @input="runFilters"
                     :items="cities"

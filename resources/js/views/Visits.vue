@@ -3,15 +3,24 @@
     <v-row>
       <v-col>
         <v-card class="ma-5" shaped outlined :loading="loading">
-          <v-data-table :headers="headers" :items="visits" sort-by="name" class="elevation-1">
-            <template v-slot:top>
-              <v-toolbar flat color="secondary" dark>
-                <v-toolbar-title>Επισκέψεις</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη Επισκεψης</v-btn>
-              </v-toolbar>
-            </template>
+          <v-toolbar flat color="secondary" dark>
+            <v-toolbar-title>Επισκέψεις</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη Επισκεψης</v-btn>
+          </v-toolbar>
+          <v-card-title>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Αναζήτηση"
+              single-line
+              hide-details
+              clearable
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table :search="search" :headers="headers" :items="visits" sort-by="name" class="elevation-1">
             <template v-slot:item.action="{ item }">
               <v-btn class="mx-0" fab dark x-small color="teal" @click="editItem(item)">
                 <v-icon small>mdi-pencil</v-icon>
@@ -57,6 +66,7 @@ export default {
     snackbar: false,
     deleteDialog: false,
     loading: false,
+    search: '',
     headers: [
       {
         text: "Πελάτης",

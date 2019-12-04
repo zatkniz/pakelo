@@ -98,7 +98,7 @@
                   <template
                     v-slot:item.product.price="{ item }"
                   >
-                    <span style="color:#fff;">{{ item.product ? item.product.price : 0}}€</span>
+                    <span style="color:#fff;">{{ customersPrice(item) }}€</span>
                   </template>
                   <template v-slot:item.action="{ item }">
                     <v-btn class="mx-0" fab dark x-small color="primary" @click="removeItem(item)">
@@ -134,6 +134,7 @@ export default {
     loading: false,
     menu: false,
     customers: [],
+    initProducts: [],
     products: [],
     valid: false,
     activeItems: [
@@ -167,6 +168,17 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("closeDialog");
+    },
+
+    customersPrice(item){
+      // console.log(item);
+      // console.log(this.order);
+      // let percentage = this.order.customer.percentage ? parseFloat(this.order.customer.percentage) / 100 : 0.4;
+
+      // if(item.product)
+      //   item.product.price += item.product.price * percentage;
+      
+      return item.product ? item.product.price : 0;
     },
 
     updateItem(item, d) {
@@ -203,7 +215,10 @@ export default {
     },
 
     getAttributes() {
-      axios.get("products-attributes").then(res => (this.products = res.data));
+      axios.get("products-attributes").then(res => {
+         this.initProducts = this.products = res.data
+        }
+      );
     },
 
     save() {
@@ -226,7 +241,20 @@ export default {
   watch: {
     order(val) {
       window.order = val;
-    }
+    },
+    // 'order.customer_id'(){
+    //   console.log(this.order.customer_id);
+    //   console.log(this.products);
+    //     this.products = this.initProducts.map(product => {
+    //       product.price = product.price + 100;
+    //     });
+
+    //     this.order.products = this.order.products.map(product => {
+    //       console.log(product);
+          
+    //       product.price = product.price + 100;
+    //     });
+    // }
   },
 };
 </script>
