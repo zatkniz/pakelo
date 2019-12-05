@@ -27,6 +27,11 @@ const router = new VueRouter({
             component: () => import("./views/Orders")
         },
         {
+            path: "/incomes",
+            name: "Incomes",
+            component: () => import("./views/Incomes")
+        },
+        {
             path: "/users",
             name: "Users",
             component: () => import("./views/Users")
@@ -69,6 +74,11 @@ const router = new VueRouter({
         {
             path: "/lists-categories",
             name: "Lists Categories",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-oil-brands",
+            name: "Lists Oil Brands",
             component: () => import("./views/Lists")
         },
         {

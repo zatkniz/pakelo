@@ -15,7 +15,7 @@ class CreateOilBrandsTable extends Migration
     {
         Schema::create('oil_brands', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name');
         });
     }
 

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\OrderProduct;
+use App\Income;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
-class OrderController extends Controller
+class IncomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-
-        $query = Order::whereIsOffer($request->input('orders') == 'true' ? true : false);
+        $query = Income::query();
 
         if ($request->input('user') != null) {
             $query->where('user_id', $request->input('user'));
@@ -35,7 +33,7 @@ class OrderController extends Controller
             $query->where('customer_id', $request->input('customer'));
         }
 
-        return $query->with(['customer', 'user',  'products', 'products.product.product'])->get();
+        return $query->with(['customer', 'user'])->get();
     }
 
     /**
@@ -56,54 +54,33 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-
         if (!$request->input('id')) {
             $request['user_id'] = Auth::user()->id;
         }
 
-        $order = Order::updateOrCreate(
-            [
-                'id' => $request->input('id')
-            ],
-            $request->all()
-        );
-
-        $order->products()->delete();
-
-        foreach ($request->input('products') as $key => $prod) {
-            $product = new OrderProduct(
-                [
-                    'order_id' => $order->id,
-                    'price' => $prod['price'],
-                    'product_id' => $prod['product']['id'],
-                    'quantity' => $prod['quantity'],
-                ]
-            );
-
-            $order->products()->save($product);
-        }
-
-        return $order;
+        return Income::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Income $income)
     {
-        return $order;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Income $income)
     {
         //
     }
@@ -112,10 +89,10 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Income $income)
     {
         //
     }
@@ -123,11 +100,11 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($income)
     {
-        $order->delete();
+        Income::find($income)->delete();
     }
 }

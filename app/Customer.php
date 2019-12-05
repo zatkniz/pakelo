@@ -22,8 +22,10 @@ class Customer extends Model
         'job',
         'limit',
         'user_id',
+        'vat_user_id',
         'seller_type_id',
         'brand_type_id',
+        'oil_brand_id',
         'percentage',
         'active',
     ];
@@ -33,6 +35,14 @@ class Customer extends Model
         'city',
         'sellerType',
         'BrandType',
+        'oilBrand',
+        'incomes'
+    ];
+
+    protected $appends = [
+        'incomes_sum',
+        'orders_sum',
+        'balance',
     ];
 
     public function user()
@@ -53,5 +63,35 @@ class Customer extends Model
     public function BrandType()
     {
         return $this->belongsTo('App\BrandType');
+    }
+
+    public function oilBrand()
+    {
+        return $this->belongsTo('App\OilBrand');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany('App\Income');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('\App\Order');
+    }
+
+    public function getIncomesSumAttribute()
+    {
+        return (float) number_format((float) $this->incomes->sum('amount'), 2, '.', '');
+    }
+
+    public function getOrdersSumAttribute()
+    {
+        return (float) number_format((float) $this->orders->sum('price'), 2, '.', '');
+    }
+
+    public function getBalanceAttribute()
+    {
+        return $this->getOrdersSumAttribute() - $this->getIncomesSumAttribute();
     }
 }

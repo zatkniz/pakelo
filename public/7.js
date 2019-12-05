@@ -231,6 +231,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -248,6 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       searchQuery: {},
       fitleredCustomers: [],
       cities: [],
+      oilBrands: [],
       brandTypes: [],
       sellerTypes: [],
       users: [],
@@ -257,20 +272,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         align: "left",
         value: "name"
       }, {
-        text: "Εmail",
-        value: "email"
-      }, {
         text: "Διεύθυνση",
         value: "address"
       }, {
-        text: "Τηλέφωνο",
-        value: "mobile"
-      }, {
-        text: "Υπεύθυνος",
-        value: "responsible"
+        text: "Υπόλοιπο",
+        value: "balance"
       }, {
         text: "Πόλη",
         value: "city.name"
+      }, {
+        text: "Λάδι",
+        value: "oil_brand.name"
       }, {
         text: "Ενέργειες",
         value: "action",
@@ -314,20 +326,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.cities = res.data;
       });
     },
-    getUsers: function getUsers() {
+    getOilBrands: function getOilBrands() {
       var _this4 = this;
 
+      axios.get("oil-brands").then(function (res) {
+        _this4.oilBrands = res.data;
+      });
+    },
+    getUsers: function getUsers() {
+      var _this5 = this;
+
       axios.get("users").then(function (res) {
-        _this4.users = res.data;
+        _this5.users = res.data;
       });
     },
     runFilters: function runFilters() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.fitleredCustomers = this.customers;
       Object.keys(this.searchQuery).map(function (q) {
-        if (_this5.searchQuery[q]) _this5.fitleredCustomers = _this5.fitleredCustomers.filter(function (customer) {
-          return customer[q] == _this5.searchQuery[q];
+        if (_this6.searchQuery[q]) _this6.fitleredCustomers = _this6.fitleredCustomers.filter(function (customer) {
+          return customer[q] == _this6.searchQuery[q];
         });
       });
     }
@@ -335,6 +354,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getUsers();
     this.getCities();
+    this.getOilBrands();
     this.getBrandTypes();
     this.getSellerTypes();
     this.runFilters();
@@ -541,24 +561,65 @@ var render = function() {
                   _c(
                     "v-card-title",
                     [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          "append-icon": "mdi-magnify",
-                          label: "Αναζήτηση",
-                          "single-line": "",
-                          "hide-details": "",
-                          clearable: ""
-                        },
-                        model: {
-                          value: _vm.search,
-                          callback: function($$v) {
-                            _vm.search = $$v
-                          },
-                          expression: "search"
-                        }
-                      })
+                      _c(
+                        "v-row",
+                        { staticClass: "px-5" },
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", sm: "6", md: "6" } },
+                            [
+                              _c("v-autocomplete", {
+                                attrs: {
+                                  items: _vm.users,
+                                  label: "Τιμολόγιο",
+                                  clearable: "",
+                                  "item-text": "name",
+                                  "item-value": "id"
+                                },
+                                on: { input: _vm.runFilters },
+                                model: {
+                                  value: _vm.searchQuery.vat_user_id,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.searchQuery,
+                                      "vat_user_id",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "searchQuery.vat_user_id"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", sm: "6", md: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "append-icon": "mdi-magnify",
+                                  label: "Αναζήτηση",
+                                  "single-line": "",
+                                  "hide-details": "",
+                                  clearable: ""
+                                },
+                                model: {
+                                  value: _vm.search,
+                                  callback: function($$v) {
+                                    _vm.search = $$v
+                                  },
+                                  expression: "search"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
@@ -673,7 +734,7 @@ var render = function() {
                                   [
                                     _c("v-select", {
                                       attrs: {
-                                        items: _vm.sellerTypes,
+                                        items: _vm.oilBrands,
                                         clearable: "",
                                         label: "Μάρκα Λαδιού",
                                         "item-text": "name",
@@ -681,15 +742,15 @@ var render = function() {
                                       },
                                       on: { input: _vm.runFilters },
                                       model: {
-                                        value: _vm.searchQuery.seller_type_id,
+                                        value: _vm.searchQuery.oil_brand_id,
                                         callback: function($$v) {
                                           _vm.$set(
                                             _vm.searchQuery,
-                                            "seller_type_id",
+                                            "oil_brand_id",
                                             $$v
                                           )
                                         },
-                                        expression: "searchQuery.seller_type_id"
+                                        expression: "searchQuery.oil_brand_id"
                                       }
                                     })
                                   ],

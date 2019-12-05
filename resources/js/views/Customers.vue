@@ -10,15 +10,29 @@
             <v-btn color="primary" dark class="mb-2" to="customer">Προσθηκη Πελατη</v-btn>
           </v-toolbar>
           <v-card-title>
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Αναζήτηση"
-              single-line
-              hide-details
-              clearable
-            ></v-text-field>
+            <v-row class="px-5">
+              <v-col cols="12" sm="6" md="6">
+                <v-autocomplete
+                  @input="runFilters"
+                  :items="users"
+                  label="Τιμολόγιο"
+                  clearable
+                  v-model="searchQuery.vat_user_id"
+                  item-text="name"
+                  item-value="id"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Αναζήτηση"
+                  single-line
+                  hide-details
+                  clearable
+                ></v-text-field>
+              </v-col>
+            </v-row>
           </v-card-title>
           <v-data-table
             :headers="headers"
@@ -65,10 +79,10 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select
                     @input="runFilters"
-                    :items="sellerTypes"
+                    :items="oilBrands"
                     clearable
                     label="Μάρκα Λαδιού"
-                    v-model="searchQuery.seller_type_id"
+                    v-model="searchQuery.oil_brand_id"
                     item-text="name"
                     item-value="id"
                   ></v-select>
@@ -134,6 +148,7 @@ export default {
     searchQuery: {},
     fitleredCustomers: [],
     cities: [],
+    oilBrands: [],
     brandTypes: [],
     sellerTypes: [],
     users: [],
@@ -144,11 +159,10 @@ export default {
         align: "left",
         value: "name"
       },
-      { text: "Εmail", value: "email" },
       { text: "Διεύθυνση", value: "address" },
-      { text: "Τηλέφωνο", value: "mobile" },
-      { text: "Υπεύθυνος", value: "responsible" },
+      { text: "Υπόλοιπο", value: "balance" },
       { text: "Πόλη", value: "city.name" },
+      { text: "Λάδι", value: "oil_brand.name" },
       {
         text: "Ενέργειες",
         value: "action",
@@ -191,6 +205,12 @@ export default {
       });
     },
 
+    getOilBrands() {
+      axios.get("oil-brands").then(res => {
+        this.oilBrands = res.data;
+      });
+    },
+
     getUsers() {
       axios.get("users").then(res => {
         this.users = res.data;
@@ -211,6 +231,7 @@ export default {
   created() {
     this.getUsers();
     this.getCities();
+    this.getOilBrands();
     this.getBrandTypes();
     this.getSellerTypes();
     this.runFilters();

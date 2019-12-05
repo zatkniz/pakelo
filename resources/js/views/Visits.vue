@@ -9,17 +9,6 @@
             <v-spacer></v-spacer>
             <v-btn color="primary" dark class="mb-2" @click="editItem({})">Προσθηκη Επισκεψης</v-btn>
           </v-toolbar>
-          <v-card-title>
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Αναζήτηση"
-              single-line
-              hide-details
-              clearable
-            ></v-text-field>
-          </v-card-title>
           <v-data-table
             :search="search"
             :headers="headers"
@@ -40,6 +29,16 @@
                     @input="getvisits"
                     @click:clear="getvisits()"
                   ></v-autocomplete>
+                </v-col>
+                <v-col class="px-10" cols="12" sm="6" md="6">
+                  <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Αναζήτηση"
+                    single-line
+                    hide-details
+                    clearable
+                  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row class="px-5">

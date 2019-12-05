@@ -25,8 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', 'UserController');
     Route::resource('customers', 'CustomerController');
     Route::resource('cities', 'CityController');
+    Route::resource('oil-brands', 'CityController');
     Route::resource('visits', 'VisitController');
     Route::resource('orders', 'OrderController');
+    Route::resource('incomes', 'IncomeController');
     Route::resource('brand-types', 'BrandTypeController');
     Route::resource('seller-types', 'SellerTypeController');
     Route::resource('products', 'ProductController');

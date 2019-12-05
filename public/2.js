@@ -134,6 +134,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -643,6 +655,47 @@ var render = function() {
                                 _vm.$set(_vm.customer, "percentage", $$v)
                               },
                               expression: "customer.percentage"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "5", md: "5" } },
+                        [
+                          _c("v-autocomplete", {
+                            attrs: {
+                              items: _vm.users,
+                              label: "Τιμολόγιο",
+                              "item-text": "name",
+                              "item-value": "id"
+                            },
+                            model: {
+                              value: _vm.customer.vat_user_id,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "vat_user_id", $$v)
+                              },
+                              expression: "customer.vat_user_id"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", sm: "4", md: "3" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "Υπόλοιπο", readonly: "" },
+                            model: {
+                              value: _vm.customer.balance,
+                              callback: function($$v) {
+                                _vm.$set(_vm.customer, "balance", $$v)
+                              },
+                              expression: "customer.balance"
                             }
                           })
                         ],

@@ -61,8 +61,8 @@ export default {
   data: () => ({
     items: [
       // { icon: "mdi-home", text: "Dashboard", href: "/" },
-      { icon: "mdi-car-side", text: "Επισκέψεις",  href: "/visits" },
-        { icon: "mdi-message", text: "Προσφορές", href: "/offers" },
+      { icon: "mdi-car-side", text: "Επισκέψεις", href: "/visits" },
+      { icon: "mdi-message", text: "Προσφορές", href: "/offers" },
       { icon: "mdi-history", text: "Παραγγελίες", href: "/orders" },
       {
         icon: "mdi-account",
@@ -70,14 +70,34 @@ export default {
         href: "/customers"
       },
       {
+        icon: "mdi-cash-100",
+        text: "Εισπράξεις",
+        href: "/incomes"
+      },
+      {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
         model: false,
         children: [
-          { text: "Μάρκες", href: '/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη' },
-          { text: "Πόλη", href: '/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη' },
-          { text: "Τύπος", href: '/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη' },
+          {
+            text: "Μάρκες Αυτοκινήτων",
+            href:
+              "/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη"
+          },
+          {
+            text: "Πόλη",
+            href: "/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη"
+          },
+          {
+            text: "Τύπος",
+            href:
+              "/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη"
+          },
+          {
+            text: "Μάρκα Λαδιού",
+            href: "/lists-oil-brands?item=oil-brands&cardTitle=Μάρκα%20Λαδιού"
+          }
         ]
       },
       // { icon: "mdi-cash-register", text: "Ταμείο" },
@@ -88,12 +108,24 @@ export default {
         text: "Λίστες Προϊόντος",
         model: false,
         children: [
-          { text: "Περιγραφές", href: '/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος' },
-          { text: "Κατηγορίες", href: '/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος' },
-          { text: "Εφαρμογές", href: '/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος' },
+          {
+            text: "Περιγραφές",
+            href:
+              "/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος"
+          },
+          {
+            text: "Κατηγορίες",
+            href:
+              "/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος"
+          },
+          {
+            text: "Εφαρμογές",
+            href:
+              "/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος"
+          }
         ]
       },
-      { icon: "mdi-contacts", text: "Χρήστες", href: "/users" },
+      { icon: "mdi-contacts", text: "Χρήστες", href: "/users" }
     ]
   }),
 

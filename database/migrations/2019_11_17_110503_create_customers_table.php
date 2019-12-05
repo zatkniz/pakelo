@@ -30,9 +30,11 @@ class CreateCustomersTable extends Migration
             $table->string('job')->nullable();
             $table->integer('limit')->default(0);
             $table->integer('user_id')->nullable();
+            $table->integer('vat_user_id')->nullable();
             $table->integer('seller_type_id')->nullable();
             $table->integer('brand_type_id')->nullable();
-            $table->float('percentage')->default(0);
+            $table->integer('oil_brand_id')->nullable();
+            $table->float('percentage')->default(40);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

@@ -17,13 +17,10 @@
           </v-toolbar>
           <v-data-table
             :headers="headers"
-            :items="orders"
+            :items="incomes"
             sort-by="name"
             class="elevation-1"
-            :single-expand="singleExpand"
-            :expanded.sync="expanded"
             :search="search"
-            show-expand
           >
             <template v-slot:top>
               <v-row>
@@ -35,8 +32,8 @@
                     v-model="user_id"
                     item-text="name"
                     item-value="id"
-                    @input="getorders"
-                    @click:clear="getorders()"
+                    @input="getincomes"
+                    @click:clear="getincomes()"
                   ></v-autocomplete>
                 </v-col>
                 <v-col class="px-10" cols="12" sm="6" md="6">
@@ -69,14 +66,14 @@
                         readonly
                         v-on="on"
                         clearable
-                        @click:clear="searchQuery[0] = null; getorders()"
+                        @click:clear="searchQuery[0] = null; getincomes()"
                       ></v-text-field>
                     </template>
                     <v-date-picker
                       v-model="searchQuery[0]"
                       no-title
                       scrollable
-                      @input="getorders(); $refs.menu.save(searchQuery[0])"
+                      @input="getincomes(); $refs.menu.save(searchQuery[0])"
                       reactive
                     >
                       <v-spacer></v-spacer>
@@ -103,14 +100,14 @@
                         prepend-icon="mdi-calendar"
                         readonly
                         v-on="on"
-                        @click:clear="searchQuery[1] = null; getorders()"
+                        @click:clear="searchQuery[1] = null; getincomes()"
                       ></v-text-field>
                     </template>
                     <v-date-picker
                       v-model="searchQuery[1]"
                       no-title
                       scrollable
-                      @input="getorders(); $refs.menuTo.save(searchQuery[1])"
+                      @input="getincomes(); $refs.menuTo.save(searchQuery[1])"
                       reactive
                     >
                       <v-spacer></v-spacer>
@@ -129,50 +126,17 @@
                 <v-icon small>mdi-delete</v-icon>
               </v-btn>
             </template>
-            <template v-slot:expanded-item="{item , headers}">
-              <td :colspan="headers.length" class="pa-0 tables-td">
-                <v-data-table
-                  class="products-table"
-                  hide-default-footer
-                  :headers="[
-                    { text: 'Κωδικός', align: 'center', sortable: false, value: 'product.code', },
-                    { text: 'Ποσότητα', align: 'center', value: 'quantity' }, 
-                    { text: 'Tιμή',align: 'center', value: 'price' }, 
-                    { text: 'Tιμή Ποσότητας', align: 'center', value: 'price_per_kg' }
-                  ]"
-                  :items="item.products"
-                >
-                  <template v-slot:item.product.code="{ item }">
-                    <v-tooltip right>
-                      <template v-slot:activator="{ on }">
-                        <div v-on="on">{{item.product.code}}</div>
-                      </template>
-                      <span>Ονομασία: {{item.product.product.name}}lt</span>
-                      <br />
-                      <span>Ποσότητα: {{item.product.lt_kg}}lt</span>
-                    </v-tooltip>
-                  </template>
-                  <template v-slot:item.price="{ item }">{{ item.price }}€</template>
-                  <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
-                  <template
-                    v-slot:item.price_per_kg="{ item }"
-                  >{{ (item.price / item.quantity).toFixed(2) }}€</template>
-                </v-data-table>
-                <div class="sum-table-div pa-5">Σύνολο Παραγγελίας: {{item.summary}}€</div>
-                <div class="sum-table-div pb-5">Αριθμός Προϊόντων: {{item.products_count}}</div>
-              </td>
-            </template>
           </v-data-table>
           <delete-dialog
-            :order="editedItem"
+            :income="editedItem"
             :deleteDialog="deleteDialog"
-            @orderDeleted="getorders(); snackbar = true;"
+            @incomeDeleted="getincomes(); snackbar = true;"
             @closeDialog="deleteDialog = false"
           />
           <edit-dialog
-            :order="editedItem"
+            :income="editedItem"
             :dialog="dialog"
-            @orderEdited="getorders(); snackbar = true;"
+            @incomeEdited="getincomes(); snackbar = true;"
             @closeDialog="dialog = false; $route.query.new = false;"
           />
 
@@ -187,11 +151,11 @@
 </template>
 
 <script>
-import deleteDialog from "../components/orders/DeleteDialog";
-import editDialog from "../components/orders/EditDialog";
+import deleteDialog from "../components/incomes/DeleteDialog";
+import editDialog from "../components/incomes/EditDialog";
 export default {
   props: {
-    isOrder: Boolean,
+    isincome: Boolean,
     hideToolbar: Boolean,
     customer: Number
   },
@@ -202,7 +166,7 @@ export default {
   data: () => ({
     dialog: false,
     snackbar: false,
-    isSingleOrder: false,
+    isSingleincome: false,
     expanded: [],
     menu: false,
     menuTo: false,
@@ -219,12 +183,11 @@ export default {
         value: "customer.name"
       },
       { text: "Πωλητής", value: "user.name" },
-      { text: "Αριθμός", value: "products_count", align: "center" },
-      { text: "Ποσό", value: "summary", align: "center" },
+      { text: "Ποσό", value: "amount", align: "center" },
       { text: "Ημερομηνία", value: "created_at" },
       { text: "Ενέργειες", value: "action", align: "right" }
     ],
-    orders: [],
+    incomes: [],
     editedItem: {},
     users: [],
     user_id: ""
@@ -232,28 +195,28 @@ export default {
 
   created() {
     if (this.$route.name == "Customers Single") {
-      this.isSingleOrder = this.isOrder;
+      this.isSingleincome = this.isincome;
     } else {
-      this.isSingleOrder = this.$route.name == "Orders";
+      this.isSingleincome = this.$route.name == "incomes";
     }
 
-    this.getorders();
+    this.getincomes();
     if (this.$route.query.new) this.dialog = true;
 
     this.getUsers();
   },
 
   methods: {
-    getorders() {
+    getincomes() {
       if (!this.user_id) this.user_id = "";
 
       this.loading = true;
       axios
         .get(
-          `orders?orders=${this.isSingleOrder}&date=${this.searchQuery}&user=${this.user_id}&customer=${this.customer}`
+          `incomes?incomes=${this.isSingleincome}&date=${this.searchQuery}&user=${this.user_id}&customer=${this.customer}`
         )
         .then(res => {
-          this.orders = res.data;
+          this.incomes = res.data;
           this.loading = false;
           this.$route.query.new;
         });
@@ -270,8 +233,8 @@ export default {
       this.dialog = true;
     },
 
-    openDeleteDialog(order) {
-      this.editedItem = Object.assign({}, order);
+    openDeleteDialog(income) {
+      this.editedItem = Object.assign({}, income);
       this.deleteDialog = true;
     }
   },
@@ -283,7 +246,7 @@ export default {
 
   computed: {
     pageTitle() {
-      return this.$route.name == "Orders" ? "Παραγγελίες" : "Προσφορές";
+      return "Εισπράξεις";
     }
   }
 };

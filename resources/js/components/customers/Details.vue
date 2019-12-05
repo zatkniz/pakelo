@@ -99,6 +99,18 @@
                 append-icon="mdi-currency-eur"
               ></v-text-field>
             </v-col>
+            <v-col cols="12" sm="5" md="5">
+              <v-autocomplete
+                :items="users"
+                label="Τιμολόγιο"
+                v-model="customer.vat_user_id"
+                item-text="name"
+                item-value="id"
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" sm="4" md="3">
+              <v-text-field label="Υπόλοιπο" readonly v-model="customer.balance" />
+            </v-col>
           </v-row>
         </v-container>
       </v-card-text>

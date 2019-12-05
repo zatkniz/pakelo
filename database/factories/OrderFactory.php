@@ -12,6 +12,8 @@ $factory->define(Order::class, function (Faker $faker) {
         'user_id' => User::all()->random(1)[0]->id,
         'customer_id' => Customer::all()->random(1)[0]->id,
         'comments' => $faker->text($maxNbChars = 200),
+        'vat_number' => $faker->text($maxNbChars = 5),
+        'no_vat' => $faker->numberBetween($min = 0, $max = 1),
         'is_offer' => $faker->numberBetween($min = 0, $max = 1),
     ];
 });

@@ -14,7 +14,7 @@ class OilBrandController extends Controller
      */
     public function index()
     {
-        //
+        return OilBrand::all();
     }
 
     /**
@@ -35,7 +35,9 @@ class OilBrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return OilBrand::updateOrCreate([
+            'id' => $request->input('id')
+        ], $request->all());
     }
 
     /**
@@ -80,6 +82,6 @@ class OilBrandController extends Controller
      */
     public function destroy(OilBrand $oilBrand)
     {
-        //
+        OilBrand::find($OilBrand)->delete();
     }
 }

@@ -22,6 +22,9 @@
         <v-btn to="/orders?new=true" fab dark small color="red">
           <v-icon>mdi-history</v-icon>
         </v-btn>
+        <v-btn to="/incomes?new=true" fab dark small color="red">
+          <v-icon>mdi-cash-100</v-icon>
+        </v-btn>
         <v-btn to="/customer?new=true" fab dark small color="red">
           <v-icon>mdi-account</v-icon>
         </v-btn>

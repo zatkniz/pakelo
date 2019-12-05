@@ -2075,6 +2075,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2188,19 +2191,26 @@ __webpack_require__.r(__webpack_exports__);
         text: "Πελάτες",
         href: "/customers"
       }, {
+        icon: "mdi-cash-100",
+        text: "Εισπράξεις",
+        href: "/incomes"
+      }, {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
         model: false,
         children: [{
-          text: "Μάρκες",
-          href: '/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη'
+          text: "Μάρκες Αυτοκινήτων",
+          href: "/lists-brand-types?item=brand-types&cardTitle=Τύπος Προϊόντος Πελάτη"
         }, {
           text: "Πόλη",
-          href: '/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη'
+          href: "/lists-cities?item=cities&cardTitle=Πόλεις%20Πελάτη"
         }, {
           text: "Τύπος",
-          href: '/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη'
+          href: "/lists-seller-types?item=seller-types&cardTitle=Τύπος%20Πελάτη"
+        }, {
+          text: "Μάρκα Λαδιού",
+          href: "/lists-oil-brands?item=oil-brands&cardTitle=Μάρκα%20Λαδιού"
         }]
       }, // { icon: "mdi-cash-register", text: "Ταμείο" },
       {
@@ -2214,13 +2224,13 @@ __webpack_require__.r(__webpack_exports__);
         model: false,
         children: [{
           text: "Περιγραφές",
-          href: '/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος'
+          href: "/lists-descriptions?item=products-descriptions&cardTitle=Περιγραφές%20Προϊόντος"
         }, {
           text: "Κατηγορίες",
-          href: '/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος'
+          href: "/lists-categories?item=products-categories&cardTitle=Κατηγορίες%20Προϊόντος"
         }, {
           text: "Εφαρμογές",
-          href: '/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος'
+          href: "/lists-uses?item=products-uses&cardTitle=Εφαρμογές%20Προϊόντος"
         }]
       }, {
         icon: "mdi-contacts",
@@ -20790,6 +20800,21 @@ var render = function() {
                   }
                 },
                 [_c("v-icon", [_vm._v("mdi-history")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    to: "/incomes?new=true",
+                    fab: "",
+                    dark: "",
+                    small: "",
+                    color: "red"
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-cash-100")])],
                 1
               ),
               _vm._v(" "),
@@ -75142,6 +75167,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
     }
   }, {
+    path: "/incomes",
+    name: "Incomes",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./views/Incomes */ "./resources/js/views/Incomes.vue"));
+    }
+  }, {
     path: "/users",
     name: "Users",
     component: function component() {
@@ -75192,6 +75223,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: "/lists-categories",
     name: "Lists Categories",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-oil-brands",
+    name: "Lists Oil Brands",
     component: function component() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
     }

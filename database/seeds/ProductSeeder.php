@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $input_file = dirname(__FILE__) . '/' . 'PAKELO PRODUCT LIST.xlsx';
+        $input_file = dirname(__FILE__) . '/' . 'PAKELO ALL PRODUCT LIST.xlsx';
         if ($xlsx = XLSX::parse($input_file)) {
 
             //create Regions
