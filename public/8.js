@@ -279,11 +279,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -298,25 +293,25 @@ __webpack_require__.r(__webpack_exports__);
       deleteDialog: false,
       loading: false,
       headers: [{
-        text: 'Όνομα',
-        align: 'left',
-        value: 'name'
+        text: "Όνομα",
+        align: "left",
+        value: "name"
       }, {
-        text: 'Εmail',
-        value: 'email'
+        text: "Εmail",
+        value: "email"
       }, {
-        text: 'Username',
-        value: 'username'
+        text: "Username",
+        value: "username"
       }, {
-        text: 'Ρόλος',
-        value: 'user_role.name'
+        text: "Ρόλος",
+        value: "user_role.name"
       }, {
-        text: 'Κατάσταση',
-        value: 'active_state'
+        text: "Κατάσταση",
+        value: "active_state"
       }, {
-        text: 'Ενέργειες',
-        value: 'action',
-        align: 'right'
+        text: "Ενέργειες",
+        value: "action",
+        align: "right"
       }],
       users: [],
       editedItem: {}
@@ -330,7 +325,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.get('users').then(function (res) {
+      axios.get("users").then(function (res) {
         _this.users = res.data;
         _this.loading = false;
       });
@@ -841,9 +836,7 @@ var render = function() {
                               },
                               [
                                 _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(
-                                    "\n                                mdi-pencil\n                            "
-                                  )
+                                  _vm._v("mdi-pencil")
                                 ])
                               ],
                               1
@@ -867,9 +860,7 @@ var render = function() {
                               },
                               [
                                 _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(
-                                    "\n                                mdi-delete\n                            "
-                                  )
+                                  _vm._v("mdi-delete")
                                 ])
                               ],
                               1
@@ -922,7 +913,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                  Η επιλογή σας αποθηκεύτηκε επιτυχώς\n                  "
+                        "\n          Η επιλογή σας αποθηκεύτηκε επιτυχώς\n          "
                       ),
                       _c(
                         "v-btn",
@@ -934,11 +925,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    κλεισιμο\n                  "
-                          )
-                        ]
+                        [_vm._v("κλεισιμο")]
                       )
                     ],
                     1

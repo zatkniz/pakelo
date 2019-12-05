@@ -13,9 +13,27 @@ class VisitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Visit::all();
+        $query = Visit::query();
+
+        if ($request->input('user') != null) {
+            $query->where('user_id', $request->input('user'));
+        }
+
+        if (explode(',', $request->input('date'))[0]) {
+            $query->where('created_at', '>=', explode(',', $request->input('date'))[0]);
+        }
+
+        if (explode(',', $request->input('date'))[1]) {
+            $query->whereDay('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[2])->whereMonth('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[1])->whereYear('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[0]);
+        }
+
+        if ($request->input('customer') != 'undefined') {
+            $query->where('customer_id', $request->input('customer'));
+        }
+
+        return $query->get();
     }
 
     /**

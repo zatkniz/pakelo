@@ -10,6 +10,26 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_customers_Details__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/customers/Details */ "./resources/js/components/customers/Details.vue");
+/* harmony import */ var _views_Orders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Orders */ "./resources/js/views/Orders.vue");
+/* harmony import */ var _views_Visits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Visits */ "./resources/js/views/Visits.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37,9 +57,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    customerDetails: _components_customers_Details__WEBPACK_IMPORTED_MODULE_0__["default"]
+    customerDetails: _components_customers_Details__WEBPACK_IMPORTED_MODULE_0__["default"],
+    orders: _views_Orders__WEBPACK_IMPORTED_MODULE_1__["default"],
+    visits: _views_Visits__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -99,7 +123,11 @@ var render = function() {
                     [
                       _c("v-tab", [_vm._v("Στοιχεια")]),
                       _vm._v(" "),
-                      _c("v-tab", [_vm._v("Παραγγελιες")])
+                      _c("v-tab", [_vm._v("Παραγγελιες")]),
+                      _vm._v(" "),
+                      _c("v-tab", [_vm._v("Προσφορες")]),
+                      _vm._v(" "),
+                      _c("v-tab", [_vm._v("Επισκεψεις")])
                     ],
                     1
                   ),
@@ -124,7 +152,78 @@ var render = function() {
                           _c(
                             "v-card",
                             { attrs: { flat: "", color: "basil" } },
-                            [_c("v-card-text", [_vm._v("Παραγγελίες")])],
+                            [
+                              _c(
+                                "v-card-text",
+                                { staticClass: "px-3 py-0" },
+                                [
+                                  _c("orders", {
+                                    attrs: {
+                                      isOrder: true,
+                                      hideToolbar: true,
+                                      customer: _vm.$route.params.id
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "", color: "basil" } },
+                            [
+                              _c(
+                                "v-card-text",
+                                { staticClass: "px-3 py-0" },
+                                [
+                                  _c("orders", {
+                                    attrs: {
+                                      isOrder: false,
+                                      hideToolbar: true,
+                                      customer: _vm.$route.params.id
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "", color: "basil" } },
+                            [
+                              _c(
+                                "v-card-text",
+                                { staticClass: "px-3 py-0" },
+                                [
+                                  _c("visits", {
+                                    attrs: {
+                                      isOrder: false,
+                                      hideToolbar: true,
+                                      customer: _vm.$route.params.id
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
                             1
                           )
                         ],

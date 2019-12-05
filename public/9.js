@@ -257,9 +257,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    isOrder: Boolean,
+    hideToolbar: Boolean,
+    customer: Number
+  },
   components: {
     deleteDialog: _components_visits_DeleteDialog__WEBPACK_IMPORTED_MODULE_0__["default"],
     editDialog: _components_visits_EditDialog__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -268,9 +365,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       dialog: false,
       snackbar: false,
+      menu: false,
+      menuTo: false,
+      date: new Date().toISOString().substr(0, 10),
       deleteDialog: false,
       loading: false,
-      search: '',
+      searchQuery: [new Date().toISOString().substr(0, 10), null],
+      search: "",
       headers: [{
         text: "Πελάτης",
         align: "left",
@@ -287,22 +388,33 @@ __webpack_require__.r(__webpack_exports__);
         align: "right"
       }],
       visits: [],
+      users: [],
+      user_id: "",
       editedItem: {}
     };
   },
   created: function created() {
     this.getvisits();
     if (this.$route.query["new"]) this.dialog = true;
+    this.getUsers();
   },
   methods: {
     getvisits: function getvisits() {
       var _this = this;
 
+      if (!this.user_id) this.user_id = "";
       this.loading = true;
-      axios.get("visits").then(function (res) {
+      axios.get("visits?date=".concat(this.searchQuery, "&user=").concat(this.user_id, "&customer=").concat(this.customer)).then(function (res) {
         _this.visits = res.data;
         _this.loading = false;
         _this.$route.query["new"];
+      });
+    },
+    getUsers: function getUsers() {
+      var _this2 = this;
+
+      axios.get("users").then(function (res) {
+        _this2.users = res.data;
       });
     },
     editItem: function editItem(item) {
@@ -625,49 +737,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
+    { class: { "pa-0": _vm.customer } },
     [
       _c(
         "v-row",
         [
           _c(
             "v-col",
+            { class: { "pa-0": _vm.customer } },
             [
               _c(
                 "v-card",
                 {
-                  staticClass: "ma-5",
+                  class: { "ma-0": _vm.customer, "ma-5": !_vm.customer },
                   attrs: { shaped: "", outlined: "", loading: _vm.loading }
                 },
                 [
-                  _c(
-                    "v-toolbar",
-                    { attrs: { flat: "", color: "secondary", dark: "" } },
-                    [
-                      _c("v-toolbar-title", [_vm._v("Επισκέψεις")]),
-                      _vm._v(" "),
-                      _c("v-divider", {
-                        staticClass: "mx-4",
-                        attrs: { inset: "", vertical: "" }
-                      }),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "mb-2",
-                          attrs: { color: "primary", dark: "" },
-                          on: {
-                            click: function($event) {
-                              return _vm.editItem({})
-                            }
-                          }
-                        },
-                        [_vm._v("Προσθηκη Επισκεψης")]
+                  !_vm.hideToolbar
+                    ? _c(
+                        "v-toolbar",
+                        { attrs: { flat: "", color: "secondary", dark: "" } },
+                        [
+                          _c("v-toolbar-title", [_vm._v("Επισκέψεις")]),
+                          _vm._v(" "),
+                          _c("v-divider", {
+                            staticClass: "mx-4",
+                            attrs: { inset: "", vertical: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mb-2",
+                              attrs: { color: "primary", dark: "" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editItem({})
+                                }
+                              }
+                            },
+                            [_vm._v("Προσθηκη Επισκεψης")]
+                          )
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  ),
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "v-card-title",
@@ -703,6 +819,393 @@ var render = function() {
                       "sort-by": "name"
                     },
                     scopedSlots: _vm._u([
+                      {
+                        key: "top",
+                        fn: function() {
+                          return [
+                            _c(
+                              "v-row",
+                              [
+                                _c(
+                                  "v-col",
+                                  {
+                                    staticClass: "px-10",
+                                    attrs: { cols: "12", sm: "6", md: "6" }
+                                  },
+                                  [
+                                    _c("v-autocomplete", {
+                                      attrs: {
+                                        items: _vm.users,
+                                        label: "Πωλητής",
+                                        clearable: "",
+                                        "item-text": "name",
+                                        "item-value": "id"
+                                      },
+                                      on: {
+                                        input: _vm.getvisits,
+                                        "click:clear": function($event) {
+                                          return _vm.getvisits()
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.user_id,
+                                        callback: function($$v) {
+                                          _vm.user_id = $$v
+                                        },
+                                        expression: "user_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-row",
+                              { staticClass: "px-5" },
+                              [
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "6" } },
+                                  [
+                                    _c(
+                                      "v-menu",
+                                      {
+                                        ref: "menu",
+                                        attrs: {
+                                          "close-on-content-click": false,
+                                          "return-value": _vm.searchQuery[0],
+                                          transition: "scale-transition",
+                                          "offset-y": "",
+                                          "min-width": "290px"
+                                        },
+                                        on: {
+                                          "update:returnValue": function(
+                                            $event
+                                          ) {
+                                            return _vm.$set(
+                                              _vm.searchQuery,
+                                              0,
+                                              $event
+                                            )
+                                          },
+                                          "update:return-value": function(
+                                            $event
+                                          ) {
+                                            return _vm.$set(
+                                              _vm.searchQuery,
+                                              0,
+                                              $event
+                                            )
+                                          }
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "activator",
+                                            fn: function(ref) {
+                                              var on = ref.on
+                                              return [
+                                                _c(
+                                                  "v-text-field",
+                                                  _vm._g(
+                                                    {
+                                                      attrs: {
+                                                        label: "Από",
+                                                        "prepend-icon":
+                                                          "mdi-calendar",
+                                                        readonly: "",
+                                                        clearable: ""
+                                                      },
+                                                      on: {
+                                                        "click:clear": function(
+                                                          $event
+                                                        ) {
+                                                          _vm.searchQuery[0] = null
+                                                          _vm.getvisits()
+                                                        }
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.searchQuery[0],
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.searchQuery,
+                                                            0,
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "searchQuery[0]"
+                                                      }
+                                                    },
+                                                    on
+                                                  )
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ]),
+                                        model: {
+                                          value: _vm.menu,
+                                          callback: function($$v) {
+                                            _vm.menu = $$v
+                                          },
+                                          expression: "menu"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-date-picker",
+                                          {
+                                            attrs: {
+                                              "no-title": "",
+                                              scrollable: "",
+                                              reactive: ""
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                _vm.getvisits()
+                                                _vm.$refs.menu.save(
+                                                  _vm.searchQuery[0]
+                                                )
+                                              }
+                                            },
+                                            model: {
+                                              value: _vm.searchQuery[0],
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.searchQuery,
+                                                  0,
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "searchQuery[0]"
+                                            }
+                                          },
+                                          [
+                                            _c("v-spacer"),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  text: "",
+                                                  color: "primary"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.menu = false
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Cancel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  text: "",
+                                                  color: "primary"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.$refs.menu.save(
+                                                      _vm.searchQuery[0]
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("OK")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  { attrs: { cols: "12", sm: "6", md: "6" } },
+                                  [
+                                    _c(
+                                      "v-menu",
+                                      {
+                                        ref: "menuTo",
+                                        attrs: {
+                                          "close-on-content-click": false,
+                                          "return-value": _vm.searchQuery[1],
+                                          transition: "scale-transition",
+                                          "offset-y": "",
+                                          "min-width": "290px"
+                                        },
+                                        on: {
+                                          "update:returnValue": function(
+                                            $event
+                                          ) {
+                                            return _vm.$set(
+                                              _vm.searchQuery,
+                                              1,
+                                              $event
+                                            )
+                                          },
+                                          "update:return-value": function(
+                                            $event
+                                          ) {
+                                            return _vm.$set(
+                                              _vm.searchQuery,
+                                              1,
+                                              $event
+                                            )
+                                          }
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "activator",
+                                            fn: function(ref) {
+                                              var on = ref.on
+                                              return [
+                                                _c(
+                                                  "v-text-field",
+                                                  _vm._g(
+                                                    {
+                                                      attrs: {
+                                                        label: "Έως",
+                                                        clearable: "",
+                                                        "prepend-icon":
+                                                          "mdi-calendar",
+                                                        readonly: ""
+                                                      },
+                                                      on: {
+                                                        "click:clear": function(
+                                                          $event
+                                                        ) {
+                                                          _vm.searchQuery[1] = null
+                                                          _vm.getvisits()
+                                                        }
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.searchQuery[1],
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.searchQuery,
+                                                            1,
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "searchQuery[1]"
+                                                      }
+                                                    },
+                                                    on
+                                                  )
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ]),
+                                        model: {
+                                          value: _vm.menuTo,
+                                          callback: function($$v) {
+                                            _vm.menuTo = $$v
+                                          },
+                                          expression: "menuTo"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-date-picker",
+                                          {
+                                            attrs: {
+                                              "no-title": "",
+                                              scrollable: "",
+                                              reactive: ""
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                _vm.getvisits()
+                                                _vm.$refs.menuTo.save(
+                                                  _vm.searchQuery[1]
+                                                )
+                                              }
+                                            },
+                                            model: {
+                                              value: _vm.searchQuery[1],
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.searchQuery,
+                                                  1,
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "searchQuery[1]"
+                                            }
+                                          },
+                                          [
+                                            _c("v-spacer"),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  text: "",
+                                                  color: "primary"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.menuTo = false
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Cancel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  text: "",
+                                                  color: "primary"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.$refs.menuTo.save(
+                                                      _vm.searchQuery[1]
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("OK")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      },
                       {
                         key: "item.action",
                         fn: function(ref) {

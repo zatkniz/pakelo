@@ -357,7 +357,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-data-table__expanded td.v-data-table__mobile-row {\r\n  text-align: center;\r\n  display: -webkit-box;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n          justify-content: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-data-table__expanded td.v-data-table__mobile-row {\n  text-align: center;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n", ""]);
 
 // exports
 

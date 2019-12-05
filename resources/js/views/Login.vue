@@ -3,7 +3,7 @@
     <v-container class="fill-height" fluid>
       <v-row class="flex-column" align="center" justify="center">
         <img class="mb-5" src="/assets/logo.png" />
-        <v-card color="#fff" class="pa-5 elevation-5" width="400" :loading="loading">
+        <v-card color="#fff" class="ml-3 pa-5 elevation-5" width="400" :loading="loading">
           <v-card-title>Συμπληρώστε τα στοιχεία εισόδου</v-card-title>
           <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="validate">
             <v-text-field v-model="name" :rules="nameRules" label="Username" required outlined></v-text-field>

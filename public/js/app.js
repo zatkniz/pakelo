@@ -2339,7 +2339,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".v-card {\r\n    border-radius: 20px !important;\r\n}\r\n\r\na.v-list-item--active.v-list-item {\r\n    background: #e41513 !important;\r\n}\r\n\r\n.v-data-table.elevation-1.theme--light {\r\n    border-radius: 20px;\r\n}\r\n\r\n.v-list .v-list-item--active {\r\n    color: #fff;\r\n}\r\n\r\n.v-data-table.products-table {\r\n    background-color: #242424;\r\n    color: #fff !important;\r\n}\r\n\r\n.v-data-table.products-table tr:hover {\r\n    color: #000 !important;\r\n}\r\n\r\n.v-data-table.products-table th {\r\n    background-color: #e41513;\r\n    color: #fff !important;\r\n}\r\n\r\n.v-data-table.products-table tbody tr:not(:last-child) td:last-child,\r\n.v-data-table.products-table\r\n    tbody\r\n    tr:not(:last-child)\r\n    td:not(.v-data-table__mobile-row) {\r\n    border-bottom: 1px solid #fff !important;\r\n}\r\n\r\n.products-table .v-data-table__mobile-row {\r\n    -webkit-box-align: center;\r\n            align-items: center;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n            justify-content: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.products-table tr.v-data-table__empty-wrapper {\r\n    color: #fff !important;\r\n}\r\n\r\ntd.tables-td {\r\n    background: #fff;\r\n    text-align: center;\r\n    font-size: 16px;\r\n    font-weight: 800;\r\n}\r\n\r\n/* .edit-product-dialog input {\r\n    color: #fff !important;\r\n} */\r\n\r\n/* .edit-product-dialog input {\r\n    color: #fff !important;\r\n} */", ""]);
+exports.push([module.i, ".v-card {\n    border-radius: 20px !important;\n}\n\na.v-list-item--active.v-list-item {\n    background: #e41513 !important;\n}\n\n.v-data-table.elevation-1.theme--light {\n    border-radius: 20px;\n}\n\n.v-list .v-list-item--active {\n    color: #fff;\n}\n\n.v-data-table.products-table {\n    background-color: #242424;\n    color: #fff !important;\n}\n\n.v-data-table.products-table tr:hover {\n    color: #000 !important;\n}\n\n.v-data-table.products-table th {\n    background-color: #e41513;\n    color: #fff !important;\n}\n\n.v-data-table.products-table tbody tr:not(:last-child) td:last-child,\n.v-data-table.products-table\n    tbody\n    tr:not(:last-child)\n    td:not(.v-data-table__mobile-row) {\n    border-bottom: 1px solid #fff !important;\n}\n\n.products-table .v-data-table__mobile-row {\n    -webkit-box-align: center;\n            align-items: center;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-pack: center;\n            justify-content: center;\n    margin-bottom: 10px;\n}\n\n.products-table tr.v-data-table__empty-wrapper {\n    color: #fff !important;\n}\n\ntd.tables-td {\n    background: #fff;\n    text-align: center;\n    font-size: 16px;\n    font-weight: 800;\n}\n\n/* .edit-product-dialog input {\n    color: #fff !important;\n} */\n\n/* .edit-product-dialog input {\n    color: #fff !important;\n} */", ""]);
 
 // exports
 
@@ -21048,7 +21048,7 @@ var render = function() {
               _c(
                 "v-card",
                 {
-                  staticClass: "pa-5 elevation-5",
+                  staticClass: "ml-3 pa-5 elevation-5",
                   attrs: { color: "#fff", width: "400", loading: _vm.loading }
                 },
                 [
@@ -75157,13 +75157,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: "/customer/:id",
     name: "Customers Single",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(9), __webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/customer",
     name: "Customers New",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(9), __webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/products",
@@ -75430,8 +75430,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
