@@ -8,6 +8,7 @@
             <v-tab>Παραγγελιες</v-tab>
             <v-tab>Προσφορες</v-tab>
             <v-tab>Επισκεψεις</v-tab>
+            <v-tab>Εισπραξεις</v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
@@ -35,6 +36,13 @@
                 </v-card-text>
               </v-card>
             </v-tab-item>
+            <v-tab-item>
+              <v-card flat color="basil">
+                <v-card-text class="px-3 py-0">
+                  <incomes :isOrder="false" :hideToolbar="true" :customer="$route.params.id" />
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
           </v-tabs-items>
         </v-card>
       </v-col>
@@ -46,11 +54,13 @@
 import customerDetails from "../components/customers/Details";
 import orders from "../views/Orders";
 import visits from "../views/Visits";
+import incomes from "../views/Incomes";
 export default {
   components: {
     customerDetails,
     orders,
-    visits
+    visits,
+    incomes
   },
   data() {
     return {

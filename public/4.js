@@ -56,6 +56,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -127,7 +135,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("v-tab", [_vm._v("Προσφορες")]),
                       _vm._v(" "),
-                      _c("v-tab", [_vm._v("Επισκεψεις")])
+                      _c("v-tab", [_vm._v("Επισκεψεις")]),
+                      _vm._v(" "),
+                      _c("v-tab", [_vm._v("Εισπραξεις")])
                     ],
                     1
                   ),
@@ -186,6 +196,34 @@ var render = function() {
                                 { staticClass: "px-3 py-0" },
                                 [
                                   _c("orders", {
+                                    attrs: {
+                                      isOrder: false,
+                                      hideToolbar: true,
+                                      customer: _vm.$route.params.id
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tab-item",
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "", color: "basil" } },
+                            [
+                              _c(
+                                "v-card-text",
+                                { staticClass: "px-3 py-0" },
+                                [
+                                  _c("visits", {
                                     attrs: {
                                       isOrder: false,
                                       hideToolbar: true,

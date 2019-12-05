@@ -365,7 +365,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     isincome: Boolean,
     hideToolbar: Boolean,
-    customer: Number
+    customer: String
   },
   components: {
     deleteDialog: _components_incomes_DeleteDialog__WEBPACK_IMPORTED_MODULE_0__["default"],

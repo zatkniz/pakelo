@@ -18,6 +18,7 @@
                   label="Πελάτης"
                   item-text="name"
                   item-value="id"
+                  @input="findCustomer"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -200,6 +201,12 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("closeDialog");
+    },
+
+    findCustomer() {
+      this.order.customer = this.customers.find(
+        customer => customer.id == this.order.customer_id
+      );
     },
 
     calculatePrice(price) {

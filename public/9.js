@@ -354,7 +354,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     isOrder: Boolean,
     hideToolbar: Boolean,
-    customer: Number
+    customer: String
   },
   components: {
     deleteDialog: _components_visits_DeleteDialog__WEBPACK_IMPORTED_MODULE_0__["default"],

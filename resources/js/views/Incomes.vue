@@ -157,7 +157,7 @@ export default {
   props: {
     isincome: Boolean,
     hideToolbar: Boolean,
-    customer: Number
+    customer: String
   },
   components: {
     deleteDialog,

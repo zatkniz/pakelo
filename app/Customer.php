@@ -87,7 +87,7 @@ class Customer extends Model
 
     public function getOrdersSumAttribute()
     {
-        return (float) number_format((float) $this->orders->sum('price'), 2, '.', '');
+        return (float) number_format((float) $this->orders->sum('summary'), 2, '.', '');
     }
 
     public function getBalanceAttribute()

@@ -214,6 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -275,6 +276,13 @@ __webpack_require__.r(__webpack_exports__);
     closeDialog: function closeDialog() {
       this.$emit("closeDialog");
     },
+    findCustomer: function findCustomer() {
+      var _this = this;
+
+      this.order.customer = this.customers.find(function (customer) {
+        return customer.id == _this.order.customer_id;
+      });
+    },
     calculatePrice: function calculatePrice(price) {
       var itemPercentage = parseFloat(price) * (parseFloat(this.order.customer.percentage) / 100);
       var returnValue = parseFloat(itemPercentage) + parseFloat(price);
@@ -313,21 +321,21 @@ __webpack_require__.r(__webpack_exports__);
       this.order.products.splice(index, 1);
     },
     getCustomers: function getCustomers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("customers").then(function (res) {
-        return _this.customers = res.data;
+        return _this2.customers = res.data;
       });
     },
     getAttributes: function getAttributes() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("products-attributes").then(function (res) {
-        _this2.initProducts = _this2.products = res.data;
+        _this3.initProducts = _this3.products = res.data;
       });
     },
     save: function save() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.$refs.form.validate()) {
         // this.loading = true;
@@ -336,11 +344,11 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         axios.post("orders", this.order).then(function (res) {
-          _this3.$emit("closeDialog");
+          _this4.$emit("closeDialog");
 
-          _this3.$emit("orderEdited");
+          _this4.$emit("orderEdited");
 
-          _this3.loading = false;
+          _this4.loading = false;
         });
       }
     }
@@ -574,7 +582,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     isOrder: Boolean,
     hideToolbar: Boolean,
-    customer: Number
+    customer: String
   },
   components: {
     deleteDialog: _components_orders_DeleteDialog__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -1163,6 +1171,7 @@ var render = function() {
                                   "item-text": "name",
                                   "item-value": "id"
                                 },
+                                on: { input: _vm.findCustomer },
                                 model: {
                                   value: _vm.order.customer_id,
                                   callback: function($$v) {
