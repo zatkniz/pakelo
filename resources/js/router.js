@@ -32,6 +32,11 @@ const router = new VueRouter({
             component: () => import("./views/Incomes")
         },
         {
+            path: "/outcomes",
+            name: "Outcomes",
+            component: () => import("./views/Outcomes")
+        },
+        {
             path: "/users",
             name: "Users",
             component: () => import("./views/Users")
@@ -79,6 +84,11 @@ const router = new VueRouter({
         {
             path: "/lists-oil-brands",
             name: "Lists Oil Brands",
+            component: () => import("./views/Lists")
+        },
+        {
+            path: "/lists-outcome-types",
+            name: "Lists Outcome Types",
             component: () => import("./views/Lists")
         },
         {

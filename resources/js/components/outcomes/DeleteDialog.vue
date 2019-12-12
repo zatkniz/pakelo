@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="deleteDialog" max-width="290" @click:outside="closeDialog">
     <v-card :loading="loading">
-      <v-card-title class="headline">Διαγραφή Χρήστη</v-card-title>
+      <v-card-title class="headline">Διαγραφή Είσπραξης</v-card-title>
 
-      <v-card-text>Είστε σίγουροι ότι θέλετε να διαγράψετε την επίσκεψη στον {{order.customer ? order.customer.name : ''}}?</v-card-text>
+      <v-card-text>Είστε σίγουροι ότι θέλετε να διαγράψετε την είσπραξη στον {{outcome.customer ? outcome.customer.name : ''}}?</v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -20,7 +20,7 @@
 export default {
   props: {
     deleteDialog: Boolean,
-    order: Object
+    outcome: Object
   },
   data: () => ({
     loading: false
@@ -33,10 +33,9 @@ export default {
 
     deleteItem() {
       this.loading = true;
-      axios.delete(`orders/${this.order.id}`).then(res => {
-        this.$store.dispatch("getAllcustomers");
+      axios.delete(`outcomes/${this.outcome.id}`).then(res => {
         this.$emit("closeDialog");
-        this.$emit("orderDeleted");
+        this.$emit("outcomeDeleted");
         this.loading = false;
       });
     }

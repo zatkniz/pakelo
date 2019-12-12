@@ -79,6 +79,7 @@
                       item-text="code"
                       item-value="id"
                       clearable
+                      :filter="searchProduct"
                       dark
                       @input="updateItem(item)"
                     >
@@ -203,6 +204,10 @@ export default {
       this.$emit("closeDialog");
     },
 
+    searchProduct(item, queryText, itemText){    
+      return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1 || item.product.name.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
+    },
+
     findCustomer() {
       this.order.customer = this.customers.find(
         customer => customer.id == this.order.customer_id
@@ -274,6 +279,7 @@ export default {
           this.order.is_offer = 1;
         }
         axios.post(`orders`, this.order).then(res => {
+          this.$store.dispatch("getAllcustomers");
           this.$emit("closeDialog");
           this.$emit("orderEdited");
           this.loading = false;

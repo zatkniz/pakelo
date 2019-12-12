@@ -2195,6 +2195,10 @@ __webpack_require__.r(__webpack_exports__);
         text: "Εισπράξεις",
         href: "/incomes"
       }, {
+        icon: "mdi-currency-usd-off",
+        text: "Έξοδα",
+        href: "/outcomes"
+      }, {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
@@ -2211,6 +2215,9 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           text: "Μάρκα Λαδιού",
           href: "/lists-oil-brands?item=oil-brands&cardTitle=Μάρκα%20Λαδιού"
+        }, {
+          text: "Τύποι Εξόδων",
+          href: "/lists-outcome-types?item=outcome-types&cardTitle=Έξοδα"
         }]
       }, // { icon: "mdi-cash-register", text: "Ταμείο" },
       {
@@ -2349,7 +2356,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".v-card {\n    border-radius: 20px !important;\n}\n\na.v-list-item--active.v-list-item {\n    background: #e41513 !important;\n}\n\n.v-data-table.elevation-1.theme--light {\n    border-radius: 20px;\n}\n\n.v-list .v-list-item--active {\n    color: #fff;\n}\n\n.v-data-table.products-table {\n    background-color: #242424;\n    color: #fff !important;\n}\n\n.v-data-table.products-table tr:hover {\n    color: #000 !important;\n}\n\n.v-data-table.products-table th {\n    background-color: #e41513;\n    color: #fff !important;\n}\n\n.v-data-table.products-table tbody tr:not(:last-child) td:last-child,\n.v-data-table.products-table\n    tbody\n    tr:not(:last-child)\n    td:not(.v-data-table__mobile-row) {\n    border-bottom: 1px solid #fff !important;\n}\n\n.products-table .v-data-table__mobile-row {\n    -webkit-box-align: center;\n            align-items: center;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-pack: center;\n            justify-content: center;\n    margin-bottom: 10px;\n}\n\n.products-table tr.v-data-table__empty-wrapper {\n    color: #fff !important;\n}\n\ntd.tables-td {\n    background: #fff;\n    text-align: center;\n    font-size: 16px;\n    font-weight: 800;\n}\n\n/* .edit-product-dialog input {\n    color: #fff !important;\n} */\n\n/* .edit-product-dialog input {\n    color: #fff !important;\n} */", ""]);
+exports.push([module.i, ".v-card {\r\n    border-radius: 20px !important;\r\n}\r\n\r\na.v-list-item--active.v-list-item {\r\n    background: #e41513 !important;\r\n}\r\n\r\n.v-data-table.elevation-1.theme--light {\r\n    border-radius: 20px;\r\n}\r\n\r\n.v-list .v-list-item--active {\r\n    color: #fff;\r\n}\r\n\r\n.v-data-table.products-table {\r\n    background-color: #242424;\r\n    color: #fff !important;\r\n}\r\n\r\n.v-data-table.products-table tr:hover {\r\n    color: #000 !important;\r\n}\r\n\r\n.v-data-table.products-table th {\r\n    background-color: #e41513;\r\n    color: #fff !important;\r\n}\r\n\r\n.v-data-table.products-table tbody tr:not(:last-child) td:last-child,\r\n.v-data-table.products-table\r\n    tbody\r\n    tr:not(:last-child)\r\n    td:not(.v-data-table__mobile-row) {\r\n    border-bottom: 1px solid #fff !important;\r\n}\r\n\r\n.products-table .v-data-table__mobile-row {\r\n    -webkit-box-align: center;\r\n            align-items: center;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n            justify-content: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.products-table tr.v-data-table__empty-wrapper {\r\n    color: #fff !important;\r\n}\r\n\r\ntd.tables-td {\r\n    background: #fff;\r\n    text-align: center;\r\n    font-size: 16px;\r\n    font-weight: 800;\r\n}\r\n\r\n/* .edit-product-dialog input {\r\n    color: #fff !important;\r\n} */\r\n\r\n/* .edit-product-dialog input {\r\n    color: #fff !important;\r\n} */", ""]);
 
 // exports
 
@@ -75146,73 +75153,79 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "Dashboard",
     redirect: "/visits",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue"));
     }
   }, {
     path: "/visits",
     name: "Visits",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Visits */ "./resources/js/views/Visits.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Visits */ "./resources/js/views/Visits.vue"));
     }
   }, {
     path: "/offers",
     name: "Offers",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
     }
   }, {
     path: "/orders",
     name: "Orders",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Orders */ "./resources/js/views/Orders.vue"));
     }
   }, {
     path: "/incomes",
     name: "Incomes",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./views/Incomes */ "./resources/js/views/Incomes.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./views/Incomes */ "./resources/js/views/Incomes.vue"));
+    }
+  }, {
+    path: "/outcomes",
+    name: "Outcomes",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Outcomes */ "./resources/js/views/Outcomes.vue"));
     }
   }, {
     path: "/users",
     name: "Users",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/Users */ "./resources/js/views/Users.vue"));
     }
   }, {
     path: "/customers",
     name: "Customers",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(5), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./views/Customers */ "./resources/js/views/Customers.vue"));
     }
   }, {
     path: "/customer/:id",
     name: "Customers Single",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(14), __webpack_require__.e(9), __webpack_require__.e(2), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(4), __webpack_require__.e(5), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/customer",
     name: "Customers New",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(14), __webpack_require__.e(9), __webpack_require__.e(2), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(4), __webpack_require__.e(5), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/CustomerSingle */ "./resources/js/views/CustomerSingle.vue"));
     }
   }, {
     path: "/products",
     name: "Products",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./views/Products */ "./resources/js/views/Products.vue"));
     }
   }, {
     path: "/product/:id",
     name: "Product Single",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
     }
   }, {
     path: "/product",
     name: "Product New",
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./views/ProductSingle */ "./resources/js/views/ProductSingle.vue"));
     }
   }, {
     path: "/lists-descriptions",
@@ -75229,6 +75242,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: "/lists-oil-brands",
     name: "Lists Oil Brands",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
+    }
+  }, {
+    path: "/lists-outcome-types",
+    name: "Lists Outcome Types",
     component: function component() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Lists */ "./resources/js/views/Lists.vue"));
     }
@@ -75467,8 +75486,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/docker/pakelo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\xampkalo\htdocs\pakelo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

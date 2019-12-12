@@ -75,6 +75,11 @@ export default {
         href: "/incomes"
       },
       {
+        icon: "mdi-currency-usd-off",
+        text: "Έξοδα",
+        href: "/outcomes"
+      },
+      {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
@@ -97,7 +102,11 @@ export default {
           {
             text: "Μάρκα Λαδιού",
             href: "/lists-oil-brands?item=oil-brands&cardTitle=Μάρκα%20Λαδιού"
-          }
+          },
+          {
+            text: "Τύποι Εξόδων",
+            href: "/lists-outcome-types?item=outcome-types&cardTitle=Έξοδα"
+          },
         ]
       },
       // { icon: "mdi-cash-register", text: "Ταμείο" },
