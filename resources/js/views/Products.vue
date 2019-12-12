@@ -86,15 +86,17 @@
                   :headers="[ { text: 'Κωδικός', align: 'center', sortable: false, value: 'code', }, { text: 'Lt/Kg', align: 'center', value: 'lt_kg' }, { text: 'Tιμή',align: 'center', value: 'price' }, { text: 'Tιμή Lt/Kg', align: 'center', value: 'price_per_kg' }]"
                   :items="item.attributes"
                 >
-                  <template v-slot:item.price="{ item }">
-                    {{ item.price }}€
-                  </template>
-                  <template v-slot:item.lt_kg="{ item }">
-                    {{ item.lt_kg }}Lt
-                  </template>
-                  <template v-slot:item.price_per_kg="{ item }">
-                    {{ (item.price / item.lt_kg).toFixed(2) }}€
-                  </template>
+                <template v-slot:item.price="{ item }">
+                  {{ calculatePrice(item.price) }}€ 
+                  <span v-if="auth.user_role_id == 1">({{ item.price }}€)</span>
+                </template>
+                <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
+                <template
+                  v-slot:item.price_per_kg="{ item }"
+                >
+                {{ calculatePrice(item.price / item.lt_kg)}}€ 
+                <span v-if="auth.user_role_id == 1">({{ (item.price / item.lt_kg).toFixed(2) }}€)</span>
+                </template>
                 </v-data-table>
               </td>
             </template>
@@ -168,6 +170,14 @@ export default {
       this.dialog = true;
     },
 
+    calculatePrice(price) {
+      const itemPercentage =
+        parseFloat(price) * (40 / 100);
+
+      const returnValue = parseFloat(itemPercentage) + parseFloat(price);
+      return returnValue.toFixed(2);
+    },
+
     openDeleteDialog(product) {
       this.editedItem = Object.assign({}, product);
       this.deleteDialog = true;
@@ -213,7 +223,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      products: "getproducts"
+      products: "getproducts",
+      auth: "getAuth"
     })
   },
 

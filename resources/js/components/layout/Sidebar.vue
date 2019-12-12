@@ -23,6 +23,7 @@
           v-model="item.model"
           :prepend-icon="item.model ? item.icon : item['icon-alt']"
           append-icon
+          v-show="checkAuth(item)"
         >
           <template v-slot:activator>
             <v-list-item>
@@ -40,7 +41,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-        <v-list-item v-else :key="item.text" link :to="item.href">
+        <v-list-item v-else :key="item.text" link :to="item.href" v-show="checkAuth(item)">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -54,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
     drawer: Boolean
@@ -83,6 +85,7 @@ export default {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
+        adminOnly: true,
         model: false,
         children: [
           {
@@ -115,6 +118,7 @@ export default {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Προϊόντος",
+        adminOnly: true,
         model: false,
         children: [
           {
@@ -134,14 +138,25 @@ export default {
           }
         ]
       },
-      { icon: "mdi-contacts", text: "Χρήστες", href: "/users" }
+      { icon: "mdi-contacts", text: "Χρήστες", href: "/users", adminOnly: true }
     ]
   }),
 
   methods: {
     broadcastEvent() {
       this.$emit("updateDrawer", this.drawer);
+    },
+    checkAuth(item){
+      if(this.auth.user_role_id == 1) return true;
+      return !item.adminOnly;
     }
-  }
+  },
+
+  computed: {
+    ...mapGetters({
+      auth: "getAuth"
+    })
+  },
+  
 };
 </script>

@@ -12,6 +12,7 @@
             </v-col>
             <v-col cols="12" sm="4" md="4">
               <v-autocomplete
+                :readonly="auth.user_role_id == 1"
                 :items="categories"
                 label="Κατηγορία"
                 v-model="product.product_category_id"
@@ -38,18 +39,24 @@
               ></v-autocomplete>
             </v-col>
             <v-col class="text-right" cols="12" sm="12" md="12" v-if="product.attributes">
-              <v-btn class="mb-5" color="primary" @click="openEditAttributeDialog">Προσθηκη</v-btn>
+              <v-btn v-if="auth.user_role_id == 1" class="mb-5" color="primary" @click="openEditAttributeDialog">Προσθηκη</v-btn>
               <v-data-table
                 class="products-table"
                 hide-default-footer
                 :headers="tableHeaders"
                 :items="product.attributes"
               >
-                <template v-slot:item.price="{ item }">{{ item.price }}€</template>
+                <template v-slot:item.price="{ item }">
+                  {{ calculatePrice(item.price) }}€ 
+                  <span v-if="auth.user_role_id == 1">({{ item.price }}€)</span>
+                </template>
                 <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
                 <template
                   v-slot:item.price_per_kg="{ item }"
-                >{{ (item.price / item.lt_kg).toFixed(2) }}€</template>
+                >
+                {{ calculatePrice(item.price / item.lt_kg)}}€ 
+                <span v-if="auth.user_role_id == 1">({{ (item.price / item.lt_kg).toFixed(2) }}€)</span>
+                </template>
                 <template v-slot:item.action="{ item }">
                   <v-btn
                     class="mx-0"
@@ -80,7 +87,7 @@
 
       <v-card-actions v-if="!product_id">
         <v-spacer></v-spacer>
-        <v-btn class="mx-5 mb-5" color="primary" type="submit">Αποθηκευση</v-btn>
+        <v-btn v-if="auth.user_role_id == 1" class="mx-5 mb-5" color="primary" type="submit">Αποθηκευση</v-btn>
       </v-card-actions>
     </v-form>
 
@@ -134,7 +141,6 @@ export default {
       { text: "Lt/Kg", align: "center", value: "lt_kg" },
       { text: "Tιμή", align: "center", value: "price" },
       { text: "Tιμή Lt/Kg", align: "center", value: "price_per_kg" },
-      { text: "Ενέργειες", value: "action", align: "right" }
     ],
     uses: [],
     status: [
@@ -166,6 +172,15 @@ export default {
         this.product_id || this.$route.params.id
       );
     },
+
+    calculatePrice(price) {
+      const itemPercentage =
+        parseFloat(price) * (40 / 100);
+
+      const returnValue = parseFloat(itemPercentage) + parseFloat(price);
+      return returnValue.toFixed(2);
+    },
+
     getproduct() {
       if (this.product_id || this.$route.params.id)
         this.$store.dispatch(
@@ -215,17 +230,26 @@ export default {
     this.getcategories();
     this.getdescriptions();
     this.getuses();
+    if(this.auth.user_role_id == 1){
+      this.tableHeaders.push({ text: "Ενέργειες", value: "action", align: "right" });
+    }
   },
 
   computed: {
     ...mapGetters({
-      product: "getproduct"
+      product: "getproduct",
+      auth: "getAuth"
     })
   },
 
   watch: {
     product_id(val) {
       this.$store.dispatch("getSingleproduct", val);
+    },
+    auth(){
+      if(this.auth.user_role_id == 1){
+        this.tableHeaders.push({ text: "Ενέργειες", value: "action", align: "right" });
+      }
     }
   }
 };
