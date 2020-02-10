@@ -39,7 +39,12 @@
               ></v-autocomplete>
             </v-col>
             <v-col class="text-right" cols="12" sm="12" md="12" v-if="product.attributes">
-              <v-btn v-if="auth.user_role_id == 1" class="mb-5" color="primary" @click="openEditAttributeDialog">Προσθηκη</v-btn>
+              <v-btn
+                v-if="auth.user_role_id == 1"
+                class="mb-5"
+                color="primary"
+                @click="openEditAttributeDialog"
+              >Προσθηκη</v-btn>
               <v-data-table
                 class="products-table"
                 hide-default-footer
@@ -47,15 +52,17 @@
                 :items="product.attributes"
               >
                 <template v-slot:item.price="{ item }">
-                  {{ calculatePrice(item.price) }}€ 
-                  <span v-if="auth.user_role_id == 1">({{ item.price }}€)</span>
+                  {{ calculatePrice(item.price) }}€
+                  <span
+                    v-if="auth.user_role_id == 1"
+                  >({{ item.price }}€)</span>
                 </template>
                 <template v-slot:item.lt_kg="{ item }">{{ item.lt_kg }}Lt</template>
-                <template
-                  v-slot:item.price_per_kg="{ item }"
-                >
-                {{ calculatePrice(item.price / item.lt_kg)}}€ 
-                <span v-if="auth.user_role_id == 1">({{ (item.price / item.lt_kg).toFixed(2) }}€)</span>
+                <template v-slot:item.price_per_kg="{ item }">
+                  {{ calculatePrice(item.price / item.lt_kg)}}€
+                  <span
+                    v-if="auth.user_role_id == 1"
+                  >({{ (item.price / item.lt_kg).toFixed(2) }}€)</span>
                 </template>
                 <template v-slot:item.action="{ item }">
                   <v-btn
@@ -87,7 +94,12 @@
 
       <v-card-actions v-if="!product_id">
         <v-spacer></v-spacer>
-        <v-btn v-if="auth.user_role_id == 1" class="mx-5 mb-5" color="primary" type="submit">Αποθηκευση</v-btn>
+        <v-btn
+          v-if="auth.user_role_id == 1"
+          class="mx-5 mb-5"
+          color="primary"
+          type="submit"
+        >Αποθηκευση</v-btn>
       </v-card-actions>
     </v-form>
 
@@ -140,7 +152,7 @@ export default {
       { text: "Κωδικός", align: "center", sortable: false, value: "code" },
       { text: "Lt/Kg", align: "center", value: "lt_kg" },
       { text: "Tιμή", align: "center", value: "price" },
-      { text: "Tιμή Lt/Kg", align: "center", value: "price_per_kg" },
+      { text: "Tιμή Lt/Kg", align: "center", value: "price_per_kg" }
     ],
     uses: [],
     status: [
@@ -174,8 +186,7 @@ export default {
     },
 
     calculatePrice(price) {
-      const itemPercentage =
-        parseFloat(price) * (40 / 100);
+      const itemPercentage = parseFloat(price) * (40 / 100);
 
       const returnValue = parseFloat(itemPercentage) + parseFloat(price);
       return returnValue.toFixed(2);
@@ -191,10 +202,15 @@ export default {
     },
     saveproduct() {
       this.loading = true;
-      axios.post("products", this.product).then(res => {
+      axios.post("products", this.product).then(async res => {
         this.loading = false;
         this.snackbar = true;
-        this.$store.dispatch("getAllproducts");
+        await this.$store.dispatch("getAllproducts");
+        if (!this.$route.params.id) {
+          setTimeout(() => {
+            window.location.hash = `#/product/${res.data.id}`;
+          }, 1000);
+        }
       });
     },
     validate() {
@@ -230,8 +246,12 @@ export default {
     this.getcategories();
     this.getdescriptions();
     this.getuses();
-    if(this.auth.user_role_id == 1){
-      this.tableHeaders.push({ text: "Ενέργειες", value: "action", align: "right" });
+    if (this.auth.user_role_id == 1) {
+      this.tableHeaders.push({
+        text: "Ενέργειες",
+        value: "action",
+        align: "right"
+      });
     }
   },
 
@@ -246,9 +266,13 @@ export default {
     product_id(val) {
       this.$store.dispatch("getSingleproduct", val);
     },
-    auth(){
-      if(this.auth.user_role_id == 1){
-        this.tableHeaders.push({ text: "Ενέργειες", value: "action", align: "right" });
+    auth() {
+      if (this.auth.user_role_id == 1) {
+        this.tableHeaders.push({
+          text: "Ενέργειες",
+          value: "action",
+          align: "right"
+        });
       }
     }
   }

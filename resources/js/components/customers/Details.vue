@@ -166,10 +166,15 @@ export default {
     },
     saveCustomer() {
       this.loading = true;
-      axios.post("customers", this.customer).then(res => {
+      axios.post("customers", this.customer).then(async res => {
         this.loading = false;
         this.snackbar = true;
-        this.$store.dispatch("getAllcustomers");
+        await this.$store.dispatch("getAllcustomers");
+        if (!this.$route.params.id) {
+          setTimeout(() => {
+            window.location.hash = `#/customer/${res.data.id}`;
+          }, 1000);
+        }
       });
     },
     validate() {

@@ -85,7 +85,6 @@ export default {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Λίστες Πελατών",
-        adminOnly: true,
         model: false,
         children: [
           {
@@ -109,7 +108,7 @@ export default {
           {
             text: "Τύποι Εξόδων",
             href: "/lists-outcome-types?item=outcome-types&cardTitle=Έξοδα"
-          },
+          }
         ]
       },
       // { icon: "mdi-cash-register", text: "Ταμείο" },
@@ -146,8 +145,8 @@ export default {
     broadcastEvent() {
       this.$emit("updateDrawer", this.drawer);
     },
-    checkAuth(item){
-      if(this.auth.user_role_id == 1) return true;
+    checkAuth(item) {
+      if (this.auth.user_role_id == 1) return true;
       return !item.adminOnly;
     }
   },
@@ -156,7 +155,6 @@ export default {
     ...mapGetters({
       auth: "getAuth"
     })
-  },
-  
+  }
 };
 </script>
