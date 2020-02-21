@@ -15,7 +15,7 @@
                   :rules="requiredRules"
                   :items="outcomeTypes"
                   v-model="outcome.outcome_type_id"
-                  label="Πελάτης"
+                  label="Έξοδο"
                   item-text="name"
                   item-value="id"
                 ></v-autocomplete>
@@ -80,7 +80,7 @@ export default {
 
   computed: {
     formTitle() {
-      return !this.outcome.id ? "Προσθήκη Είσπραξης" : "Επεξεργασία Είσπραξης";
+      return !this.outcome.id ? "Προσθήκη Εξόδου" : "Επεξεργασία Εξόδου";
     }
   },
 

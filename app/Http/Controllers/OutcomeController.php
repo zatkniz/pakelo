@@ -21,7 +21,7 @@ class OutcomeController extends Controller
             $query->where('user_id', $request->input('user'));
         }
         
-        if ($request->input('outcome_type_id') != null) {
+        if ($request->input('outcome_type_id') != 'null' && $request->input('outcome_type_id') != 'undefined') {
             $query->where('outcome_type_id', $request->input('outcome_type_id'));
         }
 
@@ -31,10 +31,6 @@ class OutcomeController extends Controller
 
         if (explode(',', $request->input('date'))[1]) {
             $query->whereDay('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[2])->whereMonth('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[1])->whereYear('created_at', '<=', explode('-', explode(',', $request->input('date'))[1])[0]);
-        }
-
-        if ($request->input('customer') != 'undefined') {
-            $query->where('customer_id', $request->input('customer'));
         }
 
         return $query->with(['type', 'user'])->get();

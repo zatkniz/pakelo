@@ -48,7 +48,19 @@
                 </v-col>
               </v-row>
               <v-row class="px-5">
-                <v-col cols="12" sm="6" md="6">
+                <v-col class="px-4" cols="12" sm="4" md="4">
+                  <v-autocomplete
+                    :items="outcomeTypes"
+                    label="Τύπος Εξόδου"
+                    clearable
+                    v-model="outcome_type_id"
+                    item-text="name"
+                    item-value="id"
+                    @input="getoutcomes"
+                    @click:clear="getoutcomes()"
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" sm="4" md="4">
                   <v-menu
                     ref="menu"
                     v-model="menu"
@@ -82,7 +94,7 @@
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col cols="12" sm="6" md="6">
+                <v-col cols="12" sm="4" md="4">
                   <v-menu
                     ref="menuTo"
                     v-model="menuTo"
@@ -170,6 +182,7 @@ export default {
     expanded: [],
     menu: false,
     menuTo: false,
+    outcome_type_id: null,
     date: new Date().toISOString().substr(0, 10),
     searchQuery: [new Date().toISOString().substr(0, 10), null],
     singleExpand: false,
@@ -188,6 +201,7 @@ export default {
       { text: "Ενέργειες", value: "action", align: "right" }
     ],
     outcomes: [],
+    outcomeTypes: [],
     editedItem: {},
     users: [],
     user_id: ""
@@ -203,6 +217,7 @@ export default {
     this.getoutcomes();
     if (this.$route.query.new) this.dialog = true;
 
+    this.getoutcomeTypes();
     this.getUsers();
   },
 
@@ -213,13 +228,17 @@ export default {
       this.loading = true;
       axios
         .get(
-          `outcomes?outcomes=${this.isSingleoutcome}&date=${this.searchQuery}&user=${this.user_id}&customer=${this.customer}`
+          `outcomes?outcomes=${this.isSingleoutcome}&date=${this.searchQuery}&user=${this.user_id}&outcome_type_id=${this.outcome_type_id}`
         )
         .then(res => {
           this.outcomes = res.data;
           this.loading = false;
           this.$route.query.new;
         });
+    },
+
+    getoutcomeTypes() {
+      axios.get("outcome-types").then(res => (this.outcomeTypes = res.data));
     },
 
     getUsers() {

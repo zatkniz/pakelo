@@ -108,8 +108,18 @@
                 item-value="id"
               ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="4" md="3">
+            <v-col cols="12" sm="2" md="2">
               <v-text-field label="Υπόλοιπο" readonly v-model="customer.balance" />
+            </v-col>
+            <v-col cols="12" sm="3" md="3">
+              <v-autocomplete
+                :items="oilBrands"
+                clearable
+                label="Μάρκα Λαδιού"
+                v-model="customer.oil_brand_id"
+                item-text="name"
+                item-value="id"
+              ></v-autocomplete>
             </v-col>
           </v-row>
         </v-container>
@@ -141,6 +151,7 @@ export default {
     nameRules: [v => !!v || "Συμπληρώστε την επωνυμία του πελάτη."],
     users: [],
     cities: [],
+    oilBrands: [],
     brandTypes: [],
     sellerTypes: [],
     status: [
@@ -187,6 +198,11 @@ export default {
         this.users = res.data;
       });
     },
+    getOilBrands() {
+      axios.get("oil-brands").then(res => {
+        this.oilBrands = res.data;
+      });
+    },
     getBrandTypes() {
       axios.get("brand-types").then(res => {
         this.brandTypes = res.data;
@@ -210,6 +226,7 @@ export default {
     this.getCities();
     this.getBrandTypes();
     this.getSellerTypes();
+    this.getOilBrands();
   },
 
   computed: {

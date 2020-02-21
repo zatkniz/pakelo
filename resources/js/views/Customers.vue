@@ -66,7 +66,7 @@
                   ></v-autocomplete>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-select
+                  <v-autocomplete
                     @input="runFilters"
                     :items="sellerTypes"
                     clearable
@@ -74,10 +74,10 @@
                     v-model="searchQuery.seller_type_id"
                     item-text="name"
                     item-value="id"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-select
+                  <v-autocomplete
                     @input="runFilters"
                     :items="oilBrands"
                     clearable
@@ -85,10 +85,10 @@
                     v-model="searchQuery.oil_brand_id"
                     item-text="name"
                     item-value="id"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-select
+                  <v-autocomplete
                     @input="runFilters"
                     :items="cities"
                     clearable
@@ -96,7 +96,7 @@
                     v-model="searchQuery.city_id"
                     item-text="name"
                     item-value="id"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
               </v-row>
             </template>
